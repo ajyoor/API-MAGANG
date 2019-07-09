@@ -71,7 +71,6 @@ class Log_Aktivitas extends CI_Controller{
             'akt_start' => $this->post('akt_start'),
             'akt_end' => $this->post('akt_end')
         ];
-
         if ($this->akt->createAktivitas($data) > 0) {
             $this->response([
                 'status' => true,
@@ -84,25 +83,29 @@ class Log_Aktivitas extends CI_Controller{
             ], 400);
         }
     }
-    // public function index_put(){
-    //     $nisn = $this->put('nisn');
-    //     $data = [
-    //         'nisn'     => $this->put('nisn'),
-    //         'nama'     => $this->put('nama'),
-    //         'alamat'   => $this->put('alamat'),
-    //         'asal_smp' => $this->put('asal_smp')
-    //     ];
+    public function index_put(){
+        $log_id = $this->put('log_id');
 
-    //     if ($this->siswa->updateSiswa($data, $nisn) > 0) {
-    //         $this->response([
-    //             'status' => true,
-    //             'message' => 'Data Siswa berhasil diedit !'
-    //         ], 400);
-    //     } else {
-    //         $this->response([
-    //             'status' => false,
-    //             'data' => 'Maaf, Data Siswa gagal diupdate !'
-    //         ], 404);
-    //     }
-    // }
+        $data = [
+            'log_id' => $this->put('log_id'),
+            'akt_tanggal'     => $this->put('akt_tanggal'),
+            'akt_idkegiatan'  => $this->put('akt_idkegiatan'),
+            'akt_catatan'   => $this->put('akt_catatan'),
+            'akt_output' => $this->put('akt_output'),
+            'akt_start' => $this->put('akt_start'),
+            'akt_end' => $this->put('akt_end')
+        ];
+
+        if ($this->akt->updateAktivitas($data, $log_id) > 0) {
+            $this->response([
+                'status' => true,
+                'message' => 'Data berhasil diedit !'
+            ], 400);
+        } else {
+            $this->response([
+                'status' => false,
+                'data' => 'Maaf, Data gagal diupdate !'
+            ], 404);
+        }
+    }
 }
