@@ -14,7 +14,7 @@ class Log_Aktivitas extends CI_Controller{
         $this->__resTraitConstruct();
         $this->load->model('Aktivitas_model','akt');
     }
-    //untuk minta data
+    //Method Get
     public function index_get() {
         $log_id = $this->get('log_id');
         if($log_id === null){
@@ -35,47 +35,51 @@ class Log_Aktivitas extends CI_Controller{
             ], 404);
         }
     }
-    // public function index_delete() {
-    //     $log_id = $this->delete('log_id');
+    //Method Delete
+    public function index_delete() {
+        $log_id = $this->delete('log_id');
 
-    //     if($log_id === null){
-    //         $this->response([
-    //             'status' => false,
-    //             'data' => 'Maaf, masukkan ID terlebih dahulu !'
-    //         ], 400);
-    //     } else{
-    //         if( $this->akt->deleteAktifitas($log_id) > 0){
-    //             //ok
-    //             $this->response([
-    //                 'status' => true,
-    //                 'log_id' => $log_id,
-    //                 'message' => 'Pegawai dengan ID tersebut berhasil dihapus !'
-    //             ], 200);
-    //         } else {
-    //             $this->response([
-    //                 'status' => false,
-    //                 'data' => 'Maaf, ID tidak ditemukan !'
-    //             ], 400);
-    //         }
-    //     }
-    // }
+        if($log_id === null){
+            $this->response([
+                'status' => false,
+                'data' => 'Maaf, masukkan ID terlebih dahulu !'
+            ], 400);
+        } else{
+            if( $this->akt->deleteAktivitas($log_id) > 0){
+                //ok
+                $this->response([
+                    'status' => true,
+                    'log_id' => $log_id,
+                    'message' => 'Pegawai dengan ID tersebut berhasil dihapus !'
+                ], 200);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'data' => 'Maaf, ID tidak ditemukan !'
+                ], 400);
+            }
+        }
+    }
+    //method post
     public function index_post() {
         $data = [
             'akt_tanggal'     => $this->post('akt_tanggal'),
-            'akt_idkegiatan'     => $this->post('akt_idkegiatan'),
+            'akt_idkegiatan'  => $this->post('akt_idkegiatan'),
             'akt_catatan'   => $this->post('akt_catatan'),
-            'asal_smp' => $this->post('asal_smp')
+            'akt_output' => $this->post('akt_output'),
+            'akt_start' => $this->post('akt_start'),
+            'akt_end' => $this->post('akt_end')
         ];
 
-        if ($this->siswa->createSiswa($data) > 0) {
+        if ($this->akt->createAktivitas($data) > 0) {
             $this->response([
                 'status' => true,
-                'message' => 'Data Siswa baru telah dibuat !'
+                'message' => 'Data aktivitas baru telah dibuat !'
             ], 200);
         } else {
             $this->response([
                 'status' => false,
-                'data' => 'Maaf, Data Siswa baru gagal dibuat !'
+                'data' => 'Maaf, Data aktivitas baru gagal dibuat !'
             ], 400);
         }
     }
