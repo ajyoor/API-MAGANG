@@ -25,7 +25,7 @@ class Aktivitas_model extends CI_Model
 
     public function deleteAktivitas($log_id)
     {
-        $this->db->delete('log_aktivitas', ['id' => $log_id]);
+        $this->db->delete('log_aktivitas', ['log_id' => $log_id]);
         return $this->db->affected_rows();
     }
 
@@ -35,10 +35,10 @@ class Aktivitas_model extends CI_Model
         return $this->db->affected_rows();
     }
 
-    public function updateAktivitas($data, $log_id)
-    {
-        $this->db->update('log_aktivitas', $data, ['id' => $log_id]);
-        return $this->db->affected_rows();
-    }
+    // public function updateAktivitas($data, $log_id)
+    // {
+    //     $this->db->update('log_aktivitas', $data, ['log_id' => $log_id]);
+    //     return $this->db->affected_rows();
+    // }
 
 }
