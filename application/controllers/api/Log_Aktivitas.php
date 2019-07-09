@@ -83,6 +83,7 @@ class Log_Aktivitas extends CI_Controller{
             ], 400);
         }
     }
+    //Method Put
     public function index_put(){
         $log_id = $this->put('log_id');
 
