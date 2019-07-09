@@ -39,10 +39,10 @@ class Aktivitas_model extends CI_Model
         return $this->db->affected_rows();
     }
 
-    // public function updateAktivitas($data, $log_id)
-    // {
-    //     $this->db->update('log_aktivitas', $data, ['log_id' => $log_id]);
-    //     return $this->db->affected_rows();
-    // }
+    public function updateAktivitas($data, $log_id)
+    {
+        $this->db->update('log_aktivitas', $data, ['log_id' => $log_id]);
+        return $this->db->affected_rows();
+    }
 
 }

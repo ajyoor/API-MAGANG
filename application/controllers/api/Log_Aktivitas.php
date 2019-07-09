@@ -63,6 +63,7 @@ class Log_Aktivitas extends CI_Controller{
     //method post
     public function index_post() {
         $data = [
+            'log_id' => $this->post('log_id'),
             'akt_tanggal'     => $this->post('akt_tanggal'),
             'akt_idkegiatan'  => $this->post('akt_idkegiatan'),
             'akt_catatan'   => $this->post('akt_catatan'),
