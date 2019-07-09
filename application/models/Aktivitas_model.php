@@ -19,6 +19,10 @@ class Aktivitas_model extends CI_Model
             $this->db->join('log_masteraktivitas', ' log_masteraktivitas.bk_id= log_aktivitas.akt_idkegiatan');
             return $this->db->get()->result();
         } else {
+            $this->db->select('log_id,akt_tanggal,bk_nama_kegiatan,akt_output,akt_start,akt_end,akt_waktu,akt_status');
+			$this->db->from('log_aktivitas');
+            $this->db->join('skp_pns', 'skp_pns.nip = log_aktivitas.nip ');
+            $this->db->join('log_masteraktivitas', ' log_masteraktivitas.bk_id= log_aktivitas.akt_idkegiatan');
             return $this->db->get_where('log_aktivitas',['log_id' => $log_id])->result_array();
         } 
     }
