@@ -1,2 +1,2 @@
 # API-MAGANG
-masih proses pengembangan
+masih proses pengembangan aplikasi
