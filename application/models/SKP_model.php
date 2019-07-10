@@ -12,7 +12,7 @@ class SKP_model extends CI_Model
 
     public function getSKP($id_skp = null)
     {
-        $this->db->select('uraian,output,mutu,waktu,biaya');
+        $this->db->select('uraian,output,satuan_output,mutu,waktu,satuan_waktu,biaya');
 		$this->db->from('skp_dataskp');
         $this->db->join('skp_t_kerja', 'skp_t_kerja.id_tkerja = skp_dataskp.id_skp ');
         // $this->db->join('log_masteraktivitas', ' log_masteraktivitas.bk_id= log_aktivitas.akt_idkegiatan');
