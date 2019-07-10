@@ -12,7 +12,7 @@ class Target_SKP extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->__resTraitConstruct();
-        $this->load->model('SKP_model','skp');
+        $this->load->model('Target_SKP_model','skp');
     }
     //untuk minta data
     public function index_get() {

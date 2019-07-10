@@ -12,7 +12,7 @@ class Log_Aktivitas extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->__resTraitConstruct();
-        $this->load->model('Aktivitas_model','akt');
+        $this->load->model('Log_Aktivitas_model','akt');
     }
     //Method Get
     public function index_get() {
