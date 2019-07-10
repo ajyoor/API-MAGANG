@@ -16,17 +16,17 @@ class Target_SKP extends CI_Controller{
     }
     //untuk minta data
     public function index_get() {
-        $id_skp = $this->get('id_skp');
-        if($id_skp === null){
-            $skp = $this->skp->getSKP();
+        $nip = $this->get('nip');
+        if($nip === null){
+            $nip = $this->skp->getSKP();
         } else {
-            $skp = $this->skp->getSKP($id_skp);
+            $nip = $this->skp->getSKP($nip);
         }
         
-        if($skp){
+        if($nip){
             $this->response([
                 'status' => true,
-                'data' => $skp
+                'data' => $nip
             ], 200);
         } else{
             $this->response([
