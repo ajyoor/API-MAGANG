@@ -66,7 +66,7 @@ class Tugas_Tambahan_SKP extends CI_Controller{
             'id_uraian_tambahan' => $this->post('id_uraian_tambahan'),
             'id_skp' => $this->post('id_skp'),
             'uraian_tambahan'     => $this->post('uraian_tambahan'),
-            'tgl_uraiantambahan' => $this->post('tgl_uraiantambahan')
+            'tgl_uraiantambahan' => date('Y-m-d H:i:s')
         ];
         if ($this->rskp->createTambahanSKP($data) > 0) {
             $this->response([

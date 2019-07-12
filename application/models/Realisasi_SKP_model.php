@@ -32,9 +32,9 @@ class Realisasi_SKP_model extends CI_Model
             return $this->db->get_where('skp_r_tambahan',['id_skp' => $id_skp])->result_array();
         }
     }
-    public function deleteTambahanSKP($id_uraian_tambahan)
+    public function deleteTambahanSKP($id_skp)
     {
-        $this->db->delete('skp_r_tambahan', ['id_uraian_tambahan' => $id_uraian_tambahan]);
+        $this->db->delete('skp_r_tambahan', ['id_skp' => $id_skp]);
         return $this->db->affected_rows();
     }
     public function createTambahanSKP($data)
@@ -42,9 +42,9 @@ class Realisasi_SKP_model extends CI_Model
         $this->db->insert('skp_r_tambahan',$data);
         return $this->db->affected_rows();
     }
-    public function updateTambahanSKP($data, $id_uraian_tambahan)
+    public function updateTambahanSKP($data, $id_skp)
     {
-        $this->db->update('skp_r_tambahan', $data, ['id_uraian_tambahan' => $id_uraian_tambahan]);
+        $this->db->update('skp_r_tambahan', $data, ['id_skp' => $id_skp]);
         return $this->db->affected_rows();
     }
 }
