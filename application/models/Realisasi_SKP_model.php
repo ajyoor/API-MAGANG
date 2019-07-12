@@ -17,6 +17,27 @@ class Realisasi_SKP_model extends CI_Model
         $this->db->join('skp_t_kerja', 'skp_t_kerja.id_tkerja = skp_r_kerja.id_tkerja');
         $this->db->join('log_aktivitas', 'log_aktivitas.id_tkerja= skp_t_kerja.id_tkerja','left');
         return $this->db->get_where('skp_r_kerja',['log_aktivitas.nip' => $nip])->result_array();
-       
+    }
+    public function getTambahanSKP($id_skp)
+    {
+        $this->db->select('id_skp,uraian_tambahan');
+		// // $this->db->from('skp_dataskp');
+        // $this->db->join('skp_r_tambahan', 'skp_r_tambahan.id_skp = skp_dataskp.id_skp');
+        return $this->db->get_where('skp_r_tambahan',['id_skp' => $id_skp])->result_array();
+    }
+    public function deleteTambahanSKP($id_uraian_tambahan)
+    {
+        $this->db->delete('skp_r_tambahan', ['id_uraian_tambahan' => $id_uraian_tambahan]);
+        return $this->db->affected_rows();
+    }
+    public function createTambahanSKP($data)
+    {
+        $this->db->insert('skp_r_tambahan',$data);
+        return $this->db->affected_rows();
+    }
+    public function updateTambahanSKP($data, $id_uraian_tambahan)
+    {
+        $this->db->update('skp_r_tambahan', $data, ['id_uraian_tambahan' => $id_uraian_tambahan]);
+        return $this->db->affected_rows();
     }
 }
