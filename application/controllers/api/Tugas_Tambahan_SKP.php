@@ -37,19 +37,19 @@ class Tugas_Tambahan_SKP extends CI_Controller{
     }
     //Method Delete
     public function index_delete() {
-        $id_skp = $this->delete('id_skp');
+        $id_uraian_tambahan = $this->delete('id_uraian_tambahan');
 
-        if($id_skp === null){
+        if($id_uraian_tambahan === null){
             $this->response([
                 'status' => false,
                 'data' => 'Maaf, masukkan ID terlebih dahulu !'
             ], 400);
         } else{
-            if( $this->akt->deleteTambahanSKP($id_skp) > 0){
+            if( $this->rskp->deleteTambahanSKP($id_uraian_tambahan) > 0){
                 //ok
                 $this->response([
                     'status' => true,
-                    'id_skp' => $id_skp,
+                    'id_uraian_tambahan' => $id_uraian_tambahan,
                     'message' => 'Pegawai dengan ID tersebut berhasil dihapus !'
                 ], 200);
             } else {
@@ -66,7 +66,7 @@ class Tugas_Tambahan_SKP extends CI_Controller{
             'id_uraian_tambahan' => $this->post('id_uraian_tambahan'),
             'id_skp' => $this->post('id_skp'),
             'uraian_tambahan'     => $this->post('uraian_tambahan'),
-            'tgl_uraiantambahan' => date('Y-m-d H:i:s')
+            'tgl_uraiantambahan' => date('Y-m-d')
         ];
         if ($this->rskp->createTambahanSKP($data) > 0) {
             $this->response([

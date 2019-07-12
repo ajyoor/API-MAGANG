@@ -22,19 +22,19 @@ class Realisasi_SKP_model extends CI_Model
     {
         if($id_skp === null)
         {
-            $this->db->select('id_skp,uraian_tambahan,tgl_uraiantambahan');
+            $this->db->select('id_skp,id_uraian_tambahan,uraian_tambahan,tgl_uraiantambahan');
             $this->db->from('skp_r_tambahan');
             return $this->db->get()->result();
         }   else{
-            $this->db->select('id_skp,uraian_tambahan,tgl_uraiantambahan');
+            $this->db->select('id_skp,id_uraian_tambahan,uraian_tambahan,tgl_uraiantambahan');
 		    // $this->db->from('skp_dataskp');
             // $this->db->join('skp_r_tambahan', 'skp_r_tambahan.id_skp = skp_dataskp.id_skp');
             return $this->db->get_where('skp_r_tambahan',['id_skp' => $id_skp])->result_array();
         }
     }
-    public function deleteTambahanSKP($id_skp)
+    public function deleteTambahanSKP($id_uraian_tambahan)
     {
-        $this->db->delete('skp_r_tambahan', ['id_skp' => $id_skp]);
+        $this->db->delete('skp_r_tambahan', ['id_uraian_tambahan' => $id_uraian_tambahan]);
         return $this->db->affected_rows();
     }
     public function createTambahanSKP($data)
