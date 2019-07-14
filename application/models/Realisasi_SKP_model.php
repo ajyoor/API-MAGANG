@@ -42,9 +42,9 @@ class Realisasi_SKP_model extends CI_Model
         $this->db->insert('skp_r_tambahan',$data);
         return $this->db->affected_rows();
     }
-    public function updateTambahanSKP($data, $id_skp)
+    public function updateTambahanSKP($data, $id_uraian_tambahan)
     {
-        $this->db->update('skp_r_tambahan', $data, ['id_skp' => $id_skp]);
+        $this->db->update('skp_r_tambahan', $data, ['id_uraian_tambahan' => $id_uraian_tambahan]);
         return $this->db->affected_rows();
     }
 }

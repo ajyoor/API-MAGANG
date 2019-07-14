@@ -26,11 +26,11 @@ class Tugas_Tambahan_SKP extends CI_Controller{
         if($rskp){
             $this->response([
                 'status' => true,
-                'data' => $rskp
+                'data'   => $rskp
             ], 200);
         } else{
             $this->response([
-                'status' => false,
+                'status'  => false,
                 'message' => 'Maaf, ID tidak ditemukan !'
             ], 404);
         }
@@ -42,20 +42,20 @@ class Tugas_Tambahan_SKP extends CI_Controller{
         if($id_uraian_tambahan === null){
             $this->response([
                 'status' => false,
-                'data' => 'Maaf, masukkan ID terlebih dahulu !'
+                'data'   => 'Maaf, masukkan ID terlebih dahulu !'
             ], 400);
         } else{
             if( $this->rskp->deleteTambahanSKP($id_uraian_tambahan) > 0){
                 //ok
                 $this->response([
-                    'status' => true,
+                    'status'             => true,
                     'id_uraian_tambahan' => $id_uraian_tambahan,
-                    'message' => 'Pegawai dengan ID tersebut berhasil dihapus !'
+                    'message'            => 'Uraian Tambahan dengan ID tersebut berhasil dihapus !'
                 ], 200);
             } else {
                 $this->response([
                     'status' => false,
-                    'data' => 'Maaf, ID tidak ditemukan !'
+                    'data'   => 'Maaf, ID tidak ditemukan !'
                 ], 400);
             }
         }
@@ -64,40 +64,41 @@ class Tugas_Tambahan_SKP extends CI_Controller{
     public function index_post() {
         $data = [
             'id_uraian_tambahan' => $this->post('id_uraian_tambahan'),
-            'id_skp' => $this->post('id_skp'),
-            'uraian_tambahan'     => $this->post('uraian_tambahan'),
+            'id_skp'             => $this->post('id_skp'),
+            'uraian_tambahan'    => $this->post('uraian_tambahan'),
             'tgl_uraiantambahan' => date('Y-m-d')
         ];
         if ($this->rskp->createTambahanSKP($data) > 0) {
             $this->response([
-                'status' => true,
+                'status'  => true,
                 'message' => 'Data Tambahan Realisasi baru telah dibuat !'
             ], 200);
         } else {
             $this->response([
                 'status' => false,
-                'data' => 'Maaf, Data Tambahan Realisasi baru gagal dibuat !'
+                'data'   => 'Maaf, Data Tambahan Realisasi baru gagal dibuat !'
             ], 400);
         }
     }
     //Method Put
     public function index_put(){
-        $id_skp = $this->put('id_skp');
+        $id_uraian_tambahan = $this->put('id_uraian_tambahan');
 
         $data = [
-            'id_skp' => $this->put('id_skp'),
-            'uraian_tambahan'     => $this->post('uraian_tambahan')
+            'id_uraian_tambahan' => $this->put('id_uraian_tambahan'),
+            'id_skp'             => $this->put('id_skp'),
+            'uraian_tambahan'    => $this->put('uraian_tambahan')
         ];
 
-        if ($this->rskp->updateTambahanSKP($data, $id_skp) > 0) {
+        if ($this->rskp->updateTambahanSKP($data, $id_uraian_tambahan) > 0) {
             $this->response([
-                'status' => true,
+                'status'  => true,
                 'message' => 'Data Tambahan berhasil diedit !'
             ], 400);
         } else {
             $this->response([
                 'status' => false,
-                'data' => 'Maaf, Data Tambahan gagal diupdate !'
+                'data'   => 'Maaf, Data Tambahan gagal diupdate !'
             ], 404);
         }
     }
