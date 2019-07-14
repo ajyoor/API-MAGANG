@@ -50,7 +50,7 @@ class Tugas_Tambahan_SKP extends CI_Controller{
                 $this->response([
                     'status'             => true,
                     'id_uraian_tambahan' => $id_uraian_tambahan,
-                    'message'            => 'Uraian Tambahan dengan ID tersebut berhasil dihapus !'
+                    'message'            => 'ID tersebut berhasil dihapus !'
                 ], 200);
             } else {
                 $this->response([
@@ -71,12 +71,12 @@ class Tugas_Tambahan_SKP extends CI_Controller{
         if ($this->rskp->createTambahanSKP($data) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data Tambahan Realisasi baru telah dibuat !'
+                'message' => 'Data baru telah dibuat !'
             ], 200);
         } else {
             $this->response([
                 'status' => false,
-                'data'   => 'Maaf, Data Tambahan Realisasi baru gagal dibuat !'
+                'data'   => 'Maaf, Data baru gagal dibuat !'
             ], 400);
         }
     }
@@ -94,7 +94,7 @@ class Tugas_Tambahan_SKP extends CI_Controller{
             $this->response([
                 'status'  => true,
                 'message' => 'Data Tambahan berhasil diedit !'
-            ], 400);
+            ], 200);
         } else {
             $this->response([
                 'status' => false,

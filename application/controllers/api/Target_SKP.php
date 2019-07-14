@@ -26,11 +26,11 @@ class Target_SKP extends CI_Controller{
         if($nip){
             $this->response([
                 'status' => true,
-                'data' => $nip
+                'data'   => $nip
             ], 200);
         } else{
             $this->response([
-                'status' => false,
+                'status'  => false,
                 'message' => 'Maaf, ID tidak ditemukan !'
             ], 404);
         }
