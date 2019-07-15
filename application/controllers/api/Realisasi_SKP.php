@@ -38,7 +38,7 @@ class Realisasi_SKP extends CI_Controller{
     //Method Post
     public function index_post() {
         $data = [
-            'nip' => $this->post('nip'),
+            'nip'           => $this->post('nip'),
             'akt_tanggal'   => $this->post('akt_tanggal'),
             'akt_idkegiatan'=> $this->post('akt_idkegiatan'),
             'akt_catatan'   => $this->post('akt_catatan'),
@@ -63,7 +63,7 @@ class Realisasi_SKP extends CI_Controller{
         $nip = $this->put('nip');
 
         $data = [
-            'nip' => $this->put('nip'),
+            'nip'           => $this->put('nip'),
             'akt_tanggal'   => $this->put('akt_tanggal'),
             'akt_idkegiatan'=> $this->put('akt_idkegiatan'),
             'akt_catatan'   => $this->put('akt_catatan'),

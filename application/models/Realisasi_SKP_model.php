@@ -10,6 +10,7 @@ class Realisasi_SKP_model extends CI_Model
         $this->load->database();
     }
 
+    //fungsi untuk Realisasi SKP
     public function getRSKP($nip)
     {
         $this->db->select('id_realisasi,uraian,r_output,r_mutu,r_waktu,r_biaya,r_perhitungan,r_capaian');
@@ -18,6 +19,8 @@ class Realisasi_SKP_model extends CI_Model
         $this->db->join('log_aktivitas', 'log_aktivitas.id_tkerja= skp_t_kerja.id_tkerja','left');
         return $this->db->get_where('skp_r_kerja',['log_aktivitas.nip' => $nip])->result_array();
     }
+
+    //fungsi untuk tugas tambahan skp
     public function getTambahanSKP($id_skp = null)
     {
         if($id_skp === null)
@@ -45,6 +48,37 @@ class Realisasi_SKP_model extends CI_Model
     public function updateTambahanSKP($data, $id_uraian_tambahan)
     {
         $this->db->update('skp_r_tambahan', $data, ['id_uraian_tambahan' => $id_uraian_tambahan]);
+        return $this->db->affected_rows();
+    }
+
+    //fungsi untuk aktifitas
+    public function getKreatifitasSKP($id_skp = null)
+    {
+        if($id_skp === null)
+        {
+            $this->db->select('id_skp,idkreatifitas,uraiankreatifitas,nilai,tgl_kreatifitas,dok_kreatifitas');
+            $this->db->from('skp_r_kreatifitas');
+            return $this->db->get()->result();
+        }   else{
+            $this->db->select('id_skp,idkreatifitas,uraiankreatifitas,nilai,tgl_kreatifitas,dok_kreatifitas');
+		    // $this->db->from('skp_dataskp');
+            // $this->db->join('skp_r_tambahan', 'skp_r_tambahan.id_skp = skp_dataskp.id_skp');
+            return $this->db->get_where('skp_r_kreatifitas',['id_skp' => $id_skp])->result_array();
+        }
+    }
+    public function deleteKreatifitasSKP($idkreatifitas)
+    {
+        $this->db->delete('skp_r_kreatifitas', ['idkreatifitas' => $idkreatifitas]);
+        return $this->db->affected_rows();
+    }
+    public function createKreatifitasSKP($data)
+    {
+        $this->db->insert('skp_r_kreatifitas',$data);
+        return $this->db->affected_rows();
+    }
+    public function updateKreatifitasSKP($data, $idkreatifitas)
+    {
+        $this->db->update('skp_r_kreatifitas', $data, ['idkreatifitas' => $idkreatifitas]);
         return $this->db->affected_rows();
     }
 }
