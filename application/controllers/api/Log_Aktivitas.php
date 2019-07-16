@@ -16,11 +16,13 @@ class Log_Aktivitas extends CI_Controller{
     }
     //Method Get
     public function index_get() {
-        $log_id = $this->get('log_id');
-        if($log_id === null){
-            $akt = $this->akt->getAktivitas();
+        $nip = $this->get('nip');
+        // $year = '';
+        // $month = '';
+        if($nip != null){
+            $akt = $this->akt->getAktivitas($nip);
         } else {
-            $akt = $this->akt->getAktivitas($log_id);
+            $akt = $this->akt->getAktivitas();
         }
         
         if($akt){
