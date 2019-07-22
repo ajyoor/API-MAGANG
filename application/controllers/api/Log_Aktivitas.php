@@ -13,6 +13,8 @@ class Log_Aktivitas extends CI_Controller{
         parent::__construct();
         $this->__resTraitConstruct();
         $this->load->model('Log_Aktivitas_model','akt');
+        //tambah limit
+        $this->methods['index_get']['limit'] = 2;
     }
     //Method Get
     public function index_get() {
