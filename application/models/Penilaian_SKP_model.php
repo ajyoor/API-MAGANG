@@ -45,7 +45,7 @@ class Penilaian_SKP_model extends CI_Model
             return $this->db->get()->result_array();
         } else{
             echo "Error Dude";
-     }
+        }
     }
     public function deleteAktivitas($log_id)
     {
@@ -57,4 +57,31 @@ class Penilaian_SKP_model extends CI_Model
         $this->db->update('log_aktivitas', $data, ['log_id' => $log_id]);
         return $this->db->affected_rows();
     }
+
+    //fungsi untuk Penetapan Target
+    public function getTarget($nip,$year)
+    {
+        $this->db->select('nip,kode_jabatan,uraian,output,satuan_output,mutu,waktu,satuan_waktu,biaya,is_aktif');
+        $this->db->from('skp_dataskp');
+        $this->db->join('skp_t_kerja', 'skp_t_kerja.id_skp = skp_dataskp.id_skp');
+        $this->db->where("EXTRACT(YEAR FROM skp_dataskp.tgl_create) = ". $year);
+        $this->db->where('skp_dataskp.nip',$nip);
+        return $this->db->get()->result_array();
+    }
+    public function updateTarget($data, $id_tkerja) //save 
+    {
+        $this->db->update('skp_t_kerja', $data, ['id_tkerja' => $id_tkerja]);
+        return $this->db->affected_rows();
+    }
+    public function updateTarget2($data, $id_skp) //confirm all status
+    {
+        $this->db->update('skp_t_kerja', $data, ['id_skp' => $id_skp]);
+        return $this->db->affected_rows();
+    }
+    public function deleteTarget($id_tkerja)
+    {
+        $this->db->delete('skp_t_kerja', ['id_tkerja' => $id_tkerja]);
+        return $this->db->affected_rows();
+    }
+
 }
