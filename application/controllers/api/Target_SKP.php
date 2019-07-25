@@ -35,4 +35,81 @@ class Target_SKP extends CI_Controller{
             ], 404);
         }
     }
+     //Method Delete
+     public function index_delete() {
+        $id_tkerja = $this->delete('id_tkerja');
+
+        if($id_tkerja === null){
+            $this->response([
+                'status' => false,
+                'data'   => 'Maaf, masukkan ID terlebih dahulu !'
+            ], 400);
+        } else{
+            if( $this->skp->deleteSKP($id_tkerja) > 0){
+                //ok
+                $this->response([
+                    'status' => true,
+                    'id_tkerja' => $id_tkerja,
+                    'message'=> 'ID tersebut berhasil dihapus !'
+                ], 200);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'data'   => 'Maaf, ID tidak ditemukan !'
+                ], 400);
+            }
+        }
+    }
+    //Method Post
+    public function index_post() {
+        $data = [
+            'id_tkerja'     => $this->post('id_tkerja'),
+            'id_skp'        => $this->post('id_skp'),
+            'uraian'        => $this->post('uraian'),
+            'output'        => $this->post('output'),
+            'satuan_output' => $this->post('satuan_output'),
+            'mutu'          => $this->post('mutu'),
+            'waktu'         => $this->post('waktu'),
+            'satuan_waktu'  => $this->post('satuan_waktu')
+        ];
+        if ($this->skp->createSKP($data) > 0) {
+            $this->response([
+                'status'  => true,
+                'message' => 'Data baru telah dibuat !'
+            ], 200);
+        } else {
+            $this->response([
+                'status' => false,
+                'data'   => 'Maaf, Data baru gagal dibuat !'
+            ], 400);
+        }
+    }
+    //Method Put
+    public function index_put(){
+        $id_tkerja = $this->put('id_tkerja');
+        $id_skp   = $this->put('id_skp');
+
+        $data = [
+            'id_tkerja'     => $this->put('id_tkerja'),
+            'id_skp'        => $this->put('id_skp'),
+            'uraian'        => $this->put('uraian'),
+            'output'        => $this->put('output'),
+            'satuan_output' => $this->put('satuan_output'),
+            'mutu'          => $this->put('mutu'),
+            'waktu'         => $this->put('waktu'),
+            'satuan_waktu'  => $this->put('satuan_waktu')
+        ];
+
+        if ($this->skp->updateSKP($data, $id_tkerja) > 0) {
+            $this->response([
+                'status'  => true,
+                'message' => 'Data berhasil diedit !'
+            ], 400);
+        } else {
+            $this->response([
+                'status' => false,
+                'data'   => 'Maaf, Data gagal diupdate !'
+            ], 404);
+        }
+    }
 }
