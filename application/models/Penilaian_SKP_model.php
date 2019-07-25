@@ -30,4 +30,31 @@ class Penilaian_SKP_model extends CI_Model
         $this->db->update('skp_r_perilaku', $data, ['id_perilaku' => $id_perilaku]);
         return $this->db->affected_rows();
     }
+
+    //fungsi untuk aktivitas
+    public function getAktivitas($nip,$year,$month)
+    {
+        if( $nip != null)   {
+            $this->db->select('log_id,akt_tanggal,bk_nama_kegiatan,akt_output,akt_start,akt_end,akt_waktu,akt_status');
+            $this->db->from('log_aktivitas');
+            $this->db->join('skp_pns', 'skp_pns.nip = log_aktivitas.nip ');
+            $this->db->join('log_masteraktivitas', ' log_masteraktivitas.bk_id= log_aktivitas.akt_idkegiatan');
+            $this->db->where("EXTRACT(YEAR FROM log_aktivitas.akt_tanggal) = ". $year);
+            $this->db->where("EXTRACT(MONTH FROM log_aktivitas.akt_tanggal) = ". $month);
+            $this->db->where('log_aktivitas.nip',$nip);
+            return $this->db->get()->result_array();
+        } else{
+            echo "Error Dude";
+     }
+    }
+    public function deleteAktivitas($log_id)
+    {
+        $this->db->delete('log_aktivitas', ['log_id' => $log_id]);
+        return $this->db->affected_rows();
+    }
+    public function updateAktivitas($data, $log_id)
+    {
+        $this->db->update('log_aktivitas', $data, ['log_id' => $log_id]);
+        return $this->db->affected_rows();
+    }
 }
