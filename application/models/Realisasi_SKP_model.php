@@ -14,10 +14,14 @@ class Realisasi_SKP_model extends CI_Model
     public function getRSKP($nip)
     {
         $this->db->select('id_realisasi,uraian,r_output,r_mutu,r_waktu,r_biaya,r_perhitungan,r_capaian');
-		// $this->db->from('skp_dataskp');
         $this->db->join('skp_t_kerja', 'skp_t_kerja.id_tkerja = skp_r_kerja.id_tkerja');
         $this->db->join('log_aktivitas', 'log_aktivitas.id_tkerja= skp_t_kerja.id_tkerja','left');
         return $this->db->get_where('skp_r_kerja',['log_aktivitas.nip' => $nip])->result_array();
+    }
+    public function updateRSKP($data, $id_realisasi)
+    {
+        $this->db->update('skp_r_kerja', $data, ['id_realisasi' => $id_realisasi]);
+        return $this->db->affected_rows();
     }
 
     //fungsi untuk tugas tambahan skp
@@ -30,8 +34,6 @@ class Realisasi_SKP_model extends CI_Model
             return $this->db->get()->result();
         }   else{
             $this->db->select('id_skp,id_uraian_tambahan,uraian_tambahan,tgl_uraiantambahan');
-		    // $this->db->from('skp_dataskp');
-            // $this->db->join('skp_r_tambahan', 'skp_r_tambahan.id_skp = skp_dataskp.id_skp');
             return $this->db->get_where('skp_r_tambahan',['id_skp' => $id_skp])->result_array();
         }
     }
@@ -56,13 +58,11 @@ class Realisasi_SKP_model extends CI_Model
     {
         if($id_skp === null)
         {
-            $this->db->select('id_skp,idkreatifitas,uraiankreatifitas,nilai,tgl_kreatifitas,dok_kreatifitas');
+            $this->db->select('id_skp,idkreatifitas,uraiankreatifitas,tgl_kreatifitas,dok_kreatifitas');
             $this->db->from('skp_r_kreatifitas');
             return $this->db->get()->result();
         }   else{
-            $this->db->select('id_skp,idkreatifitas,uraiankreatifitas,nilai,tgl_kreatifitas,dok_kreatifitas');
-		    // $this->db->from('skp_dataskp');
-            // $this->db->join('skp_r_tambahan', 'skp_r_tambahan.id_skp = skp_dataskp.id_skp');
+            $this->db->select('id_skp,idkreatifitas,uraiankreatifitas,tgl_kreatifitas,dok_kreatifitas');
             return $this->db->get_where('skp_r_kreatifitas',['id_skp' => $id_skp])->result_array();
         }
     }

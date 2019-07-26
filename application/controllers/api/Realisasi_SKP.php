@@ -35,44 +35,19 @@ class Realisasi_SKP extends CI_Controller{
             ], 404);
         }
     }
-    //Method Post
-    public function index_post() {
-        $data = [
-            'nip'           => $this->post('nip'),
-            'akt_tanggal'   => $this->post('akt_tanggal'),
-            'akt_idkegiatan'=> $this->post('akt_idkegiatan'),
-            'akt_catatan'   => $this->post('akt_catatan'),
-            'akt_output'    => $this->post('akt_output'),
-            'akt_start'     => $this->post('akt_start'),
-            'akt_end'       => $this->post('akt_end')
-        ];
-        if ($this->rskp->createRealisasi($data) > 0) {
-            $this->response([
-                'status'  => true,
-                'message' => 'Data baru telah dibuat !'
-            ], 200);
-        } else {
-            $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data baru gagal dibuat !'
-            ], 400);
-        }
-    }
     //Method Put
     public function index_put(){
-        $nip = $this->put('nip');
-
+        $id_realisasi = $this->put('id_realisasi');
         $data = [
-            'nip'           => $this->put('nip'),
-            'akt_tanggal'   => $this->put('akt_tanggal'),
-            'akt_idkegiatan'=> $this->put('akt_idkegiatan'),
-            'akt_catatan'   => $this->put('akt_catatan'),
-            'akt_output'    => $this->put('akt_output'),
-            'akt_start'     => $this->put('akt_start'),
-            'akt_end'       => $this->put('akt_end')
+            'id_realisasi'  => $this->put('id_realisasi'),
+            'r_output'      => $this->put('akt_tanggal'),
+            'r_mutu'        => $this->put('akt_idkegiatan'),
+            'r_waktu'       => $this->put('akt_catatan'),
+            'r_perhitungan' => $this->put('akt_start'),
+            'r_capaian'     => $this->put('akt_end')
         ];
 
-        if ($this->rskp->updateRealisasi($data, $nip) > 0) {
+        if ($this->rskp->updateRSKP($data, $nip) > 0) {
             $this->response([
                 'status'  => true,
                 'message' => 'Data berhasil diedit !'

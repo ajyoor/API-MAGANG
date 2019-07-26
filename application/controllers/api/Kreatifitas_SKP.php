@@ -66,7 +66,6 @@ class Kreatifitas_SKP extends CI_Controller{
             'idkreatifitas'     => $this->post('idkreatifitas'),
             'id_skp'            => $this->post('id_skp'),
             'uraiankreatifitas' => $this->post('uraiankreatifitas'),
-            'nilai'             => $this->post('nilai'),
             'tgl_kreatifitas'   => date('Y-m-d'),
             'dok_kreatifitas'   => $this->post('dok_kreatifitas')
         ];
@@ -90,7 +89,6 @@ class Kreatifitas_SKP extends CI_Controller{
             'idkreatifitas'     => $this->put('idkreatifitas'),
             'id_skp'            => $this->put('id_skp'),
             'uraiankreatifitas' => $this->put('uraiankreatifitas'),
-            'nilai'             => $this->put('nilai'),
             'tgl_kreatifitas'   => date('Y-m-d'),
             'dok_kreatifitas'   => $this->put('dok_kreatifitas')
         ];

@@ -10,7 +10,7 @@ class Penilaian_SKP_model extends CI_Model
         $this->load->database();
     }
     
-    //fungsi untuk perilaku
+    //fungsi untuk Realisasi perilaku
     public function getPerilaku($id_skp,$year)
     {
         $this->db->select('skp_r_perilaku.id_skp,id_perilaku,orientasi_pelayanan,integritas,komitmen,disiplin,kerjasama,kepemimpinan');
@@ -31,7 +31,7 @@ class Penilaian_SKP_model extends CI_Model
         return $this->db->affected_rows();
     }
 
-    //fungsi untuk aktivitas
+    //fungsi untuk Realisasi aktivitas
     public function getAktivitas($nip,$year,$month)
     {
         if( $nip != null)   {
@@ -58,7 +58,7 @@ class Penilaian_SKP_model extends CI_Model
         return $this->db->affected_rows();
     }
 
-    //fungsi untuk Penetapan Target
+    //fungsi untuk Realisasi Penetapan Target
     public function getTarget($nip,$year)
     {
         $this->db->select('nip,kode_jabatan,uraian,output,satuan_output,mutu,waktu,satuan_waktu,biaya,is_aktif');
@@ -84,4 +84,62 @@ class Penilaian_SKP_model extends CI_Model
         return $this->db->affected_rows();
     }
 
+    //fungsi untuk Realisasi (pokok,tugas tambahan,kreatifitas)
+    public function getPokok($nip)
+    {
+        $this->db->select('id_realisasi,uraian,r_output,r_mutu,r_waktu,r_biaya,r_perhitungan,r_capaian');
+		// $this->db->from('skp_dataskp');
+        $this->db->join('skp_t_kerja', 'skp_t_kerja.id_tkerja = skp_r_kerja.id_tkerja');
+        $this->db->join('log_aktivitas', 'log_aktivitas.id_tkerja= skp_t_kerja.id_tkerja','left');
+        return $this->db->get_where('skp_r_kerja',['log_aktivitas.nip' => $nip])->result_array();
+    }
+
+    
+    public function getTambahan($id_skp = null)
+    {
+        if($id_skp === null)
+        {
+            $this->db->select('id_skp,id_uraian_tambahan,uraian_tambahan,tgl_uraiantambahan');
+            $this->db->from('skp_r_tambahan');
+            return $this->db->get()->result();
+        }   else{
+            $this->db->select('id_skp,id_uraian_tambahan,uraian_tambahan,tgl_uraiantambahan');
+		    
+            return $this->db->get_where('skp_r_tambahan',['id_skp' => $id_skp])->result_array();
+        }
+    }
+    public function deleteTambahan($id_uraian_tambahan)
+    {
+        $this->db->delete('skp_r_tambahan', ['id_uraian_tambahan' => $id_uraian_tambahan]);
+        return $this->db->affected_rows();
+    }
+    public function updateTambahan($data, $id_uraian_tambahan)
+    {
+        $this->db->update('skp_r_tambahan', $data, ['id_uraian_tambahan' => $id_uraian_tambahan]);
+        return $this->db->affected_rows();
+    }
+
+    //fungsi untuk kreatifitas
+    public function getKreatifitas($id_skp = null)
+    {
+        if($id_skp === null)
+        {
+            $this->db->select('id_skp,idkreatifitas,uraiankreatifitas,nilai,tgl_kreatifitas,dok_kreatifitas');
+            $this->db->from('skp_r_kreatifitas');
+            return $this->db->get()->result();
+        }   else{
+            $this->db->select('id_skp,idkreatifitas,uraiankreatifitas,nilai,tgl_kreatifitas,dok_kreatifitas');
+            return $this->db->get_where('skp_r_kreatifitas',['id_skp' => $id_skp])->result_array();
+        }
+    }
+    public function deleteKreatifitas($idkreatifitas)
+    {
+        $this->db->delete('skp_r_kreatifitas', ['idkreatifitas' => $idkreatifitas]);
+        return $this->db->affected_rows();
+    }
+    public function updateKreatifitas($data, $idkreatifitas)
+    {
+        $this->db->update('skp_r_kreatifitas', $data, ['idkreatifitas' => $idkreatifitas]);
+        return $this->db->affected_rows();
+    }
 }
