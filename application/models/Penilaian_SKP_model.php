@@ -73,9 +73,30 @@ class Penilaian_SKP_model extends CI_Model
         $this->db->update('skp_t_kerja', $data, ['id_tkerja' => $id_tkerja]);
         return $this->db->affected_rows();
     }
-    public function updateTarget2($data, $id_skp) //confirm all status
+    public function updateTarget2($data, $id_skp, $id_tkerja) //confirm all status
     {
-        $this->db->update('skp_dataskp', $data, ['id_skp' => $id_skp]);
+            $Querynilai     = $this->db->update('skp_dataskp', $data, ['id_skp' => $id_skp]);
+            $QueryTugas     = $this->db->update('skp_t_kerja', $data, ['id_tkerja' => $id_tkerja]);
+            if ($Querynilai === TRUE && $QueryTugas === TRUE ) 
+             {
+                return TRUE;
+             } 
+           else 
+           {
+                return FALSE;
+            }
+        ////////////////////////////////////:v :v :v////////////////////////////////////////
+        // $this->db->update('skp_dataskp', $data, ['id_skp' => $id_skp]);
+        // return $this->db->affected_rows();
+    }
+    public function updateTargetRevisi($data, $id_tkerja) //confirm all status
+    {
+        $this->db->update('skp_t_kerja', $data, ['id_tkerja' => $id_tkerja]);
+        return $this->db->affected_rows();
+    }
+    public function updateTargetBatal($data, $id_tkerja) //confirm all status
+    {
+        $this->db->update('skp_t_kerja', $data, ['id_tkerja' => $id_tkerja]);
         return $this->db->affected_rows();
     }
     public function deleteTarget($id_tkerja)

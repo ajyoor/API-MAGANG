@@ -64,15 +64,68 @@ class Pen_Target extends CI_Controller{
         }
     }
     //Method Put
+    public function revisi_put(){
+        $id_tkerja = $this->put('id_tkerja');
+        $data = [
+            'id_tkerja'       => $this->put('id_tkerja'),
+            'id_skp'          => $this->put('id_skp'),
+            'is_aktif'        => 0,
+            'uraian'          => $this->put('uraian'),
+            'rev_output'      => $this->put('rev_output'),
+            'rev_mutu'        => $this->put('rev_mutu'),
+            'rev_waktu'       => $this->put('rev_waktu'),
+            'rev_biaya'       => $this->put('rev_biaya')
+        ];
+
+        if ($this->pskp->updateTargetRevisi($data, $id_tkerja) > 0) {
+            $this->response([
+                'status'  => true,
+                'message' => 'Data berhasil diedit !'
+            ], 200);
+        } else {
+            $this->response([
+                'status' => false,
+                'data'   => 'Maaf, Data gagal diupdate !'
+            ], 404);
+        }
+    }
+     //Method Put
+     public function batal_put(){
+        $id_tkerja = $this->put('id_tkerja');
+        
+        $data = [
+            'id_tkerja'       => $this->put('id_tkerja'),
+            'is_aktif'        => -1
+        ];
+
+        if ($this->pskp->updateTargetBatal($data, $id_tkerja) > 0) {
+            $this->response([
+                'status'  => true,
+                'message' => 'Data berhasil diedit !'
+            ], 200);
+        } else {
+            $this->response([
+                'status' => false,
+                'data'   => 'Maaf, Data gagal diupdate !'
+            ], 404);
+        }
+    }
+    //Method Put
     public function konfirmasi_put(){
         $id_skp = $this->put('id_skp');
+        $id_tkerja = $this->put('id_tkerja');
         $data = [
             'tgl_konf_target'  => date('Y-m-d'),
             'id_skp'           => $this->put('id_skp'),
-            
+            // 'id_tkerja'           => $this->put('id_tkerja')
+        ];
+        $data2 = [
+            'tgl_konf_target'  => date('Y-m-d'),
+            'id_skp'           => $this->put('id_skp'),
+            // 'id_tkerja'           => $this->put('id_tkerja')
         ];
 
-        if ($this->pskp->updateTarget2($data, $id_skp) > 0) {
+        if ($this->pskp->updateTarget2($data, $id_skp, $id_tkerja) > 0) {
             $this->response([
                 'status'  => true,
                 'message' => 'Data berhasil diedit !'
