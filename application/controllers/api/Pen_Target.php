@@ -67,7 +67,7 @@ class Pen_Target extends CI_Controller{
     public function konfirmasi_put(){
         $id_skp = $this->put('id_skp');
         $data = [
-            'is_aktif'        => $this->put('is_aktif'),
+            'tgl_konf_target'  => date('Y-m-d'),
             'id_skp'           => $this->put('id_skp'),
             
         ];

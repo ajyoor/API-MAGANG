@@ -60,4 +60,25 @@ class Profil_SKP extends CI_Controller{
             ], 404);
         }
     }
+    //Method Put Gambar
+    public function foto_put(){
+        $nip = $this->put('nip');
+
+        $data = [
+            'nip'                  => $this->put('nip'),
+            'image_profil'         => $this->put('image_profil')
+        ];
+
+        if ($this->pm->updateFoto($data, $nip) > 0) {
+            $this->response([
+                'status'  => true,
+                'message' => 'Data berhasil diedit !'
+            ], 400);
+        } else {
+            $this->response([
+                'status' => false,
+                'data'   => 'Maaf, Data gagal diupdate !'
+            ], 404);
+        }
+    }
 }

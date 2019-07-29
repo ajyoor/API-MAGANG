@@ -75,7 +75,7 @@ class Penilaian_SKP_model extends CI_Model
     }
     public function updateTarget2($data, $id_skp) //confirm all status
     {
-        $this->db->update('skp_t_kerja', $data, ['id_skp' => $id_skp]);
+        $this->db->update('skp_dataskp', $data, ['id_skp' => $id_skp]);
         return $this->db->affected_rows();
     }
     public function deleteTarget($id_tkerja)
@@ -85,15 +85,21 @@ class Penilaian_SKP_model extends CI_Model
     }
 
     //fungsi untuk Realisasi (pokok,tugas tambahan,kreatifitas)
-    public function getPokok($nip)
+    public function getPokok($nip,$year)
     {
         $this->db->select('id_realisasi,uraian,r_output,r_mutu,r_waktu,r_biaya,r_perhitungan,r_capaian');
-		// $this->db->from('skp_dataskp');
+		$this->db->from('skp_r_kerja');
         $this->db->join('skp_t_kerja', 'skp_t_kerja.id_tkerja = skp_r_kerja.id_tkerja');
         $this->db->join('log_aktivitas', 'log_aktivitas.id_tkerja= skp_t_kerja.id_tkerja','left');
-        return $this->db->get_where('skp_r_kerja',['log_aktivitas.nip' => $nip])->result_array();
+        $this->db->where("EXTRACT(YEAR FROM log_aktivitas.akt_tanggal) = ". $year);
+        $this->db->where('log_aktivitas.nip',$nip);
+        return $this->db->get()->result_array();
     }
-
+    public function updatePokok($data, $id_realisasi)
+    {
+        $this->db->update('skp_r_kerja', $data, ['id_realisasi' => $id_realisasi]);
+        return $this->db->affected_rows();
+    }
     
     public function getTambahan($id_skp = null)
     {

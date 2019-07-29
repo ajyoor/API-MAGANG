@@ -14,21 +14,23 @@ class Pen_Realisasi extends CI_Controller{
         $this->__resTraitConstruct();
         $this->load->model('Penilaian_SKP_model','pskp');
     }
-
-    //TUGAS POKOK
-    //Method Get
+    //-----------------------------------------------------------------------------------------//
+                                            //TUGAS POKOK//
+                                            //Method Get//
+    //-----------------------------------------------------------------------------------------//
     public function pokok_get() {
         $nip = $this->get('nip');
+        $year = $this->get('year');
         if($nip === null){
             $pskp = $this->pskp->getPokok();
         } else {
-            $pskp = $this->pskp->getPokok($nip);
+            $pskp = $this->pskp->getPokok($nip,$year);
         }
         
-        if($rskp){
+        if($pskp){
             $this->response([
                 'status' => true,
-                'data'   => $rskp
+                'data'   => $pskp
             ], 200);
         } else{
             $this->response([
@@ -39,19 +41,17 @@ class Pen_Realisasi extends CI_Controller{
     }
     //Method Put
     public function pokok_put(){
-        $nip = $this->put('nip');
+        $id_realisasi = $this->put('id_realisasi');
 
         $data = [
-            'nip'           => $this->put('nip'),
-            'akt_tanggal'   => $this->put('akt_tanggal'),
-            'akt_idkegiatan'=> $this->put('akt_idkegiatan'),
-            'akt_catatan'   => $this->put('akt_catatan'),
-            'akt_output'    => $this->put('akt_output'),
-            'akt_start'     => $this->put('akt_start'),
-            'akt_end'       => $this->put('akt_end')
+            'id_realisasi'      => $this->put('id_realisasi'),
+            'r_output'          => $this->put('r_output'),
+            'r_mutu'            => $this->put('r_mutu'),
+            'r_waktu'           => $this->put('r_waktu'),
+            'r_biaya'           => $this->put('r_biaya')
         ];
 
-        if ($this->pskp->updatePokok($data, $nip) > 0) {
+        if ($this->pskp->updatePokok($data, $id_realisasi) > 0) {
             $this->response([
                 'status'  => true,
                 'message' => 'Data berhasil diedit !'
@@ -64,8 +64,9 @@ class Pen_Realisasi extends CI_Controller{
         }
     }
     //-----------------------------------------------------------------------------------------//
-    //TUGAS TAMBAHAN
-    //Method Get
+                                            //TUGAS TAMBAHAN
+                                            //Method Get
+    //-----------------------------------------------------------------------------------------//
     public function tambahan_get() {
         $id_skp = $this->get('id_skp');
         if($id_skp === null){
@@ -134,9 +135,9 @@ class Pen_Realisasi extends CI_Controller{
         }
     }
     //-----------------------------------------------------------------------------------------//
-    //KREATIFITAS
-    //Method Get
-    //Method Get
+                                            //KREATIFITAS
+                                            //Method Get
+    //-----------------------------------------------------------------------------------------//
     public function kreatifitas_get() {
         $id_skp = $this->get('id_skp');
         if($id_skp === null){

@@ -11,12 +11,15 @@ class Realisasi_SKP_model extends CI_Model
     }
 
     //fungsi untuk Realisasi SKP
-    public function getRSKP($nip)
+    public function getRSKP($nip,$year)
     {
-        $this->db->select('id_realisasi,uraian,r_output,r_mutu,r_waktu,r_biaya,r_perhitungan,r_capaian');
+        $this->db->select('DISTINCT id_realisasi,uraian,r_output,r_mutu,r_waktu,r_biaya,r_perhitungan,r_capaian',FALSE);
+        $this->db->from('skp_r_kerja');
         $this->db->join('skp_t_kerja', 'skp_t_kerja.id_tkerja = skp_r_kerja.id_tkerja');
         $this->db->join('log_aktivitas', 'log_aktivitas.id_tkerja= skp_t_kerja.id_tkerja','left');
-        return $this->db->get_where('skp_r_kerja',['log_aktivitas.nip' => $nip])->result_array();
+        $this->db->where("EXTRACT(YEAR FROM log_aktivitas.akt_tanggal) = ". $year);
+        $this->db->where('log_aktivitas.nip',$nip);
+        return $this->db->get()->result_array();
     }
     public function updateRSKP($data, $id_realisasi)
     {

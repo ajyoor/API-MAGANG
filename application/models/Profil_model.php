@@ -27,4 +27,9 @@ class Profil_model extends CI_Model
         $this->db->update('skp_pns sp', $data, ['sp.nip' => $nip]);
         return $this->db->affected_rows();
     }
+    public function updateFoto($data, $nip)
+    {
+        $this->db->update('skp_pns sp', $data, ['sp.nip' => $nip]);
+        return $this->db->affected_rows();
+    }
 }
