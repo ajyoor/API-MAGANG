@@ -17,11 +17,10 @@ class Realisasi_SKP extends CI_Controller{
     //Method Get
     public function index_get() {
         $nip = $this->get('nip');
-        $year = $this->get('year');
         if($nip === null){
             $rskp = $this->rskp->getRSKP();
         } else {
-            $rskp = $this->rskp->getRSKP($nip,$year);
+            $rskp = $this->rskp->getRSKP($nip);
         }
         
         if($rskp){

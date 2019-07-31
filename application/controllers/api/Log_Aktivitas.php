@@ -13,8 +13,6 @@ class Log_Aktivitas extends CI_Controller{
         parent::__construct();
         $this->__resTraitConstruct();
         $this->load->model('Log_Aktivitas_model','akt');
-        //tambah limit
-        $this->methods['index_get']['limit'] = 2;
     }
     //Method Get
     public function index_get() {
@@ -39,6 +37,79 @@ class Log_Aktivitas extends CI_Controller{
             ], 404);
         }
     }
+    public function aktifitas_get() {
+        $akt = $this->akt->getAktivitasAll();
+        
+        if($akt){
+            $this->response([
+                'status' => true,
+                'data'   => $akt
+            ], 200);
+        } else{
+            $this->response([
+                'status'  => false,
+                'message' => 'Maaf, ID tidak ditemukan !'
+            ], 404);
+        }
+    }
+    //-----------------------------------------------------------------------------------------//
+                                            //MENU AKTIFITAS//
+                                    //Method Before,After,Between//
+    //-----------------------------------------------------------------------------------------//
+    public function before_get() {
+        $nip = $this->get('nip');
+        $before = $this->get('before');
+
+        $akt = $this->akt->getTanggalBefore($nip,$before);
+        
+        if($akt){
+            $this->response([
+                'status' => true,
+                'data'   => $akt
+            ], 200);
+        } else{
+            $this->response([
+                'status'  => false,
+                'message' => 'Maaf, ID tidak ditemukan !'
+            ], 404);
+        }
+    }
+    public function after_get() {
+        $nip = $this->get('nip');
+        $after = $this->get('after');
+        $akt = $this->akt->getTanggalAfter($nip,$after);
+        
+        if($akt){
+            $this->response([
+                'status' => true,
+                'data'   => $akt
+            ], 200);
+        } else{
+            $this->response([
+                'status'  => false,
+                'message' => 'Maaf, ID tidak ditemukan !'
+            ], 404);
+        }
+    }
+    public function between_get() {
+        $nip = $this->get('nip');
+        $before = $this->get('before');
+        $after = $this->get('after');
+        $akt = $this->akt->getTanggalBetween($nip,$before,$after);
+        
+        if($akt){
+            $this->response([
+                'status' => true,
+                'data'   => $akt
+            ], 200);
+        } else{
+            $this->response([
+                'status'  => false,
+                'message' => 'Maaf, ID tidak ditemukan !'
+            ], 404);
+        }
+    }
+
     //Method Delete
     public function index_delete() {
         $log_id = $this->delete('log_id');
