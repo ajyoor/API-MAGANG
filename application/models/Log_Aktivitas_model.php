@@ -19,6 +19,7 @@ class Log_Aktivitas_model extends CI_Model
             $this->db->where("EXTRACT(YEAR FROM log_aktivitas.akt_tanggal) = ". $year);
             $this->db->where("EXTRACT(MONTH FROM log_aktivitas.akt_tanggal) = ". $month);
             $this->db->where('log_aktivitas.nip',$nip);
+            $this->db->limit(10, 10);
             return $this->db->get()->result_array();
         } else{
             echo "Error Dude";
@@ -30,6 +31,7 @@ class Log_Aktivitas_model extends CI_Model
             $this->db->from('log_aktivitas');
             $this->db->join('skp_pns', 'skp_pns.nip = log_aktivitas.nip ');
             $this->db->join('log_masteraktivitas', ' log_masteraktivitas.bk_id= log_aktivitas.akt_idkegiatan');
+            // $this->db->limit(5, 10);
             return $this->db->get()->result_array();
     }
     public function getTanggalBefore($nip,$before)

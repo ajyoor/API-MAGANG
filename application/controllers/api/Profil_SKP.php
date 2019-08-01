@@ -14,7 +14,9 @@ class Profil_SKP extends CI_Controller{
         $this->__resTraitConstruct();
         $this->load->model('Profil_model','pm');
     }
-    //Method Get
+    //-----------------------------------------------------------------------------------------//
+                                            //Method GET//
+    //-----------------------------------------------------------------------------------------//
     public function index_get() {
         $nip = $this->get('nip');
         if($nip === null){
@@ -35,7 +37,10 @@ class Profil_SKP extends CI_Controller{
             ], 404);
         }
     }
-    //Method Put
+    //-----------------------------------------------------------------------------------------//
+                                            //Method PUT//
+                                        //EDIT data by nip//
+    //-----------------------------------------------------------------------------------------//
     public function index_put(){
         $nip = $this->put('nip');
 
@@ -60,7 +65,10 @@ class Profil_SKP extends CI_Controller{
             ], 404);
         }
     }
-    //Method Put Gambar
+    //-----------------------------------------------------------------------------------------//
+                                        //Method PUT foto//
+                                        //EDIT data by nip//
+    //-----------------------------------------------------------------------------------------//
     public function foto_put(){
         $nip = $this->put('nip');
 

@@ -14,7 +14,10 @@ class Pen_Target extends CI_Controller{
         $this->__resTraitConstruct();
         $this->load->model('Penilaian_SKP_model','pskp');
     }
-    //Method Get
+    //-----------------------------------------------------------------------------------------//
+                                            //Method GET//
+                                    //GET data by nip & year//
+    //-----------------------------------------------------------------------------------------//
     public function index_get() {
         $nip = $this->get('nip');
         $year = $this->get('year');
@@ -36,7 +39,10 @@ class Pen_Target extends CI_Controller{
             ], 404);
         }
     }
-    //Method Put
+    //-----------------------------------------------------------------------------------------//
+                                            //Method PUT//
+                                      //EDIT data by id_tkerja//
+    //-----------------------------------------------------------------------------------------//
     public function index_put(){
         $id_tkerja = $this->put('id_tkerja');
         $data = [
@@ -63,7 +69,10 @@ class Pen_Target extends CI_Controller{
             ], 404);
         }
     }
-    //Method Put
+    //-----------------------------------------------------------------------------------------//
+                                        //Method PUT untuk KEPALA//
+                                        //EDIT data by id_tkerja//
+    //-----------------------------------------------------------------------------------------//
     public function revisi_put(){
         $id_tkerja = $this->put('id_tkerja');
         $data = [
@@ -89,7 +98,10 @@ class Pen_Target extends CI_Controller{
             ], 404);
         }
     }
-     //Method Put
+     //-----------------------------------------------------------------------------------------//
+                                    //Method batal PUT untuk KEPALA//
+                                        //EDIT data by id_tkerja//
+    //-----------------------------------------------------------------------------------------//
      public function batal_put(){
         $id_tkerja = $this->put('id_tkerja');
         
@@ -110,7 +122,10 @@ class Pen_Target extends CI_Controller{
             ], 404);
         }
     }
-    //Method Put
+    //-----------------------------------------------------------------------------------------//
+                                //Method PUT untuk konfirmasi KEPALA//
+                                //EDIT data by id_skp & id_tkerja//
+    //-----------------------------------------------------------------------------------------//
     public function konfirmasi_put(){
         $id_skp = $this->put('id_skp');
         $id_tkerja = $this->put('id_tkerja');
@@ -137,7 +152,10 @@ class Pen_Target extends CI_Controller{
             ], 404);
         }
     }
-    //Method Delete
+    //-----------------------------------------------------------------------------------------//
+                                            //Method DELETE//
+                                        //DELETE data by id_tkerja//
+    //-----------------------------------------------------------------------------------------//
     public function index_delete() {
         $id_tkerja = $this->delete('id_tkerja');
 

@@ -16,7 +16,10 @@ class Pen_Aktivitas extends CI_Controller{
         //tambah limit
         // $this->methods['index_get']['limit'] = 2;
     }
-    //Method Get
+    //-----------------------------------------------------------------------------------------//
+                                            //Method GET//
+                                    //GET data by nip,year,month//
+    //-----------------------------------------------------------------------------------------//
     public function index_get() {
         $nip = $this->get('nip');
         $log_id = $this->get('log_id');
@@ -40,7 +43,10 @@ class Pen_Aktivitas extends CI_Controller{
             ], 404);
         }
     }
-    //Method Delete
+    //-----------------------------------------------------------------------------------------//
+                                            //Method DELETE//
+                                        //DELETE data by log_id//
+    //-----------------------------------------------------------------------------------------//
     public function index_delete() {
         $log_id = $this->delete('log_id');
 
@@ -65,7 +71,10 @@ class Pen_Aktivitas extends CI_Controller{
             }
         }
     }
-    //Method Put
+    //-----------------------------------------------------------------------------------------//
+                                            //Method PUT//
+                                        //EDIT data by log_id//
+    //-----------------------------------------------------------------------------------------//
     public function index_put(){
         $log_id = $this->put('log_id');
 

@@ -14,7 +14,9 @@ class Target_SKP extends CI_Controller{
         $this->__resTraitConstruct();
         $this->load->model('Target_SKP_model','skp');
     }
-    //untuk minta data
+    //-----------------------------------------------------------------------------------------//
+                                            //Method GET//
+    //-----------------------------------------------------------------------------------------//
     public function index_get() {
         $nip = $this->get('nip');
         if($nip === null){
@@ -35,7 +37,10 @@ class Target_SKP extends CI_Controller{
             ], 404);
         }
     }
-     //Method Delete
+     //-----------------------------------------------------------------------------------------//
+                                            //Method DELETE//
+                                        //DELETE data by id_tkerja//
+    //-----------------------------------------------------------------------------------------//
      public function index_delete() {
         $id_tkerja = $this->delete('id_tkerja');
 
@@ -60,7 +65,9 @@ class Target_SKP extends CI_Controller{
             }
         }
     }
-    //Method Post
+    //-----------------------------------------------------------------------------------------//
+                                            //Method POST//
+    //-----------------------------------------------------------------------------------------//
     public function index_post() {
         $data = [
             'id_tkerja'     => $this->post('id_tkerja'),
@@ -84,7 +91,10 @@ class Target_SKP extends CI_Controller{
             ], 400);
         }
     }
-    //Method Put
+    //-----------------------------------------------------------------------------------------//
+                                            //Method PUT//
+                                //EDIT data by id_tkerja & id_skp//
+    //-----------------------------------------------------------------------------------------//
     public function index_put(){
         $id_tkerja = $this->put('id_tkerja');
         $id_skp   = $this->put('id_skp');

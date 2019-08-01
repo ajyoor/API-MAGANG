@@ -14,7 +14,10 @@ class Kreatifitas_SKP extends CI_Controller{
         $this->__resTraitConstruct();
         $this->load->model('Realisasi_SKP_model','rskp');
     }
-    //Method Get
+    //-----------------------------------------------------------------------------------------//
+                                            //Method GET//
+                                        //GET data by id_skp//
+    //-----------------------------------------------------------------------------------------//
     public function index_get() {
         $id_skp = $this->get('id_skp');
         if($id_skp === null){
@@ -35,7 +38,10 @@ class Kreatifitas_SKP extends CI_Controller{
             ], 404);
         }
     }
-    //Method Delete
+   //-----------------------------------------------------------------------------------------//
+                                            //Method DELETE//
+                                      //DELETE by idkreatifitas//
+    //-----------------------------------------------------------------------------------------//
     public function index_delete() {
         $idkreatifitas = $this->delete('idkreatifitas');
 
@@ -60,7 +66,9 @@ class Kreatifitas_SKP extends CI_Controller{
             }
         }
     }
-    //Method Post
+    //-----------------------------------------------------------------------------------------//
+                                            //Method POST//
+    //-----------------------------------------------------------------------------------------//
     public function index_post() {
         $data = [
             'idkreatifitas'     => $this->post('idkreatifitas'),
@@ -81,7 +89,10 @@ class Kreatifitas_SKP extends CI_Controller{
             ], 400);
         }
     }
-    //Method Put
+    //-----------------------------------------------------------------------------------------//
+                                            //Method PUT//
+                                    //EDIT data by idkreatifitas//
+    //-----------------------------------------------------------------------------------------//
     public function index_put(){
         $idkreatifitas = $this->put('idkreatifitas');
 

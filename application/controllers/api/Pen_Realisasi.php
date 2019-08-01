@@ -16,7 +16,7 @@ class Pen_Realisasi extends CI_Controller{
     }
     //-----------------------------------------------------------------------------------------//
                                             //TUGAS POKOK//
-                                            //Method Get//
+                                            //Method GET//
     //-----------------------------------------------------------------------------------------//
     public function pokok_get() {
         $nip = $this->get('nip');
@@ -39,7 +39,9 @@ class Pen_Realisasi extends CI_Controller{
             ], 404);
         }
     }
-    //Method Put
+    //-----------------------------------------------------------------------------------------//
+                                            //Method PUT//
+    //-----------------------------------------------------------------------------------------//
     public function pokok_put(){
         $id_realisasi = $this->put('id_realisasi');
 
@@ -64,8 +66,8 @@ class Pen_Realisasi extends CI_Controller{
         }
     }
     //-----------------------------------------------------------------------------------------//
-                                            //TUGAS TAMBAHAN
-                                            //Method Get
+                                          //TUGAS TAMBAHAN
+                                            //Method GET
     //-----------------------------------------------------------------------------------------//
     public function tambahan_get() {
         $id_skp = $this->get('id_skp');
@@ -87,7 +89,9 @@ class Pen_Realisasi extends CI_Controller{
             ], 404);
         }
     }
-    //Method Delete
+    //-----------------------------------------------------------------------------------------//
+                                        //Method DELETE//
+    //-----------------------------------------------------------------------------------------//
     public function tambahan_delete() {
     $id_uraian_tambahan = $this->delete('id_uraian_tambahan');
 
@@ -112,7 +116,9 @@ class Pen_Realisasi extends CI_Controller{
         }
     }
     }
-    //Method Put
+    //-----------------------------------------------------------------------------------------//
+                                            //Method PUT//
+    //-----------------------------------------------------------------------------------------//
     public function tambahan_put(){
         $id_uraian_tambahan = $this->put('id_uraian_tambahan');
 
@@ -158,7 +164,9 @@ class Pen_Realisasi extends CI_Controller{
             ], 404);
         }
     }
-    //Method Delete
+    //-----------------------------------------------------------------------------------------//
+                                        //Method DELETE//
+    //-----------------------------------------------------------------------------------------//
     public function kreatifitas_delete() {
         $idkreatifitas = $this->delete('idkreatifitas');
 
@@ -183,7 +191,9 @@ class Pen_Realisasi extends CI_Controller{
             }
         }
     }
-    //Method Put
+    //-----------------------------------------------------------------------------------------//
+                                    //Method PUT//
+    //-----------------------------------------------------------------------------------------//
     public function kreatifitas_put(){
         $idkreatifitas = $this->put('idkreatifitas');
 

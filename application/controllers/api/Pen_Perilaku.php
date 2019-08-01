@@ -14,7 +14,10 @@ class Pen_Perilaku extends CI_Controller{
         $this->__resTraitConstruct();
         $this->load->model('Penilaian_SKP_model','pskp');
     }
-    //Method Get
+    //-----------------------------------------------------------------------------------------//
+                                            //Method GET//
+                                    //GET data by id_skp & year//
+    //-----------------------------------------------------------------------------------------//
     public function index_get() {
         $id_skp = $this->get('id_skp');
         $year = $this->get('year');
@@ -36,7 +39,9 @@ class Pen_Perilaku extends CI_Controller{
             ], 404);
         }
     }
-    //Method Post
+    //-----------------------------------------------------------------------------------------//
+                                            //Method POST//
+    //-----------------------------------------------------------------------------------------//
     public function index_post() {
         $data = [
             'id_perilaku'        => $this->post('id_perilaku'),
@@ -62,7 +67,10 @@ class Pen_Perilaku extends CI_Controller{
             ], 400);
         }
     }
-    //Method Put
+    //-----------------------------------------------------------------------------------------//
+                                            //Method PUT//
+                                    //EDIT data by id_perilaku//
+    //-----------------------------------------------------------------------------------------//
     public function index_put(){
         $id_perilaku = $this->put('id_perilaku');
 

@@ -14,7 +14,9 @@ class Tugas_Tambahan_SKP extends CI_Controller{
         $this->__resTraitConstruct();
         $this->load->model('Realisasi_SKP_model','rskp');
     }
-    //Method Get
+    //-----------------------------------------------------------------------------------------//
+                                            //Method GET//
+    //-----------------------------------------------------------------------------------------//
     public function index_get() {
         $id_skp = $this->get('id_skp');
         if($id_skp === null){
@@ -35,7 +37,10 @@ class Tugas_Tambahan_SKP extends CI_Controller{
             ], 404);
         }
     }
-    //Method Delete
+    //-----------------------------------------------------------------------------------------//
+                                            //Method DELETE//
+                                    //DELETE data by id_uraian_tambahan//
+    //-----------------------------------------------------------------------------------------//
     public function index_delete() {
         $id_uraian_tambahan = $this->delete('id_uraian_tambahan');
 
@@ -60,7 +65,9 @@ class Tugas_Tambahan_SKP extends CI_Controller{
             }
         }
     }
-    //Method Post
+    //-----------------------------------------------------------------------------------------//
+                                            //Method POST//
+    //-----------------------------------------------------------------------------------------//
     public function index_post() {
         $data = [
             'id_uraian_tambahan' => $this->post('id_uraian_tambahan'),
@@ -80,7 +87,10 @@ class Tugas_Tambahan_SKP extends CI_Controller{
             ], 400);
         }
     }
-    //Method Put
+    //-----------------------------------------------------------------------------------------//
+                                            //Method PUT//
+                                    //EDIT data by id_uraian_tambahan//
+    //-----------------------------------------------------------------------------------------//
     public function index_put(){
         $id_uraian_tambahan = $this->put('id_uraian_tambahan');
 

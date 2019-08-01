@@ -14,7 +14,9 @@ class Realisasi_SKP extends CI_Controller{
         $this->__resTraitConstruct();
         $this->load->model('Realisasi_SKP_model','rskp');
     }
-    //Method Get
+    //-----------------------------------------------------------------------------------------//
+                                            //Method GET//
+    //-----------------------------------------------------------------------------------------//
     public function index_get() {
         $nip = $this->get('nip');
         if($nip === null){
@@ -35,7 +37,10 @@ class Realisasi_SKP extends CI_Controller{
             ], 404);
         }
     }
-    //Method Put
+    //-----------------------------------------------------------------------------------------//
+                                            //Method PUT//
+                                    //EDIT data by id_realisasi//
+    //-----------------------------------------------------------------------------------------//
     public function index_put(){
         $id_realisasi = $this->put('id_realisasi');
         $data = [

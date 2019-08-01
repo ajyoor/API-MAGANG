@@ -14,7 +14,10 @@ class Log_Aktivitas extends CI_Controller{
         $this->__resTraitConstruct();
         $this->load->model('Log_Aktivitas_model','akt');
     }
-    //Method Get
+    //-----------------------------------------------------------------------------------------//
+                                            //Method GET//
+                                //Get by nip,year, month & Get all//
+    //-----------------------------------------------------------------------------------------//
     public function index_get() {
         $nip = $this->get('nip');
         $year = $this->get('year');
@@ -110,7 +113,10 @@ class Log_Aktivitas extends CI_Controller{
         }
     }
 
-    //Method Delete
+    //-----------------------------------------------------------------------------------------//
+                                            //Method DELETE//
+                                          //DELETE by log_id//
+    //-----------------------------------------------------------------------------------------//
     public function index_delete() {
         $log_id = $this->delete('log_id');
 
@@ -135,7 +141,9 @@ class Log_Aktivitas extends CI_Controller{
             }
         }
     }
-    //Method Post
+    //-----------------------------------------------------------------------------------------//
+                                            //Method POST//
+    //-----------------------------------------------------------------------------------------//
     public function index_post() {
         $data = [
             'log_id'        => $this->post('log_id'),
@@ -158,7 +166,10 @@ class Log_Aktivitas extends CI_Controller{
             ], 400);
         }
     }
-    //Method Put
+    //-----------------------------------------------------------------------------------------//
+                                            //Method PUT//
+                                        //EDIT data by log_id//
+    //-----------------------------------------------------------------------------------------//
     public function index_put(){
         $log_id = $this->put('log_id');
 
