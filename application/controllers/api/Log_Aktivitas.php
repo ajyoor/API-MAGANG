@@ -22,22 +22,31 @@ class Log_Aktivitas extends CI_Controller{
         $nip = $this->get('nip');
         $year = $this->get('year');
         $month = $this->get('month');
-        if($nip != null){
-            $akt = $this->akt->getAktivitas($nip,$year,$month);
+        $method = $_SERVER['REQUEST_METHOD'];
+        if($method != 'GET'){
+        json_output(400,array('status' => 400,'message' => 'Bad request.'));
         } else {
-            $akt = $this->akt->getAktivitas();
-        }
-        
-        if($akt){
-            $this->response([
-                'status' => true,
-                'data'   => $akt
-            ], 200);
-        } else{
-            $this->response([
-                'status'  => false,
-                'message' => 'Maaf, ID tidak ditemukan !'
-            ], 404);
+                    $check_auth_client = $this->MyModel->check_auth_client();
+        if($check_auth_client == true){
+                $response = $this->MyModel->auth();
+                if($nip != null){
+                    $akt = $this->akt->getAktivitas($nip,$year,$month);
+                } else {
+                    $akt = $this->akt->getAktivitas();
+                }
+                
+                if($akt){
+                    $this->response([
+                        'status' => true,
+                        'data'   => $akt
+                    ], 200);
+                } else{
+                    $this->response([
+                        'status'  => false,
+                        'message' => 'Maaf, ID tidak ditemukan !'
+                    ], 404);
+                }
+            }
         }
     }
     public function aktifitas_get() {
