@@ -3,8 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MyModel extends CI_Model {
 
-    var $client_service = "frontend-client";
-    var $auth_key       = "simplerestapi";
+    var $client_service = "api-magang";
+    var $auth_key       = "geomedia";
 
     public function check_auth_client(){
         $client_service = $this->input->get_request_header('Client-Service', TRUE);
@@ -27,7 +27,7 @@ class MyModel extends CI_Model {
             if (md5($hashed_password, crypt($password, $hashed_password))) {
                $last_login = date('Y-m-d H:i:s');
                $token = crypt(substr( md5(rand()), 0, 7));
-               $expired_at = date("Y-m-d H:i:s", strtotime('+2 hours'));
+               $expired_at = date("Y-m-d H:i:s", strtotime('+12 hours'));
                $this->db->trans_start();
                $this->db->where('id',$id)->update('users',array('last_login' => $last_login));
                $this->db->insert('users_authentication',array('users_id' => $id,'token' => $token,'expired_at' => $expired_at));
