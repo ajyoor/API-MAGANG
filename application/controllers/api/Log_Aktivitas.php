@@ -234,6 +234,7 @@ class Log_Aktivitas extends CI_Controller{
 		        $response = $this->MyModel->auth();
 		        $respStatus = $response['status'];
 		        if($response['status'] == 200){
+                    $params = json_decode(file_get_contents('php://input'), TRUE);
                     $data = [
                         'log_id'        => $this->post('log_id'),
                         'akt_tanggal'   => $this->post('akt_tanggal'),

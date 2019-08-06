@@ -18,25 +18,24 @@ class MyModel extends CI_Model {
 
     public function login($username,$password)
     {
-        $q  = $this->db->select('password,id')->from('users')->where('username',$username)->get()->row();
+        $q  = $this->db->select('password,nip')->from('skp_pns')->where('username',$username)->get()->row();
         if($q == ""){
             return array('status' => 204,'message' => 'Username not found.');
         } else {
             $hashed_password = $q->password;
-            $id              = $q->id;
+            $nip             = $q->nip;
             if (md5($hashed_password, crypt($password, $hashed_password))) {
-               $last_login = date('Y-m-d H:i:s');
                $token = crypt(substr( md5(rand()), 0, 7));
                $expired_at = date("Y-m-d H:i:s", strtotime('+12 hours'));
                $this->db->trans_start();
-               $this->db->where('id',$id)->update('users',array('last_login' => $last_login));
-               $this->db->insert('users_authentication',array('users_id' => $id,'token' => $token,'expired_at' => $expired_at));
+               $this->db->update('skp_pns',array('token' => $token,'expired_at' => $expired_at));
+               $this->db->where('nip',$username);
                if ($this->db->trans_status() === FALSE){
                   $this->db->trans_rollback();
                   return array('status' => 500,'message' => 'Internal server error.');
                } else {
                   $this->db->trans_commit();
-                  return array('status' => 200,'message' => 'Successfully login.','id' => $id, 'token' => $token);
+                  return array('status' => 200,'message' => 'Successfully login.','nip' => $nip, 'token' => $token);
                }
             } else {
                return array('status' => 204,'message' => 'Wrong password.');
@@ -46,26 +45,23 @@ class MyModel extends CI_Model {
 
     public function logout()
     {
-        $users_id  = $this->input->get_request_header('User-ID', TRUE);
         $token     = $this->input->get_request_header('Authorization', TRUE);
-        $this->db->where('users_id',$users_id)->where('token',$token)->delete('users_authentication');
-        return array('status' => 200,'message' => 'Successfully logout.');
+        $this->db->where('token',$token)->delete('skp_pns');
+        return array('status' => 200,'message' => 'Successfully logout & deleted token');
     }
 
     public function auth()
     {
-        $users_id  = $this->input->get_request_header('User-ID', TRUE);
         $token     = $this->input->get_request_header('Authorization', TRUE);
-        $q  = $this->db->select('expired_at')->from('users_authentication')->where('users_id',$users_id)->where('token',$token)->get()->row();
+        $q  = $this->db->select('expired_at')->from('skp_pns')->where('token',$token)->get()->row();
         if($q == ""){
             return json_output(401,array('status' => 401,'message' => 'Unauthorized.'));
         } else {
             if($q->expired_at < date('Y-m-d H:i:s')){
                 return json_output(401,array('status' => 401,'message' => 'Your session has been expired.'));
             } else {
-                $updated_at = date('Y-m-d H:i:s');
                 $expired_at = date("Y-m-d H:i:s", strtotime('+12 hours'));
-                $this->db->where('users_id',$users_id)->where('token',$token)->update('users_authentication',array('expired_at' => $expired_at,'updated_at' => $updated_at));
+                $this->db->where('token',$token)->update('skp_pns',array('expired_at' => $expired_at));
                 return array('status' => 200,'message' => 'Authorized.');
             }
         }
