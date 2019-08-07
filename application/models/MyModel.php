@@ -28,8 +28,9 @@ class MyModel extends CI_Model {
                $token = crypt(substr( md5(rand()), 0, 7));
                $expired_at = date("Y-m-d H:i:s", strtotime('+12 hours'));
                $this->db->trans_start();
-               $this->db->update('skp_pns',array('token' => $token,'expired_at' => $expired_at));
+               $data=array('token' => $token,'expired_at' => $expired_at);
                $this->db->where('nip',$username);
+               $this->db->update('skp_pns',$data);
                if ($this->db->trans_status() === FALSE){
                   $this->db->trans_rollback();
                   return array('status' => 500,'message' => 'Internal server error.');
@@ -46,7 +47,9 @@ class MyModel extends CI_Model {
     public function logout()
     {
         $token     = $this->input->get_request_header('Authorization', TRUE);
-        $this->db->where('token',$token)->delete('skp_pns');
+        $data=array('token' => null,'expired_at' => null);
+               $this->db->where('token',$token);
+               $this->db->update('skp_pns',$data);
         return array('status' => 200,'message' => 'Successfully logout & deleted token');
     }
 
