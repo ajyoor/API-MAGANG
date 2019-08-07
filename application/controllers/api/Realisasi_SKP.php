@@ -13,16 +13,26 @@ class Realisasi_SKP extends CI_Controller{
         parent::__construct();
         $this->__resTraitConstruct();
         $this->load->model('Realisasi_SKP_model','rskp');
+        $this->load->model('MyModel','mm');
     }
     //-----------------------------------------------------------------------------------------//
                                             //Method GET//
     //-----------------------------------------------------------------------------------------//
     public function index_get() {
         $nip = $this->get('nip');
-        if($nip === null){
-            $rskp = $this->rskp->getRSKP();
-        } else {
+
+        $method = $_SERVER['REQUEST_METHOD'];
+        if($method != 'GET'){
+			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+		} else {
+            $check_auth_client = $this->mm->check_auth_client();
+			if($check_auth_client == true){
+		        $response = $this->mm->auth();
+        if($response['status'] == 200 && $nip != null){
             $rskp = $this->rskp->getRSKP($nip);
+            json_output($response['status'],$rskp);
+        } else {
+            $rskp = $this->rskp->getRSKP();
         }
         
         if($rskp){
@@ -35,7 +45,9 @@ class Realisasi_SKP extends CI_Controller{
                 'status'  => false,
                 'message' => 'Maaf, ID tidak ditemukan !'
             ], 404);
-        }
+                }
+            }
+        }       
     }
     //-----------------------------------------------------------------------------------------//
                                             //Method PUT//
@@ -43,16 +55,26 @@ class Realisasi_SKP extends CI_Controller{
     //-----------------------------------------------------------------------------------------//
     public function index_put(){
         $id_realisasi = $this->put('id_realisasi');
-        $data = [
-            'id_realisasi'  => $this->put('id_realisasi'),
-            'r_output'      => $this->put('akt_tanggal'),
-            'r_mutu'        => $this->put('akt_idkegiatan'),
-            'r_waktu'       => $this->put('akt_catatan'),
-            'r_perhitungan' => $this->put('akt_start'),
-            'r_capaian'     => $this->put('akt_end')
-        ];
+       
+        $method = $_SERVER['REQUEST_METHOD'];
+		if($method != 'PUT'){
+			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+		} else {
+			$check_auth_client = $this->mm->check_auth_client();
+			if($check_auth_client == true){
+		        $response = $this->mm->auth();
+		        $respStatus = $response['status'];
+		        if($response['status'] == 200 && $id_realisasi != null){
+                    $data = [
+                        'id_realisasi'  => $this->put('id_realisasi'),
+                        'r_output'      => $this->put('akt_tanggal'),
+                        'r_mutu'        => $this->put('akt_idkegiatan'),
+                        'r_waktu'       => $this->put('akt_catatan'),
+                        'r_perhitungan' => $this->put('akt_start'),
+                        'r_capaian'     => $this->put('akt_end')
+                    ];
 
-        if ($this->rskp->updateRSKP($data, $nip) > 0) {
+        if ($this->rskp->updateRSKP($data, $id_realisasi) > 0) {
             $this->response([
                 'status'  => true,
                 'message' => 'Data berhasil diedit !'
@@ -62,6 +84,9 @@ class Realisasi_SKP extends CI_Controller{
                 'status' => false,
                 'data'   => 'Maaf, Data gagal diupdate !'
             ], 404);
+                    }
+                }
+            }
         }
     }
 }

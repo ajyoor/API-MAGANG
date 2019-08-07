@@ -13,16 +13,26 @@ class Target_SKP extends CI_Controller{
         parent::__construct();
         $this->__resTraitConstruct();
         $this->load->model('Target_SKP_model','skp');
+        $this->load->model('MyModel','mm');
     }
     //-----------------------------------------------------------------------------------------//
                                             //Method GET//
     //-----------------------------------------------------------------------------------------//
     public function index_get() {
         $nip = $this->get('nip');
-        if($nip === null){
-            $nip = $this->skp->getSKP();
-        } else {
+
+        $method = $_SERVER['REQUEST_METHOD'];
+        if($method != 'GET'){
+			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+		} else {
+            $check_auth_client = $this->mm->check_auth_client();
+			if($check_auth_client == true){
+		        $response = $this->mm->auth();
+        if($response['status'] == 200 && $nip != null){
             $nip = $this->skp->getSKP($nip);
+            json_output($response['status'],$nip);
+        } else {
+            $nip = $this->skp->getSKP();
         }
         
         if($nip){
@@ -35,33 +45,42 @@ class Target_SKP extends CI_Controller{
                 'status'  => false,
                 'message' => 'Maaf, ID tidak ditemukan !'
             ], 404);
+                }
+            }
         }
     }
      //-----------------------------------------------------------------------------------------//
                                             //Method DELETE//
                                         //DELETE data by id_tkerja//
     //-----------------------------------------------------------------------------------------//
-     public function index_delete() {
+    public function index_delete() {
         $id_tkerja = $this->delete('id_tkerja');
 
-        if($id_tkerja === null){
-            $this->response([
-                'status' => false,
-                'data'   => 'Maaf, masukkan ID terlebih dahulu !'
-            ], 400);
-        } else{
-            if( $this->skp->deleteSKP($id_tkerja) > 0){
+        $method = $_SERVER['REQUEST_METHOD'];
+        if($method != 'DELETE'){
+			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+		} else {
+            $check_auth_client = $this->mm->check_auth_client();
+			if($check_auth_client == true){
+                $response = $this->mm->auth();
+        if($response['status'] == 200 && $id_tkerja != null){
+            $id_tkerja = $this->skp->deleteSKP($id_tkerja);
+            json_output($response['status'],$id_tkerja);
+        }
+
+        if( $this->skp->deleteSKP($id_tkerja) > 0){
                 //ok
                 $this->response([
                     'status' => true,
                     'id_tkerja' => $id_tkerja,
                     'message'=> 'ID tersebut berhasil dihapus !'
                 ], 200);
-            } else {
+        } else {
                 $this->response([
                     'status' => false,
                     'data'   => 'Maaf, ID tidak ditemukan !'
                 ], 400);
+                }
             }
         }
     }
@@ -69,16 +88,27 @@ class Target_SKP extends CI_Controller{
                                             //Method POST//
     //-----------------------------------------------------------------------------------------//
     public function index_post() {
-        $data = [
-            'id_tkerja'     => $this->post('id_tkerja'),
-            'id_skp'        => $this->post('id_skp'),
-            'uraian'        => $this->post('uraian'),
-            'output'        => $this->post('output'),
-            'satuan_output' => $this->post('satuan_output'),
-            'mutu'          => $this->post('mutu'),
-            'waktu'         => $this->post('waktu'),
-            'satuan_waktu'  => $this->post('satuan_waktu')
-        ];
+        
+        $method = $_SERVER['REQUEST_METHOD'];
+		if($method != 'POST'){
+			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+		} else {
+			$check_auth_client = $this->mm->check_auth_client();
+			if($check_auth_client == true){
+		        $response = $this->mm->auth();
+		        $respStatus = $response['status'];
+		        if($response['status'] == 200){
+                    $params = json_decode(file_get_contents('php://input'), TRUE);
+                    $data = [
+                        'id_tkerja'     => $this->post('id_tkerja'),
+                        'id_skp'        => $this->post('id_skp'),
+                        'uraian'        => $this->post('uraian'),
+                        'output'        => $this->post('output'),
+                        'satuan_output' => $this->post('satuan_output'),
+                        'mutu'          => $this->post('mutu'),
+                        'waktu'         => $this->post('waktu'),
+                        'satuan_waktu'  => $this->post('satuan_waktu')
+                    ];
         if ($this->skp->createSKP($data) > 0) {
             $this->response([
                 'status'  => true,
@@ -89,6 +119,9 @@ class Target_SKP extends CI_Controller{
                 'status' => false,
                 'data'   => 'Maaf, Data baru gagal dibuat !'
             ], 400);
+                    }
+                }
+            }
         }
     }
     //-----------------------------------------------------------------------------------------//
@@ -97,18 +130,26 @@ class Target_SKP extends CI_Controller{
     //-----------------------------------------------------------------------------------------//
     public function index_put(){
         $id_tkerja = $this->put('id_tkerja');
-        $id_skp   = $this->put('id_skp');
 
-        $data = [
-            'id_tkerja'     => $this->put('id_tkerja'),
-            'id_skp'        => $this->put('id_skp'),
-            'uraian'        => $this->put('uraian'),
-            'output'        => $this->put('output'),
-            'satuan_output' => $this->put('satuan_output'),
-            'mutu'          => $this->put('mutu'),
-            'waktu'         => $this->put('waktu'),
-            'satuan_waktu'  => $this->put('satuan_waktu')
-        ];
+        $method = $_SERVER['REQUEST_METHOD'];
+		if($method != 'PUT'){
+			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+		} else {
+			$check_auth_client = $this->mm->check_auth_client();
+			if($check_auth_client == true){
+		        $response = $this->mm->auth();
+		        $respStatus = $response['status'];
+		        if($response['status'] == 200 && $id_tkerja != null){
+                    $data = [
+                        'id_tkerja'     => $this->put('id_tkerja'),
+                        'id_skp'        => $this->put('id_skp'),
+                        'uraian'        => $this->put('uraian'),
+                        'output'        => $this->put('output'),
+                        'satuan_output' => $this->put('satuan_output'),
+                        'mutu'          => $this->put('mutu'),
+                        'waktu'         => $this->put('waktu'),
+                        'satuan_waktu'  => $this->put('satuan_waktu')
+                    ];
 
         if ($this->skp->updateSKP($data, $id_tkerja) > 0) {
             $this->response([
@@ -120,6 +161,9 @@ class Target_SKP extends CI_Controller{
                 'status' => false,
                 'data'   => 'Maaf, Data gagal diupdate !'
             ], 404);
+                    }
+                }
+            }
         }
     }
 }

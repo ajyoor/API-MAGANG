@@ -13,6 +13,7 @@ class Pen_Realisasi extends CI_Controller{
         parent::__construct();
         $this->__resTraitConstruct();
         $this->load->model('Penilaian_SKP_model','pskp');
+        $this->load->model('MyModel','mm');
     }
     //-----------------------------------------------------------------------------------------//
                                             //TUGAS POKOK//
@@ -21,10 +22,18 @@ class Pen_Realisasi extends CI_Controller{
     public function pokok_get() {
         $nip = $this->get('nip');
         $year = $this->get('year');
-        if($nip === null){
-            $pskp = $this->pskp->getPokok();
-        } else {
+        $method = $_SERVER['REQUEST_METHOD'];
+        if($method != 'GET'){
+			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+		} else {
+            $check_auth_client = $this->mm->check_auth_client();
+			if($check_auth_client == true){
+		        $response = $this->mm->auth();
+        if($response['status'] == 200 && $nip != null){
             $pskp = $this->pskp->getPokok($nip,$year);
+            json_output($response['status'],$pskp);
+        } else {
+            $pskp = $this->pskp->getPokok();
         }
         
         if($pskp){
@@ -37,6 +46,8 @@ class Pen_Realisasi extends CI_Controller{
                 'status'  => false,
                 'message' => 'Maaf, ID tidak ditemukan !'
             ], 404);
+                }
+            }
         }
     }
     //-----------------------------------------------------------------------------------------//
@@ -44,14 +55,23 @@ class Pen_Realisasi extends CI_Controller{
     //-----------------------------------------------------------------------------------------//
     public function pokok_put(){
         $id_realisasi = $this->put('id_realisasi');
-
-        $data = [
-            'id_realisasi'      => $this->put('id_realisasi'),
-            'r_output'          => $this->put('r_output'),
-            'r_mutu'            => $this->put('r_mutu'),
-            'r_waktu'           => $this->put('r_waktu'),
-            'r_biaya'           => $this->put('r_biaya')
-        ];
+        
+        $method = $_SERVER['REQUEST_METHOD'];
+		if($method != 'PUT'){
+			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+		} else {
+			$check_auth_client = $this->mm->check_auth_client();
+			if($check_auth_client == true){
+		        $response = $this->mm->auth();
+		        $respStatus = $response['status'];
+		        if($response['status'] == 200 && $id_realisasi != null){
+                    $data = [
+                        'id_realisasi'      => $this->put('id_realisasi'),
+                        'r_output'          => $this->put('r_output'),
+                        'r_mutu'            => $this->put('r_mutu'),
+                        'r_waktu'           => $this->put('r_waktu'),
+                        'r_biaya'           => $this->put('r_biaya')
+                    ];
 
         if ($this->pskp->updatePokok($data, $id_realisasi) > 0) {
             $this->response([
@@ -63,6 +83,9 @@ class Pen_Realisasi extends CI_Controller{
                 'status' => false,
                 'data'   => 'Maaf, Data gagal diupdate !'
             ], 404);
+                    }
+                }
+            }
         }
     }
     //-----------------------------------------------------------------------------------------//
@@ -71,10 +94,18 @@ class Pen_Realisasi extends CI_Controller{
     //-----------------------------------------------------------------------------------------//
     public function tambahan_get() {
         $id_skp = $this->get('id_skp');
-        if($id_skp === null){
-            $pskp = $this->pskp->getTambahan();
-        } else {
+        $method = $_SERVER['REQUEST_METHOD'];
+        if($method != 'GET'){
+			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+		} else {
+            $check_auth_client = $this->mm->check_auth_client();
+			if($check_auth_client == true){
+		        $response = $this->mm->auth();
+        if($response['status'] == 200 && $id_skp != null){
             $pskp = $this->pskp->getTambahan($id_skp);
+            json_output($response['status'],$pskp);
+        } else {
+            $pskp = $this->pskp->getTambahan();
         }
         
         if($pskp){
@@ -87,46 +118,64 @@ class Pen_Realisasi extends CI_Controller{
                 'status'  => false,
                 'message' => 'Maaf, ID tidak ditemukan !'
             ], 404);
+                }
+            }
         }
     }
     //-----------------------------------------------------------------------------------------//
                                         //Method DELETE//
     //-----------------------------------------------------------------------------------------//
     public function tambahan_delete() {
-    $id_uraian_tambahan = $this->delete('id_uraian_tambahan');
 
-    if($id_uraian_tambahan === null){
-        $this->response([
-            'status' => false,
-            'data'   => 'Maaf, masukkan ID terlebih dahulu !'
-        ], 400);
-    } else{
-        if( $this->pskp->deleteTambahan($id_uraian_tambahan) > 0){
+    $method = $_SERVER['REQUEST_METHOD'];
+    if($method != 'DELETE'){
+        json_output(400,array('status' => 400,'message' => 'Bad request.'));
+    } else {
+        $check_auth_client = $this->mm->check_auth_client();
+        if($check_auth_client == true){
+            $response = $this->mm->auth();
+    if($response['status'] == 200 && $id_uraian_tambahan != null){
+        $pskp = $this->pskp->deleteTambahan($id_uraian_tambahan);
+        json_output($response['status'],$pskp);
+    }
+
+    if( $this->pskp->deleteTambahan($id_uraian_tambahan) > 0){
             //ok
             $this->response([
                 'status'             => true,
                 'id_uraian_tambahan' => $id_uraian_tambahan,
                 'message'            => 'ID tersebut berhasil dihapus !'
             ], 200);
-        } else {
+    } else {
             $this->response([
                 'status' => false,
                 'data'   => 'Maaf, ID tidak ditemukan !'
             ], 400);
+                }
+            }
         }
     }
-    }
+    
     //-----------------------------------------------------------------------------------------//
                                             //Method PUT//
     //-----------------------------------------------------------------------------------------//
     public function tambahan_put(){
         $id_uraian_tambahan = $this->put('id_uraian_tambahan');
 
-        $data = [
-            'id_uraian_tambahan' => $this->put('id_uraian_tambahan'),
-            'id_skp'             => $this->put('id_skp'),
-            'uraian_tambahan'    => $this->put('uraian_tambahan')
-        ];
+        $method = $_SERVER['REQUEST_METHOD'];
+		if($method != 'PUT'){
+			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+		} else {
+			$check_auth_client = $this->mm->check_auth_client();
+			if($check_auth_client == true){
+		        $response = $this->mm->auth();
+		        $respStatus = $response['status'];
+		        if($response['status'] == 200 && $id_uraian_tambahan != null){
+                    $data = [
+                        'id_uraian_tambahan' => $this->put('id_uraian_tambahan'),
+                        'id_skp'             => $this->put('id_skp'),
+                        'uraian_tambahan'    => $this->put('uraian_tambahan')
+                    ];
 
         if ($this->pskp->updateTambahan($data, $id_uraian_tambahan) > 0) {
             $this->response([
@@ -138,6 +187,9 @@ class Pen_Realisasi extends CI_Controller{
                 'status' => false,
                 'data'   => 'Maaf, Data Tambahan gagal diupdate !'
             ], 404);
+                    }
+                }
+            }
         }
     }
     //-----------------------------------------------------------------------------------------//
@@ -146,10 +198,19 @@ class Pen_Realisasi extends CI_Controller{
     //-----------------------------------------------------------------------------------------//
     public function kreatifitas_get() {
         $id_skp = $this->get('id_skp');
-        if($id_skp === null){
-            $pskp = $this->pskp->getKreatifitas();
-        } else {
+
+        $method = $_SERVER['REQUEST_METHOD'];
+        if($method != 'GET'){
+			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+		} else {
+            $check_auth_client = $this->mm->check_auth_client();
+			if($check_auth_client == true){
+		        $response = $this->mm->auth();
+        if($response['status'] == 200 && $id_skp != null){
             $pskp = $this->pskp->getKreatifitas($id_skp);
+            json_output($response['status'],$pskp);
+        } else {
+            $pskp = $this->pskp->getKreatifitas();
         }
         
         if($pskp){
@@ -162,32 +223,40 @@ class Pen_Realisasi extends CI_Controller{
                 'status'  => false,
                 'message' => 'Maaf, ID tidak ditemukan !'
             ], 404);
+                }
+            }
         }
     }
     //-----------------------------------------------------------------------------------------//
                                         //Method DELETE//
     //-----------------------------------------------------------------------------------------//
     public function kreatifitas_delete() {
-        $idkreatifitas = $this->delete('idkreatifitas');
-
-        if($idkreatifitas === null){
-            $this->response([
-                'status' => false,
-                'data'   => 'Maaf, masukkan ID terlebih dahulu !'
-            ], 400);
-        } else{
-            if( $this->pskp->deleteKreatifitas($idkreatifitas) > 0){
+        
+        $method = $_SERVER['REQUEST_METHOD'];
+        if($method != 'DELETE'){
+			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+		} else {
+            $check_auth_client = $this->mm->check_auth_client();
+			if($check_auth_client == true){
+                $response = $this->mm->auth();
+        if($response['status'] == 200 && $idkreatifitas != null){
+            $pskp = $this->pskp->deleteKreatifitas($idkreatifitas);
+            json_output($response['status'],$pskp);
+        }
+         
+        if( $this->pskp->deleteKreatifitas($idkreatifitas) > 0){
                 //ok
                 $this->response([
                     'status'             => true,
                     'idkreatifitas'      => $idkreatifitas,
                     'message'            => 'ID tersebut berhasil dihapus !'
                 ], 200);
-            } else {
+        } else {
                 $this->response([
                     'status' => false,
                     'data'   => 'Maaf, ID tidak ditemukan !'
                 ], 400);
+                }
             }
         }
     }
@@ -196,15 +265,24 @@ class Pen_Realisasi extends CI_Controller{
     //-----------------------------------------------------------------------------------------//
     public function kreatifitas_put(){
         $idkreatifitas = $this->put('idkreatifitas');
-
-        $data = [
-            'idkreatifitas'     => $this->put('idkreatifitas'),
-            'id_skp'            => $this->put('id_skp'),
-            'uraiankreatifitas' => $this->put('uraiankreatifitas'),
-            'nilai'             => $this->put('nilai'),
-            'tgl_kreatifitas'   => date('Y-m-d'),
-            'dok_kreatifitas'   => $this->put('dok_kreatifitas')
-        ];
+       
+        $method = $_SERVER['REQUEST_METHOD'];
+		if($method != 'PUT'){
+			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+		} else {
+			$check_auth_client = $this->mm->check_auth_client();
+			if($check_auth_client == true){
+		        $response = $this->mm->auth();
+		        $respStatus = $response['status'];
+		        if($response['status'] == 200 && $idkreatifitas != null){
+                    $data = [
+                        'idkreatifitas'     => $this->put('idkreatifitas'),
+                        'id_skp'            => $this->put('id_skp'),
+                        'uraiankreatifitas' => $this->put('uraiankreatifitas'),
+                        'nilai'             => $this->put('nilai'),
+                        'tgl_kreatifitas'   => date('Y-m-d'),
+                        'dok_kreatifitas'   => $this->put('dok_kreatifitas')
+                    ];
 
         if ($this->pskp->updateKreatifitas($data, $idkreatifitas) > 0) {
             $this->response([
@@ -216,6 +294,9 @@ class Pen_Realisasi extends CI_Controller{
                 'status' => false,
                 'data'   => 'Maaf, Data gagal diupdate !'
             ], 404);
+                    }
+                }
+            }
         }
     }
 }

@@ -199,7 +199,8 @@ class Log_Aktivitas extends CI_Controller{
             $akt = $this->akt->deleteAktivitas($log_id);
             json_output($response['status'],$akt);
         }
-            if($akt){
+        
+        if($akt){
                 //ok
                 $this->response([
                     'status' => true,

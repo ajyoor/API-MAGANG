@@ -13,6 +13,7 @@ class Pen_Aktivitas extends CI_Controller{
         parent::__construct();
         $this->__resTraitConstruct();
         $this->load->model('Penilaian_SKP_model','pskp');
+        $this->load->model('MyModel','mm');
         //tambah limit
         // $this->methods['index_get']['limit'] = 2;
     }
@@ -25,8 +26,17 @@ class Pen_Aktivitas extends CI_Controller{
         $log_id = $this->get('log_id');
         $year = $this->get('year');
         $month = $this->get('month');
-        if($nip != null){
+
+        $method = $_SERVER['REQUEST_METHOD'];
+        if($method != 'GET'){
+			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+		} else {
+            $check_auth_client = $this->mm->check_auth_client();
+			if($check_auth_client == true){
+		        $response = $this->mm->auth();
+        if($response['status'] == 200 && $id_skp != null){
             $pskp = $this->pskp->getAktivitas($nip,$year,$month);
+            json_output($response['status'],$pskp);
         } else {
             $pskp = $this->pskp->getAktivitas();
         }
@@ -41,6 +51,8 @@ class Pen_Aktivitas extends CI_Controller{
                 'status'  => false,
                 'message' => 'Maaf, ID tidak ditemukan !'
             ], 404);
+                }
+            }
         }
     }
     //-----------------------------------------------------------------------------------------//
@@ -50,24 +62,30 @@ class Pen_Aktivitas extends CI_Controller{
     public function index_delete() {
         $log_id = $this->delete('log_id');
 
-        if($log_id === null){
-            $this->response([
-                'status' => false,
-                'data'   => 'Maaf, masukkan ID terlebih dahulu !'
-            ], 400);
-        } else{
-            if( $this->pskp->deleteAktivitas($log_id) > 0){
+        $method = $_SERVER['REQUEST_METHOD'];
+        if($method != 'DELETE'){
+			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+		} else {
+            $check_auth_client = $this->mm->check_auth_client();
+			if($check_auth_client == true){
+                $response = $this->mm->auth();
+        if($response['status'] == 200 && $log_id != null){
+            $pskp = $this->pskp->deleteAktivitas($log_id);
+            json_output($response['status'],$pskp);
+        }
+        if( $this->pskp->deleteAktivitas($log_id) > 0){
                 //ok
                 $this->response([
                     'status' => true,
                     'log_id' => $log_id,
                     'message'=> 'ID tersebut berhasil dihapus !'
                 ], 200);
-            } else {
+        } else {
                 $this->response([
                     'status' => false,
                     'data'   => 'Maaf, ID tidak ditemukan !'
                 ], 400);
+                }
             }
         }
     }
@@ -77,12 +95,21 @@ class Pen_Aktivitas extends CI_Controller{
     //-----------------------------------------------------------------------------------------//
     public function index_put(){
         $log_id = $this->put('log_id');
-
-        $data = [
-            'log_id'            => $this->put('log_id'),
-            'akt_status'        => $this->put('akt_status'),
-            'akt_tgl_confirm'   => date('Y-m-d')
-        ];
+        
+        $method = $_SERVER['REQUEST_METHOD'];
+		if($method != 'PUT'){
+			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+		} else {
+			$check_auth_client = $this->mm->check_auth_client();
+			if($check_auth_client == true){
+		        $response = $this->mm->auth();
+		        $respStatus = $response['status'];
+		        if($response['status'] == 200 && $log_id != null){
+                    $data = [
+                        'log_id'            => $this->put('log_id'),
+                        'akt_status'        => $this->put('akt_status'),
+                        'akt_tgl_confirm'   => date('Y-m-d')
+                    ];
 
         if ($this->pskp->updateAktivitas($data, $log_id) > 0) {
             $this->response([
@@ -94,6 +121,9 @@ class Pen_Aktivitas extends CI_Controller{
                 'status' => false,
                 'data'   => 'Maaf, Data gagal diupdate !'
             ], 404);
+                    }
+                }
+            }
         }
     }
 }
