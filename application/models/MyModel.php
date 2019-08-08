@@ -26,7 +26,7 @@ class MyModel extends CI_Model {
                $expired_at = date("Y-m-d H:i:s", strtotime('+720 hours'));
                $this->db->trans_start();
                $data=array('token' => $token,'expired_at' => $expired_at);
-               $this->db->where('nip',$username);
+               $this->db->where('nip',$nip);
                $this->db->update('skp_pns',$data);
                if ($this->db->trans_status() === FALSE){
                   $this->db->trans_rollback();
@@ -60,7 +60,7 @@ class MyModel extends CI_Model {
             if($q->expired_at < date('Y-m-d H:i:s')){
                 return json_output(401,array('status' => 401,'message' => 'Your session has been expired.'));
             } else {
-                $expired_at = date("Y-m-d H:i:s", strtotime('+12 hours'));
+                $expired_at = date("Y-m-d H:i:s", strtotime('+720 hours'));
                 $this->db->where('token',$token)->update('skp_pns',array('expired_at' => $expired_at));
                 return array('status' => 200,'message' => 'Authorized.');
             }
