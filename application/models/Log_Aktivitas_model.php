@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined ('BASEPATH') OR exit ('No direct script access allowed') ;
 
 class Log_Aktivitas_model extends CI_Model
@@ -12,7 +12,7 @@ class Log_Aktivitas_model extends CI_Model
     public function getAktivitas($nip,$year,$month)
     {
         if( $nip != null)   {
-            $this->db->select('log_id,akt_tanggal,bk_nama_kegiatan,akt_output,akt_start,akt_end,akt_waktu,akt_status');
+            $this->db->select("log_id,akt_tanggal,bk_nama_kegiatan,CONCAT(log_aktivitas.akt_output,' ', log_aktivitas.akt_satuan) as Output,akt_start,akt_end,akt_waktu,akt_status",FALSE);
             $this->db->from('log_aktivitas');
             $this->db->join('skp_pns', 'skp_pns.nip = log_aktivitas.nip ');
             $this->db->join('log_masteraktivitas', ' log_masteraktivitas.bk_id= log_aktivitas.akt_idkegiatan');
