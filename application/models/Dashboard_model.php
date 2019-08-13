@@ -21,7 +21,7 @@ class Dashboard_model extends CI_Model
     public function getRealisasi($nip)
     {
         if( $nip != null)   {
-        $this->db->select('COUNT(id_realisasi) as Target');
+        $this->db->select('COUNT(id_realisasi) as Realisasi');
         $this->db->from('skp_r_kerja');
         $this->db->join('skp_t_kerja', 'skp_t_kerja.id_tkerja = skp_r_kerja.id_tkerja');
         $this->db->join('log_aktivitas', 'log_aktivitas.id_tkerja= skp_t_kerja.id_tkerja','left');

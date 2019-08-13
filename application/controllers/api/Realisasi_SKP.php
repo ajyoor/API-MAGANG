@@ -67,11 +67,11 @@ class Realisasi_SKP extends CI_Controller{
 		        if($response['status'] == 200 && $id_realisasi != null){
                     $data = [
                         'id_realisasi'  => $this->put('id_realisasi'),
-                        'r_output'      => $this->put('akt_tanggal'),
-                        'r_mutu'        => $this->put('akt_idkegiatan'),
-                        'r_waktu'       => $this->put('akt_catatan'),
-                        'r_perhitungan' => $this->put('akt_start'),
-                        'r_capaian'     => $this->put('akt_end')
+                        'r_output'      => $this->put('r_output'),
+                        'r_mutu'        => $this->put('r_mutu'),
+                        'r_waktu'       => $this->put('r_waktu'),
+                        'r_perhitungan' => $this->put('r_perhitungan'),
+                        'r_capaian'     => $this->put('r_capaian')
                     ];
 
         if ($this->rskp->updateRSKP($data, $id_realisasi) > 0) {

@@ -32,8 +32,6 @@ class Log_Aktivitas extends CI_Controller{
     //-----------------------------------------------------------------------------------------//
     public function index_get() {
         $nip = $this->get('nip');
-        $year = $this->get('year');
-        $month = $this->get('month');
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
 			json_output(400,array('status' => 400,'message' => 'Bad request.'));
@@ -42,7 +40,7 @@ class Log_Aktivitas extends CI_Controller{
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200 && $nip != null){
-            $akt = $this->akt->getAktivitas($nip,$year,$month);
+            $akt = $this->akt->getAktivitas($nip);
             json_output($response['status'],$akt);
         } else {
             $akt = $this->akt->getAktivitas();
@@ -110,7 +108,7 @@ class Log_Aktivitas extends CI_Controller{
         if($akt){
             $this->response([
                 'status' => true,
-                'data'   => $akt
+                'data'   => $akt 
             ], 200);
         } else{
             $this->response([

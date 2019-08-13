@@ -13,6 +13,7 @@ class Dashboard extends CI_Controller{
         parent::__construct();
         $this->__resTraitConstruct();
         $this->load->model('Dashboard_model','cak');
+        $this->load->model('MyModel','mm');
     }
     //-----------------------------------------------------------------------------------------//
                                         //GET Target Dashboard//
@@ -27,16 +28,16 @@ class Dashboard extends CI_Controller{
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200 && $nip != null){
-            $nip = $this->cak->getTarget($nip);
-            json_output($response['status'],$nip);
+            $cak = $this->cak->getTarget($nip);
+            json_output($response['status'],$cak);
         } else {
-            $nip = $this->cak->getTarget();
+            $cak = $this->cak->getTarget();
         }
         
-        if($nip){
+        if($cak){
             $this->response([
                 'status' => true,
-                'data'   => $nip
+                'data'   => $cak
             ], 200);
         } else{
             $this->response([
@@ -61,21 +62,21 @@ class Dashboard extends CI_Controller{
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200 && $nip != null){
-            $nip = $this->cak->getRealisasi($nip);
-            json_output($response['status'],$nip);
+            $cak = $this->cak->getRealisasi($nip);
+            json_output($response['status'],$cak);
         } else {
-            $nip = $this->cak->getRealisasi();
+            $cak = $this->cak->getRealisasi();
         }
         if($nip === null){
-            $nip = $this->cak->getRealisasi();
+            $cak = $this->cak->getRealisasi();
         } else {
-            $nip = $this->cak->getRealisasi($nip);
+            $cak = $this->cak->getRealisasi($nip);
         }
         
-        if($nip){
+        if($cak){
             $this->response([
                 'status' => true,
-                'data'   => $nip
+                'data'   => $cak
             ], 200);
         } else{
             $this->response([

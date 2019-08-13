@@ -9,15 +9,13 @@ class Log_Aktivitas_model extends CI_Model
         $this->load->database();
     }
 
-    public function getAktivitas($nip,$year,$month)
+    public function getAktivitas($nip)
     {
         if( $nip != null)   {
             $this->db->select('log_id,akt_tanggal,bk_nama_kegiatan,akt_output,akt_start,akt_end,akt_waktu,akt_status');
             $this->db->from('log_aktivitas');
             $this->db->join('skp_pns', 'skp_pns.nip = log_aktivitas.nip ');
             $this->db->join('log_masteraktivitas', ' log_masteraktivitas.bk_id= log_aktivitas.akt_idkegiatan');
-            $this->db->where("EXTRACT(YEAR FROM log_aktivitas.akt_tanggal) = ". $year);
-            $this->db->where("EXTRACT(MONTH FROM log_aktivitas.akt_tanggal) = ". $month);
             $this->db->where('log_aktivitas.nip',$nip);
             // $this->db->limit(10, 10);
             return $this->db->get()->result_array();
@@ -27,7 +25,7 @@ class Log_Aktivitas_model extends CI_Model
     }
     public function getAktivitasAll()
     {
-            $this->db->select('log_id,bk_nama_kegiatan');
+            $this->db->select('log_id,bk_nama_kegiatan,akt_satuan');
             $this->db->from('log_aktivitas');
             $this->db->join('skp_pns', 'skp_pns.nip = log_aktivitas.nip ');
             $this->db->join('log_masteraktivitas', ' log_masteraktivitas.bk_id= log_aktivitas.akt_idkegiatan');

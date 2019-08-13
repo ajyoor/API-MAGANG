@@ -76,7 +76,7 @@ class Profil_SKP extends CI_Controller{
             $this->response([
                 'status'  => true,
                 'message' => 'Data berhasil diedit !'
-            ], 400);
+            ], 200);
         } else {
             $this->response([
                 'status' => false,
@@ -112,7 +112,7 @@ class Profil_SKP extends CI_Controller{
             $this->response([
                 'status'  => true,
                 'message' => 'Data berhasil diedit !'
-            ], 400);
+            ], 200);
         } else {
             $this->response([
                 'status' => false,
