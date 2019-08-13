@@ -2,10 +2,10 @@
 ![Screenshot (7)](https://user-images.githubusercontent.com/42866630/60865678-bb010380-a250-11e9-9cf1-a1ff3eb7de5e.png)
 
 🙉 **LOGIN (controller : Auth.php;model : MyModel.php;Pengisian data username & password diisi di body RAW)**\
-1.) POST (header => Auth-Key : geomedia;Content-Type : application/json)\
-           **_ex.    username (ex. 198512052015032001)\ 
-                     password (ex. 198512052015032001)_**\
-    2.) POST (header => Auth-Key : geomedia;Content-Type : application/json;nip : 198512052015032001;Authorization : token)\
+   1.) POST (header => Auth-Key : geomedia;Content-Type : application/json)\
+           **_ex.    username (ex. 198512052015032001)_**\
+                  **_password (ex. 198512052015032001)_**\
+   2.) POST (header => Auth-Key : geomedia;Content-Type : application/json;nip : 198512052015032001;Authorization : token)\
            **_ex.    username (ex. 198512052015032001)-**\\ 
                     password (ex. 198512052015032001)\
 🙉 **PROFIL SKP (controller : Profil_SKP.php;model : Profil_model.php)**\
