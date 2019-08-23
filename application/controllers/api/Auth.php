@@ -7,7 +7,7 @@ class Auth extends CI_Controller {
 	{
 		$method = $_SERVER['REQUEST_METHOD'];
 		if($method != 'POST'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			echo json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
 			$check_auth_client = $this->MyModel->check_auth_client();
 			if($check_auth_client == true){
@@ -16,7 +16,7 @@ class Auth extends CI_Controller {
 		        	$password = $params['password'];
 		        
 		        	$response = $this->MyModel->login($username,$password);
-				json_output($response['status'],$response);
+					echo json_encode($response);
 			}
 		}
 	}

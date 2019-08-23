@@ -9,7 +9,7 @@ class MyModel extends CI_Model {
         if($auth_key == $this->auth_key){
             return true;
         } else {
-            return json_output(401,array('status' => 401,'message' => 'Unauthorized.'));
+            return json_encode(401,array('status' => 401,'message' => 'Unauthorized.'));
         }
     }
 
