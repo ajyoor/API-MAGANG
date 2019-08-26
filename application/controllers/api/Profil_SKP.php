@@ -12,7 +12,10 @@ class Profil_SKP extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->__resTraitConstruct();
+
+        //pm merupakan alias dari Profil_model
         $this->load->model('Profil_model','pm');
+        //mm merupakan alias dari MyModel
         $this->load->model('MyModel','mm');
     }
     //-----------------------------------------------------------------------------------------//
@@ -22,14 +25,14 @@ class Profil_SKP extends CI_Controller{
         $nip = $this->get('nip');
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200 && $nip != null){
             $pm = $this->pm->getProfil($nip);
-            json_output($response['status'],$pm);
+            json_encode($response['status'],$pm);
         } else {
             $pm = $this->pm->getProfil();
         }
@@ -56,7 +59,7 @@ class Profil_SKP extends CI_Controller{
 
         $method = $_SERVER['REQUEST_METHOD'];
 		if($method != 'PUT'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
 			$check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
@@ -96,7 +99,7 @@ class Profil_SKP extends CI_Controller{
 
         $method = $_SERVER['REQUEST_METHOD'];
 		if($method != 'PUT'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
 			$check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){

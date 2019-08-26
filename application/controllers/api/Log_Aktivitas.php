@@ -12,19 +12,11 @@ class Log_Aktivitas extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->__resTraitConstruct();
+
+        //akt merupakan alias dari Log_Aktivitas_model
         $this->load->model('Log_Aktivitas_model','akt');
+        //mm merupakan alias dari MyModel
         $this->load->model('MyModel','mm');
-        // $check_auth_client = $this->mm->check_auth_client();
-        // if($check_auth_client == true){
-        //     $response = $this->mm->auth();
-        // if($response['status'] == 200){
-        // json_output($response['status']);
-        // } else {
-        // json_output(400,array(
-        //     'status' => 400,
-        //     'message' => 'Bad request.'));
-        //     }
-        // }
     }
     //-----------------------------------------------------------------------------------------//
                                             //Method GET//
@@ -34,14 +26,14 @@ class Log_Aktivitas extends CI_Controller{
         $nip = $this->get('nip');
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200 && $nip != null){
             $akt = $this->akt->getAktivitas($nip);
-            json_output($response['status'],$akt);
+            json_encode($response['status'],$akt);
         } else {
             $akt = $this->akt->getAktivitas();
         }
@@ -63,14 +55,14 @@ class Log_Aktivitas extends CI_Controller{
     public function aktifitas_get() {
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200){
             $akt = $this->akt->getAktivitasAll();
-            json_output($response['status'],$akt);
+            json_encode($response['status'],$akt);
         }
         if($akt){
             $this->response([
@@ -95,14 +87,14 @@ class Log_Aktivitas extends CI_Controller{
         $before = $this->get('before');
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200 && $nip != null){
             $akt = $this->akt->getTanggalBefore($nip,$before);
-            json_output($response['status'],$akt);
+            json_encode($response['status'],$akt);
         }       
         
         if($akt){
@@ -124,14 +116,14 @@ class Log_Aktivitas extends CI_Controller{
         $after = $this->get('after');
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200  && $nip != null ){
             $akt = $this->akt->getTanggalAfter($nip,$after);
-            json_output($response['status'],$akt);
+            json_encode($response['status'],$akt);
         }
         
         if($akt){
@@ -154,14 +146,14 @@ class Log_Aktivitas extends CI_Controller{
         $after = $this->get('after');
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200  && $nip != null ){
             $akt = $this->akt->getTanggalBetween($nip,$before,$after);
-            json_output($response['status'],$akt);
+            json_encode($response['status'],$akt);
         }
         
         if($akt){
@@ -188,14 +180,14 @@ class Log_Aktivitas extends CI_Controller{
 
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'DELETE'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
                 $response = $this->mm->auth();
         if($response['status'] == 200 && $log_id != null){
             $akt = $this->akt->deleteAktivitas($log_id);
-            json_output($response['status'],$akt);
+            json_encode($response['status'],$akt);
         }
         
         if($akt){
@@ -220,7 +212,7 @@ class Log_Aktivitas extends CI_Controller{
     public function index_post() {
         $method = $_SERVER['REQUEST_METHOD'];
 		if($method != 'POST'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
 			$check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
@@ -260,7 +252,7 @@ class Log_Aktivitas extends CI_Controller{
         $log_id = $this->put('log_id');
         $method = $_SERVER['REQUEST_METHOD'];
 		if($method != 'PUT'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
 			$check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){

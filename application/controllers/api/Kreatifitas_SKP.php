@@ -12,7 +12,10 @@ class Kreatifitas_SKP extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->__resTraitConstruct();
+
+        //rskp merupakan alias dari Realisasi_SKP_model
         $this->load->model('Realisasi_SKP_model','rskp');
+        //mm merupakan alias dari MyModel
         $this->load->model('MyModel','mm');
     }
     //-----------------------------------------------------------------------------------------//
@@ -24,14 +27,14 @@ class Kreatifitas_SKP extends CI_Controller{
 
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200 && $id_skp != null){
             $rskp = $this->rskp->getKreatifitasSKP($id_skp);
-            json_output($response['status'],$rskp);
+            json_encode($response['status'],$rskp);
         } else {
             $rskp = $this->rskp->getKreatifitasSKP();
         }
@@ -58,14 +61,14 @@ class Kreatifitas_SKP extends CI_Controller{
 
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'DELETE'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
                 $response = $this->mm->auth();
         if($response['status'] == 200 && $idkreatifitas != null){
             $rskp = $this->rskp->deleteKreatifitasSKP($idkreatifitas);
-            json_output($response['status'],$rskp);
+            json_encode($response['status'],$rskp);
         }
         if( $this->rskp->deleteKreatifitasSKP($idkreatifitas) > 0){
                 //ok
@@ -90,7 +93,7 @@ class Kreatifitas_SKP extends CI_Controller{
         
         $method = $_SERVER['REQUEST_METHOD'];
 		if($method != 'POST'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
 			$check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
@@ -129,7 +132,7 @@ class Kreatifitas_SKP extends CI_Controller{
 
         $method = $_SERVER['REQUEST_METHOD'];
 		if($method != 'PUT'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
 			$check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){

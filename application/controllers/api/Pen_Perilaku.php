@@ -12,7 +12,10 @@ class Pen_Perilaku extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->__resTraitConstruct();
+
+        //pskp merupakan alias dari Penilaian_SKP_model
         $this->load->model('Penilaian_SKP_model','pskp');
+        //mm merupakan alias dari MyModel
         $this->load->model('MyModel','mm');
     }
     //-----------------------------------------------------------------------------------------//
@@ -24,14 +27,14 @@ class Pen_Perilaku extends CI_Controller{
         $year = $this->get('year');
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200 && $id_skp != null){
             $pskp = $this->pskp->getPerilaku($id_skp,$year);
-            json_output($response['status'],$pskp);
+            json_encode($response['status'],$pskp);
         } else {
             $pskp = $this->pskp->getPerilaku();
         }
@@ -57,7 +60,7 @@ class Pen_Perilaku extends CI_Controller{
         
         $method = $_SERVER['REQUEST_METHOD'];
 		if($method != 'POST'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
 			$check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
@@ -101,7 +104,7 @@ class Pen_Perilaku extends CI_Controller{
 
         $method = $_SERVER['REQUEST_METHOD'];
 		if($method != 'PUT'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
 			$check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){

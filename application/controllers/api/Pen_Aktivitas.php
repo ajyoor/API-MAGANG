@@ -12,10 +12,11 @@ class Pen_Aktivitas extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->__resTraitConstruct();
+
+        //pskp merupakan alias dari Penilaian_SKP_model
         $this->load->model('Penilaian_SKP_model','pskp');
+        //mm merupakan alias dari MyModel
         $this->load->model('MyModel','mm');
-        //tambah limit
-        // $this->methods['index_get']['limit'] = 2;
     }
     //-----------------------------------------------------------------------------------------//
                                             //Method GET//
@@ -29,14 +30,14 @@ class Pen_Aktivitas extends CI_Controller{
 
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200 && $id_skp != null){
             $pskp = $this->pskp->getAktivitas($nip,$year,$month);
-            json_output($response['status'],$pskp);
+            json_encode($response['status'],$pskp);
         } else {
             $pskp = $this->pskp->getAktivitas();
         }
@@ -64,14 +65,14 @@ class Pen_Aktivitas extends CI_Controller{
 
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'DELETE'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
                 $response = $this->mm->auth();
         if($response['status'] == 200 && $log_id != null){
             $pskp = $this->pskp->deleteAktivitas($log_id);
-            json_output($response['status'],$pskp);
+            json_encode($response['status'],$pskp);
         }
         if( $this->pskp->deleteAktivitas($log_id) > 0){
                 //ok
@@ -98,7 +99,7 @@ class Pen_Aktivitas extends CI_Controller{
         
         $method = $_SERVER['REQUEST_METHOD'];
 		if($method != 'PUT'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
 			$check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){

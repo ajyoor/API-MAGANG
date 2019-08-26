@@ -12,7 +12,10 @@ class Dashboard extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->__resTraitConstruct();
+
+        //cak merupakan alias dari Dashboard_model
         $this->load->model('Dashboard_model','cak');
+        //mm merupakan alias dari MyModel
         $this->load->model('MyModel','mm');
     }
     //-----------------------------------------------------------------------------------------//
@@ -22,14 +25,14 @@ class Dashboard extends CI_Controller{
         $nip = $this->get('nip');
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200 && $nip != null){
             $cak = $this->cak->getTarget($nip);
-            json_output($response['status'],$cak);
+            json_encode($response['status'],$cak);
         } else {
             $cak = $this->cak->getTarget();
         }
@@ -56,14 +59,14 @@ class Dashboard extends CI_Controller{
         $nip = $this->get('nip');
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200 && $nip != null){
             $cak = $this->cak->getRealisasi($nip);
-            json_output($response['status'],$cak);
+            json_encode($response['status'],$cak);
         } else {
             $cak = $this->cak->getRealisasi();
         }

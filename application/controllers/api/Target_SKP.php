@@ -12,7 +12,10 @@ class Target_SKP extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->__resTraitConstruct();
+
+        //skp merupakan alias dari Target_SKP_model
         $this->load->model('Target_SKP_model','skp');
+        //mm merupakan alias dari MyModel
         $this->load->model('MyModel','mm');
     }
     //-----------------------------------------------------------------------------------------//
@@ -23,14 +26,14 @@ class Target_SKP extends CI_Controller{
 
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200 && $nip != null){
             $nip = $this->skp->getSKP($nip);
-            json_output($response['status'],$nip);
+            json_encode($response['status'],$nip);
         } else {
             $nip = $this->skp->getSKP();
         }
@@ -58,14 +61,14 @@ class Target_SKP extends CI_Controller{
 
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'DELETE'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
                 $response = $this->mm->auth();
         if($response['status'] == 200 && $id_tkerja != null){
             $id_tkerja = $this->skp->deleteSKP($id_tkerja);
-            json_output($response['status'],$id_tkerja);
+            json_encode($response['status'],$id_tkerja);
         }
 
         if( $this->skp->deleteSKP($id_tkerja) > 0){
@@ -91,7 +94,7 @@ class Target_SKP extends CI_Controller{
         
         $method = $_SERVER['REQUEST_METHOD'];
 		if($method != 'POST'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
 			$check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
@@ -133,7 +136,7 @@ class Target_SKP extends CI_Controller{
 
         $method = $_SERVER['REQUEST_METHOD'];
 		if($method != 'PUT'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
 			$check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){

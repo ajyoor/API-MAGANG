@@ -12,7 +12,10 @@ class Pen_Realisasi extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->__resTraitConstruct();
+
+        //pskp merupakan alias dari Penilaian_SKP_model
         $this->load->model('Penilaian_SKP_model','pskp');
+        //mm merupakan alias dari MyModel
         $this->load->model('MyModel','mm');
     }
     //-----------------------------------------------------------------------------------------//
@@ -24,14 +27,14 @@ class Pen_Realisasi extends CI_Controller{
         $year = $this->get('year');
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200 && $nip != null){
             $pskp = $this->pskp->getPokok($nip,$year);
-            json_output($response['status'],$pskp);
+            json_encode($response['status'],$pskp);
         } else {
             $pskp = $this->pskp->getPokok();
         }
@@ -58,7 +61,7 @@ class Pen_Realisasi extends CI_Controller{
         
         $method = $_SERVER['REQUEST_METHOD'];
 		if($method != 'PUT'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
 			$check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
@@ -96,14 +99,14 @@ class Pen_Realisasi extends CI_Controller{
         $id_skp = $this->get('id_skp');
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200 && $id_skp != null){
             $pskp = $this->pskp->getTambahan($id_skp);
-            json_output($response['status'],$pskp);
+            json_encode($response['status'],$pskp);
         } else {
             $pskp = $this->pskp->getTambahan();
         }
@@ -129,14 +132,14 @@ class Pen_Realisasi extends CI_Controller{
 
     $method = $_SERVER['REQUEST_METHOD'];
     if($method != 'DELETE'){
-        json_output(400,array('status' => 400,'message' => 'Bad request.'));
+        json_encode(400,array('status' => 400,'message' => 'Bad request.'));
     } else {
         $check_auth_client = $this->mm->check_auth_client();
         if($check_auth_client == true){
             $response = $this->mm->auth();
     if($response['status'] == 200 && $id_uraian_tambahan != null){
         $pskp = $this->pskp->deleteTambahan($id_uraian_tambahan);
-        json_output($response['status'],$pskp);
+        json_encode($response['status'],$pskp);
     }
 
     if( $this->pskp->deleteTambahan($id_uraian_tambahan) > 0){
@@ -164,7 +167,7 @@ class Pen_Realisasi extends CI_Controller{
 
         $method = $_SERVER['REQUEST_METHOD'];
 		if($method != 'PUT'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
 			$check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
@@ -201,14 +204,14 @@ class Pen_Realisasi extends CI_Controller{
 
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200 && $id_skp != null){
             $pskp = $this->pskp->getKreatifitas($id_skp);
-            json_output($response['status'],$pskp);
+            json_encode($response['status'],$pskp);
         } else {
             $pskp = $this->pskp->getKreatifitas();
         }
@@ -234,14 +237,14 @@ class Pen_Realisasi extends CI_Controller{
         
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'DELETE'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
                 $response = $this->mm->auth();
         if($response['status'] == 200 && $idkreatifitas != null){
             $pskp = $this->pskp->deleteKreatifitas($idkreatifitas);
-            json_output($response['status'],$pskp);
+            json_encode($response['status'],$pskp);
         }
          
         if( $this->pskp->deleteKreatifitas($idkreatifitas) > 0){
@@ -268,7 +271,7 @@ class Pen_Realisasi extends CI_Controller{
        
         $method = $_SERVER['REQUEST_METHOD'];
 		if($method != 'PUT'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
 			$check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
