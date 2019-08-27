@@ -17,6 +17,8 @@ class Dashboard extends CI_Controller{
         $this->load->model('Dashboard_model','cak');
         //mm merupakan alias dari MyModel
         $this->load->model('MyModel','mm');
+        //pm merupakan alias dari Profil_model
+        $this->load->model('Profil_model','pm');
     }
     //-----------------------------------------------------------------------------------------//
                                         //GET Target Dashboard//
@@ -31,16 +33,18 @@ class Dashboard extends CI_Controller{
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
         if($response['status'] == 200 && $nip != null){
-            $cak = $this->cak->getTarget($nip);
-            json_encode($response['status'],$cak);
+            $target = $this->cak->getTarget($nip);
+            $profil = $this->pm->getProfil($nip);
+            $realisasi = $this->cak->getRealisasi($nip);
+            json_encode($response['status'],$target && $profil && $realisasi);
         } else {
             $cak = $this->cak->getTarget();
         }
         
-        if($cak){
+        if($target && $profil && $realisasi){
             $this->response([
                 'status' => true,
-                'data'   => $cak
+                'data'   => [$target, $realisasi ,$profil]
             ], 200);
         } else{
             $this->response([
@@ -55,41 +59,41 @@ class Dashboard extends CI_Controller{
                                         //GET Realisasi Dashboard//
     //-----------------------------------------------------------------------------------------//
 
-    public function realisasi_get() {
-        $nip = $this->get('nip');
-        $method = $_SERVER['REQUEST_METHOD'];
-        if($method != 'GET'){
-			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
-		} else {
-            $check_auth_client = $this->mm->check_auth_client();
-			if($check_auth_client == true){
-		        $response = $this->mm->auth();
-        if($response['status'] == 200 && $nip != null){
-            $cak = $this->cak->getRealisasi($nip);
-            json_encode($response['status'],$cak);
-        } else {
-            $cak = $this->cak->getRealisasi();
-        }
-        if($nip === null){
-            $cak = $this->cak->getRealisasi();
-        } else {
-            $cak = $this->cak->getRealisasi($nip);
-        }
+    // public function realisasi_get() {
+    //     $nip = $this->get('nip');
+    //     $method = $_SERVER['REQUEST_METHOD'];
+    //     if($method != 'GET'){
+	// 		json_encode(400,array('status' => 400,'message' => 'Bad request.'));
+	// 	} else {
+    //         $check_auth_client = $this->mm->check_auth_client();
+	// 		if($check_auth_client == true){
+	// 	        $response = $this->mm->auth();
+    //     if($response['status'] == 200 && $nip != null){
+    //         $cak = $this->cak->getRealisasi($nip);
+    //         json_encode($response['status'],$cak);
+    //     } else {
+    //         $cak = $this->cak->getRealisasi();
+    //     }
+    //     if($nip === null){
+    //         $cak = $this->cak->getRealisasi();
+    //     } else {
+    //         $cak = $this->cak->getRealisasi($nip);
+    //     }
         
-        if($cak){
-            $this->response([
-                'status' => true,
-                'data'   => $cak
-            ], 200);
-        } else{
-            $this->response([
-                'status'  => false,
-                'message' => 'Maaf, ID tidak ditemukan !'
-            ], 404);
-                }
-            }
-        }
-    }
+    //     if($cak){
+    //         $this->response([
+    //             'status' => true,
+    //             'data'   => $cak
+    //         ], 200);
+    //     } else{
+    //         $this->response([
+    //             'status'  => false,
+    //             'message' => 'Maaf, ID tidak ditemukan !'
+    //         ], 404);
+    //             }
+    //         }
+    //     }
+    // }
     //-----------------------------------------------------------------------------------------//
                                     //GET Capaian Target Dashboard//
     //-----------------------------------------------------------------------------------------//
