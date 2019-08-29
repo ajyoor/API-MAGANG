@@ -70,6 +70,9 @@
  	     **_uraiankreatifitas (ex. Coba Gan)_**\
              **_tgl_kreatifitas (*autofill datenow)_**\
 	     **_dok_kreatifitas (ex. Bukti_Pembayaran_UKT.jpeg)_**\
+
+# LIST API YANG DIGUNAKAN DI MOBILE POSTMAN
+https://documenter.getpostman.com/view/6150381/SVYxnuod
 			
     
     
