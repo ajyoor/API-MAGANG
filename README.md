@@ -1,5 +1,9 @@
 # API-MAGANG
 ![Screenshot (7)](https://user-images.githubusercontent.com/42866630/60865678-bb010380-a250-11e9-9cf1-a1ff3eb7de5e.png)
+
+# LIST API YANG DIGUNAKAN DI MOBILE POSTMAN
+https://documenter.getpostman.com/view/6150381/SVYxnuod
+
 # LIST API YANG DIGUNAKAN DI MOBILE
 🔥 **LOGIN & LOGOUT (controller : Auth.php;model : MyModel.php;Pengisian data username & password diisi di body RAW)**\
 1.) POST LOGIN (header => Auth-Key : geomedia;Content-Type : application/json)\
@@ -71,8 +75,7 @@
              **_tgl_kreatifitas (*autofill datenow)_**\
 	     **_dok_kreatifitas (ex. Bukti_Pembayaran_UKT.jpeg)_**\
 
-# LIST API YANG DIGUNAKAN DI MOBILE POSTMAN
-https://documenter.getpostman.com/view/6150381/SVYxnuod
+
 			
     
     
