@@ -27,15 +27,16 @@ class Dashboard extends CI_Controller{
         $nip = $this->get('nip');
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
-			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
-		} else {
+      json_encode(400,array('status' => 400,'message' => 'Bad request.'));
+    } else {
             $check_auth_client = $this->mm->check_auth_client();
-			if($check_auth_client == true){
-		        $response = $this->mm->auth();
+      if($check_auth_client == true){
+            $response = $this->mm->auth();
         if($response['status'] == 200 && $nip != null){
             $target = $this->cak->getTarget($nip);
             $profil = $this->pm->getProfil($nip);
             $realisasi = $this->cak->getRealisasi($nip);
+            $hasil = array_merge($target,$realisasi,$profil);
             json_encode($response['status'],$target && $profil && $realisasi);
         } else {
             $cak = $this->cak->getTarget();
@@ -44,7 +45,11 @@ class Dashboard extends CI_Controller{
         if($target && $profil && $realisasi){
             $this->response([
                 'status' => true,
-                'data'   => [$target, $realisasi ,$profil]
+                'message' => 'success',
+                'data'   => $hasil
+                // 'data'   => $target, 
+                // 'data_realisasi'=> $realisasi,
+                // 'data_profil'   => $profil
             ], 200);
         } else{
             $this->response([
@@ -63,11 +68,11 @@ class Dashboard extends CI_Controller{
     //     $nip = $this->get('nip');
     //     $method = $_SERVER['REQUEST_METHOD'];
     //     if($method != 'GET'){
-	// 		json_encode(400,array('status' => 400,'message' => 'Bad request.'));
-	// 	} else {
+  //     json_encode(400,array('status' => 400,'message' => 'Bad request.'));
+  //   } else {
     //         $check_auth_client = $this->mm->check_auth_client();
-	// 		if($check_auth_client == true){
-	// 	        $response = $this->mm->auth();
+  //     if($check_auth_client == true){
+  //           $response = $this->mm->auth();
     //     if($response['status'] == 200 && $nip != null){
     //         $cak = $this->cak->getRealisasi($nip);
     //         json_encode($response['status'],$cak);
@@ -97,10 +102,7 @@ class Dashboard extends CI_Controller{
     //-----------------------------------------------------------------------------------------//
                                     //GET Capaian Target Dashboard//
     //-----------------------------------------------------------------------------------------//
-
-
-
-    //-----------------------------------------------------------------------------------------//
+//-----------------------------------------------------------------------------------------//
                             //GET Capaian Aktifitas Tiap Bulan Dashboard//
     //-----------------------------------------------------------------------------------------//
 }

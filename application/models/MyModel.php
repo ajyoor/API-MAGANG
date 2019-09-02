@@ -22,8 +22,9 @@ class MyModel extends CI_Model {
             $hashed_password = $q->password;
             $nip             = $q->nip;
             if (md5($hashed_password, crypt($password, $hashed_password))) {
-               $token = crypt(substr( md5(rand()), 0, 7));
-               $expired_at = date("Y-m-d H:i:s", strtotime('+720 hours'));
+               // $token = crypt(substr( md5(rand()), 0, 7));
+               $token = substr(md5(uniqid(rand(),'')),0,5);
+               $expired_at = date("Y-m-d H:i:s", strtotime('+1 month'));
                $this->db->trans_start();
                $data=array('token' => $token,'expired_at' => $expired_at);
                $this->db->where('nip',$nip);
@@ -60,7 +61,7 @@ class MyModel extends CI_Model {
             if($q->expired_at < date('Y-m-d H:i:s')){
                 return json_output(401,array('status' => 401,'message' => 'Your session has been expired.'));
             } else {
-                $expired_at = date("Y-m-d H:i:s", strtotime('+720 hours'));
+                $expired_at = date("Y-m-d H:i:s", strtotime('+1 month'));
                 $this->db->where('token',$token)->update('skp_pns',array('expired_at' => $expired_at));
                 return array('status' => 200,'message' => 'Authorized.');
             }
