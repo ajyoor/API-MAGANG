@@ -9,8 +9,9 @@ class Penilaian_SKP_model extends CI_Model
         parent::__construct();
         $this->load->database();
     }
-    
-    //fungsi untuk Realisasi perilaku
+    //-----------------------------------------------------------------------------------------//
+                                    //Method Penilaian Perilaku//
+    //-----------------------------------------------------------------------------------------//
     public function getPerilaku($id_skp,$year)
     {
         $this->db->select('skp_r_perilaku.id_skp,id_perilaku,orientasi_pelayanan,integritas,komitmen,disiplin,kerjasama,kepemimpinan');
@@ -31,7 +32,9 @@ class Penilaian_SKP_model extends CI_Model
         return $this->db->affected_rows();
     }
 
-    //fungsi untuk Realisasi aktivitas
+    //-----------------------------------------------------------------------------------------//
+                                    //Method Penilaian Aktivitas//
+    //-----------------------------------------------------------------------------------------//
     public function getAktivitas($nip,$year,$month)
     {
         if( $nip != null)   {
@@ -58,7 +61,9 @@ class Penilaian_SKP_model extends CI_Model
         return $this->db->affected_rows();
     }
 
-    //fungsi untuk Realisasi Penetapan Target
+    //-----------------------------------------------------------------------------------------//
+                                    //Method Penilaian Target//
+    //-----------------------------------------------------------------------------------------//
     public function getTarget($nip,$year)
     {
         $this->db->select('nip,kode_jabatan,uraian,output,satuan_output,mutu,waktu,satuan_waktu,biaya,is_aktif');
@@ -105,7 +110,10 @@ class Penilaian_SKP_model extends CI_Model
         return $this->db->affected_rows();
     }
 
-    //fungsi untuk Realisasi (pokok,tugas tambahan,kreatifitas)
+    //-----------------------------------------------------------------------------------------//
+                                    //Method Penilaian Realisasi//
+                                           //Tugas Pokok/
+    //-----------------------------------------------------------------------------------------//
     public function getPokok($nip,$year)
     {
         $this->db->select('id_realisasi,uraian,r_output,r_mutu,r_waktu,r_biaya,r_perhitungan,r_capaian');
@@ -121,7 +129,10 @@ class Penilaian_SKP_model extends CI_Model
         $this->db->update('skp_r_kerja', $data, ['id_realisasi' => $id_realisasi]);
         return $this->db->affected_rows();
     }
-    
+    //-----------------------------------------------------------------------------------------//
+                                    //Method Penilaian Realisasi//
+                                           //Tugas Tambahan/
+    //-----------------------------------------------------------------------------------------//
     public function getTambahan($id_skp = null)
     {
         if($id_skp === null)
@@ -145,8 +156,10 @@ class Penilaian_SKP_model extends CI_Model
         $this->db->update('skp_r_tambahan', $data, ['id_uraian_tambahan' => $id_uraian_tambahan]);
         return $this->db->affected_rows();
     }
-
-    //fungsi untuk kreatifitas
+//-----------------------------------------------------------------------------------------//
+                                    //Method Penilaian Realisasi//
+                                           //Tugas Kreatifitas/
+    //-----------------------------------------------------------------------------------------//
     public function getKreatifitas($id_skp = null)
     {
         if($id_skp === null)
