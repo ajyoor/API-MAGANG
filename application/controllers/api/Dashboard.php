@@ -27,26 +27,28 @@ class Dashboard extends CI_Controller{
         $nip = $this->get('nip');
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
-      json_encode(400,array('status' => 400,'message' => 'Bad request.'));
+        json_encode(400,array('status' => 400,'message' => 'Bad request.'));
     } else {
             $check_auth_client = $this->mm->check_auth_client();
-      if($check_auth_client == true){
+        if($check_auth_client == true){
             $response = $this->mm->auth();
         if($response['status'] == 200 && $nip != null){
-            $target = $this->cak->getTarget($nip);
-            $profil = $this->pm->getProfil($nip);
-            $realisasi = $this->cak->getRealisasi($nip);
-            $hasil = array_merge($target,$realisasi,$profil);
-            json_encode($response['status'],$target && $profil && $realisasi);
+            $target = $this->cak->getTarget($nip)[0];
+            $realisasi = $this->cak->getRealisasi($nip)[0];
+            $profil = $this->pm->getProfil($nip)[0];
+            $profil['target'] = $target['target'];
+            $profil['realisasi'] = $realisasi['realisasi']; 
+            // $hasil = array_merge($target,$realisasi,$profil);
+            // json_encode($response['status'],$profil);
         } else {
             $cak = $this->cak->getTarget();
         }
         
-        if($target && $profil && $realisasi){
+        if($profil){
             $this->response([
                 'status' => true,
                 'message' => 'success',
-                'data'   => $hasil
+                'data'   => $profil
                 // 'data'   => $target, 
                 // 'data_realisasi'=> $realisasi,
                 // 'data_profil'   => $profil
