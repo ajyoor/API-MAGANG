@@ -15,14 +15,16 @@ class MyModel extends CI_Model {
 
     public function login($username,$password)
     {
-        $q  = $this->db->select('skp_pns.password,skp_pns.nip,skp_jabatan.nama_jabatan')->from('skp_pns')->join('skp_jabatan', 'skp_jabatan.kode_jabatan = skp_pns.kode_jabatan')->where('skp_pns.username',$username)->get()->row();
+        $q  = $this->db->select('skp_pns.password,skp_pns.nip,skp_pns.kode_jabatan,skp_jabatan.nama_jabatan,skp_jabatan.jabatan')->from('skp_pns')->join('skp_jabatan', 'skp_jabatan.kode_jabatan = skp_pns.kode_jabatan')->where('skp_pns.username',$username)->get()->row();
         
         if($q == ""){
             return array('status' => 204,'message' => 'Username not found.');
         } else {
             $hashed_password = $q->password;
             $nip             = $q->nip;
+            $kode_jabatan    = $q->kode_jabatan;
             $nama_jabatan    = $q->nama_jabatan;
+            $jabatan         = $q->jabatan;
             if (md5($hashed_password, crypt($password, $hashed_password))) {
                // $token = crypt(substr( md5(rand()), 0, 7));
                $token = substr(md5(uniqid(rand(),'')),0,5);
@@ -30,6 +32,7 @@ class MyModel extends CI_Model {
                $this->db->trans_start();
                $data=array('token' => $token,'expired_at' => $expired_at);
                $this->db->where('nip',$nip);
+               $this->db->where('kode_jabatan',$kode_jabatan);
                // $this->db->where('nama_jabatan',$nama_jabatan);
                $this->db->update('skp_pns',$data);
                if ($this->db->trans_status() === FALSE){
@@ -37,7 +40,7 @@ class MyModel extends CI_Model {
                   return array('status' => 500,'message' => 'Internal server error.');
                } else {
                   $this->db->trans_commit();
-                  return array('status' => 200,'message' => 'Successfully login.','nip' => $nip,'nama_jabatan' => $nama_jabatan, 'token' => $token);
+                  return array('status' => 200,'message' => 'Successfully login.','nip' => $nip,'kode_jabatan' => $kode_jabatan,'nama_jabatan' => $nama_jabatan,'jabatan' => $jabatan, 'token' => $token);
                }
             } else {
                return array('status' => 204,'message' => 'Wrong password.');
