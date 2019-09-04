@@ -29,4 +29,15 @@ class Dashboard_model extends CI_Model
         return $this->db->get()->result_array();
         }
     }
+    public function getBawahan($parent)
+    {
+
+        if( $parent != null)   {
+        $this->db->select("skp_pns.image_profil,skp_pns.nama, skp_pns.nip, skp_jabatan.nama_jabatan, skp_jabatan.parent,(select nama from skp_pns where kode_jabatan=skp_jabatan.parent) as nama_penilai",FALSE);
+        $this->db->from('skp_pns');
+        $this->db->join('skp_jabatan', 'skp_jabatan.kode_jabatan=skp_pns.kode_jabatan');
+        $this->db->where('skp_jabatan.parent',$parent);
+        return $this->db->get()->result_array();
+        }
+    }
 }

@@ -63,48 +63,44 @@ class Dashboard extends CI_Controller{
         }
     }
     //-----------------------------------------------------------------------------------------//
-                                        //GET Realisasi Dashboard//
+                                    //GET Bawahan Dashboard//
     //-----------------------------------------------------------------------------------------//
-
-    // public function realisasi_get() {
-    //     $nip = $this->get('nip');
-    //     $method = $_SERVER['REQUEST_METHOD'];
-    //     if($method != 'GET'){
-  //     json_encode(400,array('status' => 400,'message' => 'Bad request.'));
-  //   } else {
-    //         $check_auth_client = $this->mm->check_auth_client();
-  //     if($check_auth_client == true){
-  //           $response = $this->mm->auth();
-    //     if($response['status'] == 200 && $nip != null){
-    //         $cak = $this->cak->getRealisasi($nip);
-    //         json_encode($response['status'],$cak);
-    //     } else {
-    //         $cak = $this->cak->getRealisasi();
-    //     }
-    //     if($nip === null){
-    //         $cak = $this->cak->getRealisasi();
-    //     } else {
-    //         $cak = $this->cak->getRealisasi($nip);
-    //     }
+    public function bawahan_get() {
+        $parent = $this->get('parent');
+        $method = $_SERVER['REQUEST_METHOD'];
+        if($method != 'GET'){
+            json_encode(400,array('status' => 400,'message' => 'Bad request.'));
+        } else {
+            $check_auth_client = $this->mm->check_auth_client();
+            if($check_auth_client == true){
+                $response = $this->mm->auth();
+        if($response['status'] == 200 && $parent != null){
+            $cak = $this->cak->getBawahan($parent);
+            json_encode($response['status'],$cak);
+        } else {
+            $cak = $this->cak->getBawahan();
+        }
         
-    //     if($cak){
-    //         $this->response([
-    //             'status' => true,
-    //             'data'   => $cak
-    //         ], 200);
-    //     } else{
-    //         $this->response([
-    //             'status'  => false,
-    //             'message' => 'Maaf, ID tidak ditemukan !'
-    //         ], 404);
-    //             }
-    //         }
-    //     }
-    // }
+        if($cak){
+            $this->response([
+                'status' => true,
+                'data'   => $cak
+            ], 200);
+        } else{
+            $this->response([
+                'status'  => false,
+                'message' => 'Maaf, ID tidak ditemukan !'
+            ], 404);
+                }
+            }
+        }
+    }
+    
+    
     //-----------------------------------------------------------------------------------------//
                                     //GET Capaian Target Dashboard//
     //-----------------------------------------------------------------------------------------//
-//-----------------------------------------------------------------------------------------//
-                            //GET Capaian Aktifitas Tiap Bulan Dashboard//
+    //-----------------------------------------------------------------------------------------//
+                            //GET Capaian cakifitas Tiap Bulan Dashboard//
     //-----------------------------------------------------------------------------------------//
 }
