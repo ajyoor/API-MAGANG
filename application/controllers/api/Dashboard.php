@@ -48,7 +48,7 @@ class Dashboard extends CI_Controller{
             $this->response([
                 'status' => true,
                 'message' => 'success',
-                'data'   => $profil
+                'data'   => [$profil]
                 // 'data'   => $target, 
                 // 'data_realisasi'=> $realisasi,
                 // 'data_profil'   => $profil
