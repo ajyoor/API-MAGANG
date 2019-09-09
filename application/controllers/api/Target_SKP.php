@@ -40,8 +40,9 @@ class Target_SKP extends CI_Controller{
         
         if($nip){
             $this->response([
-                'status' => true,
-                'data'   => $nip
+                'status'  => true,
+                'message' => 'Success !',
+                'data'    => $nip
             ], 200);
         } else{
             $this->response([
@@ -75,13 +76,13 @@ class Target_SKP extends CI_Controller{
                 //ok
                 $this->response([
                     'status' => true,
-                    'id_tkerja' => $id_tkerja,
-                    'message'=> 'ID tersebut berhasil dihapus !'
+                    'message' => 'Success !',
+                    'id_tkerja' => $id_tkerja
                 ], 200);
         } else {
                 $this->response([
-                    'status' => false,
-                    'data'   => 'Maaf, ID tidak ditemukan !'
+                    'status'    => false,
+                    'message'   => 'Maaf, ID tidak ditemukan !'
                 ], 400);
                 }
             }
@@ -115,12 +116,12 @@ class Target_SKP extends CI_Controller{
         if ($this->skp->createSKP($data) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data baru telah dibuat !'
+                'message' => 'Success !'
             ], 200);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data baru gagal dibuat !'
+                'status'    => false,
+                'message'   => 'Maaf, Data baru gagal dibuat !'
             ], 400);
                     }
                 }
@@ -157,12 +158,12 @@ class Target_SKP extends CI_Controller{
         if ($this->skp->updateSKP($data, $id_tkerja) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data berhasil diedit !'
+                'message' => 'Success !',
             ], 400);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data gagal diupdate !'
+                'status'    => false,
+                'message'   => 'Maaf, Data gagal diupdate !'
             ], 404);
                     }
                 }

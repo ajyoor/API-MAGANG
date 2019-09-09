@@ -40,8 +40,9 @@ class Realisasi_SKP extends CI_Controller{
         
         if($rskp){
             $this->response([
-                'status' => true,
-                'data'   => $rskp
+                'status'  => true,
+                'message' => 'Success !',   
+                'data'    => $rskp
             ], 200);
         } else{
             $this->response([
@@ -80,12 +81,12 @@ class Realisasi_SKP extends CI_Controller{
         if ($this->rskp->updateRSKP($data, $id_realisasi) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data berhasil diedit !'
+                'message' => 'Success !'
             ], 400);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data gagal diupdate !'
+                'status'    => false,
+                'message'   => 'Maaf, Data gagal diupdate !'
             ], 404);
                     }
                 }

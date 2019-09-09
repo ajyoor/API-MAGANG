@@ -44,8 +44,9 @@ class Pen_Aktivitas extends CI_Controller{
         
         if($pskp){
             $this->response([
-                'status' => true,
-                'data'   => $pskp
+                'status'  => true,
+                'message' => 'Success !',
+                'data'    => $pskp
             ], 200);
         } else{
             $this->response([
@@ -77,14 +78,14 @@ class Pen_Aktivitas extends CI_Controller{
         if( $this->pskp->deleteAktivitas($log_id) > 0){
                 //ok
                 $this->response([
-                    'status' => true,
-                    'log_id' => $log_id,
-                    'message'=> 'ID tersebut berhasil dihapus !'
+                    'status'  => true,
+                    'message' => 'Success !',
+                    'log_id'  => $log_id
                 ], 200);
         } else {
                 $this->response([
-                    'status' => false,
-                    'data'   => 'Maaf, ID tidak ditemukan !'
+                    'status'    => false,
+                    'message'   => 'Maaf, ID tidak ditemukan !'
                 ], 400);
                 }
             }
@@ -115,12 +116,12 @@ class Pen_Aktivitas extends CI_Controller{
         if ($this->pskp->updateAktivitas($data, $log_id) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data berhasil diedit !'
+                'message' => 'Success !'
             ], 400);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data gagal diupdate !'
+                'status'    => false,
+                'message'   => 'Maaf, Data gagal diupdate !'
             ], 404);
                     }
                 }

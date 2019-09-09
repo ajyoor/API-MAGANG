@@ -38,8 +38,9 @@ class Profil_SKP extends CI_Controller{
         }
         if($pm){
             $this->response([
-                'status' => true,
-                'data'   => $pm
+                'status'  => true,
+                'message' => 'Success !',
+                'data'    => $pm
             ], 200);
         } else{
             $this->response([
@@ -78,12 +79,12 @@ class Profil_SKP extends CI_Controller{
         if ($this->pm->updateProfil($data, $nip) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data berhasil diedit !'
+                'message' => 'Success !'
             ], 200);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data gagal diupdate !'
+                'status'    => false,
+                'message'   => 'Maaf, Data gagal diupdate !'
             ], 404);
                         }
                     }
@@ -114,12 +115,12 @@ class Profil_SKP extends CI_Controller{
         if ($this->pm->updateFoto($data, $nip) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data berhasil diedit !'
+                'message' => 'Success !',
             ], 200);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data gagal diupdate !'
+                'status'    => false,
+                'message'   => 'Maaf, Data gagal diupdate !'
             ], 404);
                     }
                 }

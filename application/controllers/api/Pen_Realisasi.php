@@ -41,8 +41,9 @@ class Pen_Realisasi extends CI_Controller{
         
         if($pskp){
             $this->response([
-                'status' => true,
-                'data'   => $pskp
+                'status'  => true,
+                'message' => 'Success !',
+                'data'    => $pskp
             ], 200);
         } else{
             $this->response([
@@ -79,12 +80,12 @@ class Pen_Realisasi extends CI_Controller{
         if ($this->pskp->updatePokok($data, $id_realisasi) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data berhasil diedit !'
+                'message' => 'Success !'
             ], 400);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data gagal diupdate !'
+                'status'    => false,
+                'message'   => 'Maaf, Data gagal diupdate !'
             ], 404);
                     }
                 }
@@ -113,8 +114,9 @@ class Pen_Realisasi extends CI_Controller{
         
         if($pskp){
             $this->response([
-                'status' => true,
-                'data'   => $pskp
+                'status'  => true,
+                'message' => 'Success !',
+                'data'    => $pskp
             ], 200);
         } else{
             $this->response([
@@ -146,13 +148,13 @@ class Pen_Realisasi extends CI_Controller{
             //ok
             $this->response([
                 'status'             => true,
-                'id_uraian_tambahan' => $id_uraian_tambahan,
-                'message'            => 'ID tersebut berhasil dihapus !'
+                'message'            => 'Success !',
+                'id_uraian_tambahan' => $id_uraian_tambahan
             ], 200);
     } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, ID tidak ditemukan !'
+                'status'    => false,
+                'message'   => 'Maaf, ID tidak ditemukan !'
             ], 400);
                 }
             }
@@ -183,12 +185,12 @@ class Pen_Realisasi extends CI_Controller{
         if ($this->pskp->updateTambahan($data, $id_uraian_tambahan) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data Tambahan berhasil diedit !'
+                'message' => 'Success !'
             ], 200);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data Tambahan gagal diupdate !'
+                'status'    => false,
+                'message'   => 'Maaf, Data Tambahan gagal diupdate !'
             ], 404);
                     }
                 }
@@ -218,8 +220,9 @@ class Pen_Realisasi extends CI_Controller{
         
         if($pskp){
             $this->response([
-                'status' => true,
-                'data'   => $pskp
+                'status'  => true,
+                'message' => 'Success !',
+                'data'    => $pskp
             ], 200);
         } else{
             $this->response([
@@ -251,13 +254,13 @@ class Pen_Realisasi extends CI_Controller{
                 //ok
                 $this->response([
                     'status'             => true,
-                    'idkreatifitas'      => $idkreatifitas,
-                    'message'            => 'ID tersebut berhasil dihapus !'
+                    'message'            => 'Success !',
+                    'idkreatifitas'      => $idkreatifitas
                 ], 200);
         } else {
                 $this->response([
-                    'status' => false,
-                    'data'   => 'Maaf, ID tidak ditemukan !'
+                    'status'    => false,
+                    'message'   => 'Maaf, ID tidak ditemukan !'
                 ], 400);
                 }
             }
@@ -290,12 +293,12 @@ class Pen_Realisasi extends CI_Controller{
         if ($this->pskp->updateKreatifitas($data, $idkreatifitas) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data berhasil diedit !'
+                'message' => 'Success !',
             ], 200);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data gagal diupdate !'
+                'status'    => false,
+                'message'   => 'Maaf, Data gagal diupdate !'
             ], 404);
                     }
                 }

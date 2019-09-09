@@ -40,8 +40,9 @@ class Log_Aktivitas extends CI_Controller{
         
         if($akt){
             $this->response([
-                'status' => true,
-                'data'   => $akt
+                'status'  => true,
+                'message' => 'Success !',
+                'data'    => $akt
             ], 200);
         } else{
             $this->response([
@@ -66,8 +67,9 @@ class Log_Aktivitas extends CI_Controller{
         }
         if($akt){
             $this->response([
-                'status' => true,
-                'data'   => $akt
+                'status'  => true,
+                'message' => 'Success !',
+                'data'    => $akt
             ], 200);
         } else{
             $this->response([
@@ -99,8 +101,9 @@ class Log_Aktivitas extends CI_Controller{
         
         if($akt){
             $this->response([
-                'status' => true,
-                'data'   => $akt 
+                'status'  => true,
+                'message' => 'Success !',
+                'data'    => $akt 
             ], 200);
         } else{
             $this->response([
@@ -128,8 +131,9 @@ class Log_Aktivitas extends CI_Controller{
         
         if($akt){
             $this->response([
-                'status' => true,
-                'data'   => $akt
+                'status'  => true,
+                'message' => 'Success !',
+                'data'    => $akt
             ], 200);
         } else{
             $this->response([
@@ -158,8 +162,9 @@ class Log_Aktivitas extends CI_Controller{
         
         if($akt){
             $this->response([
-                'status' => true,
-                'data'   => $akt
+                'status'  => true,
+                'message' => 'Success !',
+                'data'    => $akt
             ], 200);
         } else{
             $this->response([
@@ -193,14 +198,14 @@ class Log_Aktivitas extends CI_Controller{
         if($akt){
                 //ok
                 $this->response([
-                    'status' => true,
-                    'log_id' => $log_id,
-                    'message'=> 'ID tersebut berhasil dihapus !'
+                    'status'  => true,
+                    'message' => 'Success !',
+                    'log_id'  => $log_id
                 ], 200);
         } else {
                 $this->response([
-                    'status' => false,
-                    'data'   => 'Maaf, ID tidak ditemukan !'
+                    'status'  => false,
+                    'message' => 'Maaf, ID tidak ditemukan !'
                 ], 400);
                     }
             }   
@@ -232,12 +237,12 @@ class Log_Aktivitas extends CI_Controller{
         if ($this->akt->createAktivitas($data) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data baru telah dibuat !'
+                'message' => 'Success !'
             ], 200);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data baru gagal dibuat !'
+                'status'  => false,
+                'message' => 'Maaf, Data baru gagal dibuat !'
             ], 400);
                         }
                     }
@@ -272,12 +277,12 @@ class Log_Aktivitas extends CI_Controller{
         if ($this->akt->updateAktivitas($data, $log_id) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data berhasil diedit !'
+                'message' => 'Success !'
             ], 400);
         } else {
             $this->response([
                 'status' => false,
-                'data'   => 'Maaf, Data gagal diupdate !'
+                'message'   => 'Maaf, Data gagal diupdate !'
             ], 404);
                     }
                 }

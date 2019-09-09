@@ -40,8 +40,9 @@ class Tugas_Tambahan_SKP extends CI_Controller{
         
         if($rskp){
             $this->response([
-                'status' => true,
-                'data'   => $rskp
+                'status'  => true,
+                'message' => 'Success !',
+                'data'    => $rskp
             ], 200);
         } else{
             $this->response([
@@ -75,13 +76,13 @@ class Tugas_Tambahan_SKP extends CI_Controller{
                 //ok
                 $this->response([
                     'status'             => true,
-                    'id_uraian_tambahan' => $id_uraian_tambahan,
-                    'message'            => 'ID tersebut berhasil dihapus !'
+                    'message'            => 'Success !',
+                    'id_uraian_tambahan' => $id_uraian_tambahan
                 ], 200);
         } else {
                 $this->response([
-                    'status' => false,
-                    'data'   => 'Maaf, ID tidak ditemukan !'
+                    'status'    => false,
+                    'message'   => 'Maaf, ID tidak ditemukan !'
                 ], 400);
                 }
             }
@@ -111,12 +112,12 @@ class Tugas_Tambahan_SKP extends CI_Controller{
         if ($this->rskp->createTambahanSKP($data) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data baru telah dibuat !'
+                'message' => 'Success !'
             ], 200);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data baru gagal dibuat !'
+                'status'    => false,
+                'message'   => 'Maaf, Data baru gagal dibuat !'
             ], 400);
                     }
                 }
@@ -148,12 +149,12 @@ class Tugas_Tambahan_SKP extends CI_Controller{
         if ($this->rskp->updateTambahanSKP($data, $id_uraian_tambahan) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data Tambahan berhasil diedit !'
+                'message' => 'Success !'
             ], 200);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data Tambahan gagal diupdate !'
+                'status'    => false,
+                'message'   => 'Maaf, Data Tambahan gagal diupdate !'
             ], 404);
                     }
                 }

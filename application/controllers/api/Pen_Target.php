@@ -41,8 +41,9 @@ class Pen_Target extends CI_Controller{
         
         if($pskp){
             $this->response([
-                'status' => true,
-                'data'   => $pskp
+                'status'  => true,
+                'message' => 'Success !',
+                'data'    => $pskp
             ], 200);
         } else{
             $this->response([
@@ -84,12 +85,12 @@ class Pen_Target extends CI_Controller{
         if ($this->pskp->updateTarget($data, $id_tkerja) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data berhasil diedit !'
+                'message' => 'Success !'
             ], 200);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data gagal diupdate !'
+                'status'    => false,
+                'message'   => 'Maaf, Data gagal diupdate !'
             ], 404);
                     }
                 }
@@ -126,12 +127,12 @@ class Pen_Target extends CI_Controller{
         if ($this->pskp->updateTargetRevisi($data, $id_tkerja) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data berhasil diedit !'
+                'message' => 'Success !'
             ], 200);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data gagal diupdate !'
+                'status'    => false,
+                'message'   => 'Maaf, Data gagal diupdate !'
             ], 404);
                     }
                 }
@@ -162,12 +163,12 @@ class Pen_Target extends CI_Controller{
         if ($this->pskp->updateTargetBatal($data, $id_tkerja) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data berhasil diedit !'
+                'message' => 'Success !'
             ], 200);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data gagal diupdate !'
+                'status'    => false,
+                'message'   => 'Maaf, Data gagal diupdate !'
             ], 404);
                     }
                 }
@@ -205,12 +206,12 @@ class Pen_Target extends CI_Controller{
         if ($this->pskp->updateTarget2($data, $id_skp, $id_tkerja) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data berhasil diedit !'
+                'message' => 'Success !'
             ], 200);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data gagal diupdate !'
+                'status'    => false,
+                'message'   => 'Maaf, Data gagal diupdate !'
             ], 404);
                     }
                 }
@@ -238,14 +239,14 @@ class Pen_Target extends CI_Controller{
         if( $this->pskp->deleteTarget($id_tkerja) > 0){
                 //ok
                 $this->response([
-                    'status' => true,
-                    'id_tkerja' => $id_tkerja,
-                    'message'=> 'ID tersebut berhasil dihapus !'
+                    'status'    => true,
+                    'message'   => 'Success !',
+                    'id_tkerja' => $id_tkerja
                 ], 200);
         } else {
                 $this->response([
-                    'status' => false,
-                    'data'   => 'Maaf, ID tidak ditemukan !'
+                    'status'    => false,
+                    'message'   => 'Maaf, ID tidak ditemukan !'
                 ], 400);
                 }
             }

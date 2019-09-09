@@ -41,8 +41,9 @@ class Kreatifitas_SKP extends CI_Controller{
         
         if($rskp){
             $this->response([
-                'status' => true,
-                'data'   => $rskp
+                'status'  => true,
+                'message' => 'Success !', 
+                'data'    => $rskp
             ], 200);
         } else{
             $this->response([
@@ -53,7 +54,7 @@ class Kreatifitas_SKP extends CI_Controller{
             }
         }
     }
-   //-----------------------------------------------------------------------------------------//
+    //-----------------------------------------------------------------------------------------//
                                             //Method DELETE//
                                       //DELETE by idkreatifitas//
     //-----------------------------------------------------------------------------------------//
@@ -74,13 +75,13 @@ class Kreatifitas_SKP extends CI_Controller{
                 //ok
                 $this->response([
                     'status'             => true,
-                    'idkreatifitas'      => $idkreatifitas,
-                    'message'            => 'ID tersebut berhasil dihapus !'
+                    'message'            => 'Success !',
+                    'idkreatifitas'      => $idkreatifitas
                 ], 200);
         } else {
                 $this->response([
-                    'status' => false,
-                    'data'   => 'Maaf, ID tidak ditemukan !'
+                    'status'    => false,
+                    'message'   => 'Maaf, ID tidak ditemukan !'
                 ], 400);
                 }
             }
@@ -111,12 +112,12 @@ class Kreatifitas_SKP extends CI_Controller{
         if ($this->rskp->createKreatifitasSKP($data) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data baru telah dibuat !'
+                'message' => 'Success !'
             ], 200);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data baru gagal dibuat !'
+                'status'    => false,
+                'message'   => 'Maaf, Data baru gagal dibuat !'
             ], 400);
                     }
                 }
@@ -150,12 +151,12 @@ class Kreatifitas_SKP extends CI_Controller{
         if ($this->rskp->updateKreatifitasSKP($data, $idkreatifitas) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data berhasil diedit !'
+                'message' => 'Success !',
             ], 200);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data gagal diupdate !'
+                'status'    => false,
+                'message'   => 'Maaf, Data gagal diupdate !'
             ], 404);
                     }
                 }

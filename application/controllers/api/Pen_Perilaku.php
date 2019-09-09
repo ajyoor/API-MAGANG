@@ -41,8 +41,9 @@ class Pen_Perilaku extends CI_Controller{
         
         if($pskp){
             $this->response([
-                'status' => true,
-                'data'   => $pskp
+                'status'  => true,
+                'message' => 'Success !',
+                'data'    => $pskp
             ], 200);
         } else{
             $this->response([
@@ -83,12 +84,12 @@ class Pen_Perilaku extends CI_Controller{
         if ($this->pskp->createPerilaku($data) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data baru telah dibuat !'
+                'message' => 'Success !'
             ], 200);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data baru gagal dibuat !'
+                'status'    => false,
+                'message'   => 'Maaf, Data baru gagal dibuat !'
             ], 400);
                     }
                 }
@@ -127,12 +128,12 @@ class Pen_Perilaku extends CI_Controller{
         if ($this->pskp->updatePerilaku($data, $id_perilaku) > 0) {
             $this->response([
                 'status'  => true,
-                'message' => 'Data berhasil diedit !'
+                'message' => 'Success !'
             ], 200);
         } else {
             $this->response([
-                'status' => false,
-                'data'   => 'Maaf, Data gagal diupdate !'
+                'status'    => false,
+                'message'   => 'Maaf, Data gagal diupdate !'
             ], 404);
                     }
                 }
