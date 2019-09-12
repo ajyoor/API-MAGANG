@@ -20,9 +20,22 @@ class Log_Aktivitas_model extends CI_Model
             $this->db->where('log_aktivitas.nip',$nip);
             $this->db->limit(5, 10);
             return $this->db->get()->result_array();
-        } else{
-            echo "Error Dude";
-              }
+        } else {
+
+        }
+    }
+    public function getAktivitasSearch($nip, $masukan)
+    {
+        if ($nip != null && $masukan != null){
+            
+            $this->db->select("log_id,akt_tanggal,bk_id,bk_nama_kegiatan,akt_catatan,akt_output,akt_start,akt_end,akt_satuan,akt_waktu,akt_keterangan,id_tkerja,akt_status",FALSE);
+            $this->db->from('log_aktivitas');
+            $this->db->join('skp_pns', 'skp_pns.nip = log_aktivitas.nip ');
+            $this->db->join('log_masteraktivitas', ' log_masteraktivitas.bk_id= log_aktivitas.akt_idkegiatan');
+            $this->db->where('log_aktivitas.nip',$nip);    
+            $this->db->where("bk_nama_kegiatan like '%$masukan%'");
+            return $this->db->get()->result_array();
+        }
     }
     public function getAktivitasAll()
     {
