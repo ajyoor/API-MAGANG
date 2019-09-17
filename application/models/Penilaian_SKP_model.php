@@ -21,11 +21,13 @@ class Penilaian_SKP_model extends CI_Model
         $this->db->where('skp_r_perilaku.id_skp',$id_skp);
         return $this->db->get()->result_array();
     }
+    
     public function createPerilaku($data)
     {
         $this->db->insert('skp_r_perilaku',$data);
         return $this->db->affected_rows();
     }
+    
     public function updatePerilaku($data, $id_perilaku)
     {
         $this->db->update('skp_r_perilaku', $data, ['id_perilaku' => $id_perilaku]);
@@ -50,6 +52,7 @@ class Penilaian_SKP_model extends CI_Model
             echo "Error Dude";
         }
     }
+    
     public function getAktivitasSearch($nip, $masukan,$year,$month)
     {
         if ($nip != null && $masukan != null && $month != null && $year != null){
@@ -64,11 +67,13 @@ class Penilaian_SKP_model extends CI_Model
             return $this->db->get()->result_array();
         }
     }
+    
     public function deleteAktivitas($log_id)
     {
         $this->db->delete('log_aktivitas', ['log_id' => $log_id]);
         return $this->db->affected_rows();
     }
+    
     public function updateAktivitas($data, $log_id)
     {
         $this->db->update('log_aktivitas', $data, ['log_id' => $log_id]);
@@ -87,34 +92,52 @@ class Penilaian_SKP_model extends CI_Model
         $this->db->where('skp_dataskp.nip',$nip);
         return $this->db->get()->result_array();
     }
+
+    public function getTargetSearch($nip, $masukan,$year)
+    {
+        if ($nip != null && $masukan != null && $year != null){
+            $this->db->select('nip,kode_jabatan,uraian,output,satuan_output,mutu,waktu,satuan_waktu,biaya,is_aktif');
+            $this->db->from('skp_dataskp');
+            $this->db->join('skp_t_kerja', 'skp_t_kerja.id_skp = skp_dataskp.id_skp');
+            $this->db->where("EXTRACT(YEAR FROM skp_dataskp.tgl_create) = ". $year);
+            $this->db->where('skp_dataskp.nip',$nip);
+            $this->db->where("uraian like '%$masukan%'");
+            return $this->db->get()->result_array();
+        }
+    }
+
     public function updateTarget($data, $id_tkerja) //save 
     {
         $this->db->update('skp_t_kerja', $data, ['id_tkerja' => $id_tkerja]);
         return $this->db->affected_rows();
     }
+
     public function updateTarget2($data, $id_skp, $id_tkerja) //confirm all status
     {
             $Querynilai     = $this->db->update('skp_dataskp', $data, ['id_skp' => $id_skp]);
             $QueryTugas     = $this->db->update('skp_t_kerja', $data, ['id_tkerja' => $id_tkerja]);
             if ($Querynilai === TRUE && $QueryTugas === TRUE ) 
-             {
+            {
                 return TRUE;
-             } 
-           else 
-           {
+            } 
+            else 
+            {
                 return FALSE;
-           }
+            }
     }
+
     public function updateTargetRevisi($data, $id_tkerja) //confirm all status
     {
         $this->db->update('skp_t_kerja', $data, ['id_tkerja' => $id_tkerja]);
         return $this->db->affected_rows();
     }
+
     public function updateTargetBatal($data, $id_tkerja) //confirm all status
     {
         $this->db->update('skp_t_kerja', $data, ['id_tkerja' => $id_tkerja]);
         return $this->db->affected_rows();
     }
+
     public function deleteTarget($id_tkerja)
     {
         $this->db->delete('skp_t_kerja', ['id_tkerja' => $id_tkerja]);
@@ -135,6 +158,7 @@ class Penilaian_SKP_model extends CI_Model
         $this->db->where('log_aktivitas.nip',$nip);
         return $this->db->get()->result_array();
     }
+
     public function updatePokok($data, $id_realisasi)
     {
         $this->db->update('skp_r_kerja', $data, ['id_realisasi' => $id_realisasi]);
@@ -157,11 +181,13 @@ class Penilaian_SKP_model extends CI_Model
             return $this->db->get_where('skp_r_tambahan',['id_skp' => $id_skp])->result_array();
         }
     }
+
     public function deleteTambahan($id_uraian_tambahan)
     {
         $this->db->delete('skp_r_tambahan', ['id_uraian_tambahan' => $id_uraian_tambahan]);
         return $this->db->affected_rows();
     }
+
     public function updateTambahan($data, $id_uraian_tambahan)
     {
         $this->db->update('skp_r_tambahan', $data, ['id_uraian_tambahan' => $id_uraian_tambahan]);
@@ -183,11 +209,13 @@ class Penilaian_SKP_model extends CI_Model
             return $this->db->get_where('skp_r_kreatifitas',['id_skp' => $id_skp])->result_array();
         }
     }
+
     public function deleteKreatifitas($idkreatifitas)
     {
         $this->db->delete('skp_r_kreatifitas', ['idkreatifitas' => $idkreatifitas]);
         return $this->db->affected_rows();
     }
+
     public function updateKreatifitas($data, $idkreatifitas)
     {
         $this->db->update('skp_r_kreatifitas', $data, ['idkreatifitas' => $idkreatifitas]);

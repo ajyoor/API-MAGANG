@@ -24,7 +24,7 @@ class Pen_Aktivitas extends CI_Controller{
     //-----------------------------------------------------------------------------------------//
     public function index_get() {
         $nip    = $this->get('nip');
-        $log_id = $this->get('log_id');
+        // $log_id = $this->get('log_id');
         $year   = $this->get('year');
         $month  = $this->get('month');
 

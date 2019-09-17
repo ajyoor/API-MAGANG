@@ -54,6 +54,37 @@ class Pen_Target extends CI_Controller{
             }
         }
     }
+
+    public function search_get() {
+        $nip     = $this->get('nip');
+        $masukan = $this->get('masukan');
+        $year    = $this->get('year');
+        $method  = $_SERVER['REQUEST_METHOD'];
+        if($method != 'GET'){
+            json_encode(400,array('status' => 400,'message' => 'Bad request.'));
+        } else {
+            $check_auth_client = $this->mm->check_auth_client();
+            if($check_auth_client == true){
+                $response = $this->mm->auth();
+        if($response['status'] == 200 && $nip != null && $masukan != null && $year != null){
+            $pskp = $this->pskp->getTargetSearch($nip, $masukan,$year);
+            json_encode($response['status'],$pskp);
+        }
+        if($pskp){
+            $this->response([
+                'status'  => true,
+                'message' => 'Success !',
+                'data'    => $pskp
+            ], 200);
+        } else{
+            $this->response([
+                'status'  => false,
+                'message' => 'Maaf, data tidak ditemukan !'
+            ], 404);
+                }
+            }
+        }
+    }
     //-----------------------------------------------------------------------------------------//
                                             //Method PUT//
                                       //EDIT data by id_tkerja//
