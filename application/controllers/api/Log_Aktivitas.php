@@ -31,7 +31,7 @@ class Log_Aktivitas extends CI_Controller{
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
-        if($response['status'] == 200 && $nip != null){
+        if($response['status'] == 200 && $nip != null ){
             $akt = $this->akt->getAktivitas($nip);
             json_encode($response['status'],$akt);
         } else {
@@ -81,9 +81,9 @@ class Log_Aktivitas extends CI_Controller{
         }
     }
     public function search_get() {
-        $nip = $this->get('nip');
+        $nip     = $this->get('nip');
         $masukan = $this->get('masukan');
-        $method = $_SERVER['REQUEST_METHOD'];
+        $method  = $_SERVER['REQUEST_METHOD'];
         if($method != 'GET'){
 			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
 		} else {
@@ -103,7 +103,7 @@ class Log_Aktivitas extends CI_Controller{
         } else{
             $this->response([
                 'status'  => false,
-                'message' => 'Maaf, ID tidak ditemukan !'
+                'message' => 'Maaf, data tidak ditemukan !'
             ], 404);
                 }
             }

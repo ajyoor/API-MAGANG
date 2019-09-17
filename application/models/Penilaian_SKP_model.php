@@ -50,6 +50,20 @@ class Penilaian_SKP_model extends CI_Model
             echo "Error Dude";
         }
     }
+    public function getAktivitasSearch($nip, $masukan,$year,$month)
+    {
+        if ($nip != null && $masukan != null && $month != null && $year != null){
+            $this->db->select('log_id,akt_tanggal,bk_nama_kegiatan,akt_output,akt_start,akt_end,akt_waktu,akt_status');
+            $this->db->from('log_aktivitas');
+            $this->db->join('skp_pns', 'skp_pns.nip = log_aktivitas.nip ');
+            $this->db->join('log_masteraktivitas', ' log_masteraktivitas.bk_id= log_aktivitas.akt_idkegiatan');
+            $this->db->where("EXTRACT(YEAR FROM log_aktivitas.akt_tanggal) = ". $year);
+            $this->db->where("EXTRACT(MONTH FROM log_aktivitas.akt_tanggal) = ". $month);
+            $this->db->where('log_aktivitas.nip',$nip); 
+            $this->db->where("bk_nama_kegiatan like '%$masukan%'");
+            return $this->db->get()->result_array();
+        }
+    }
     public function deleteAktivitas($log_id)
     {
         $this->db->delete('log_aktivitas', ['log_id' => $log_id]);
@@ -89,10 +103,7 @@ class Penilaian_SKP_model extends CI_Model
            else 
            {
                 return FALSE;
-            }
-        ////////////////////////////////////:v :v :v////////////////////////////////////////
-        // $this->db->update('skp_dataskp', $data, ['id_skp' => $id_skp]);
-        // return $this->db->affected_rows();
+           }
     }
     public function updateTargetRevisi($data, $id_tkerja) //confirm all status
     {
