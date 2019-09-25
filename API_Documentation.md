@@ -1,6 +1,6 @@
 # Dokumentasi API dan contoh
 
-### 0.  Push Product (Add force as optional parameter )
+### 1.  Login SKP
 
 #### HTTP Request
 ```json
@@ -17,7 +17,7 @@ PATCH http://localhost/API-MAGANG/api/auth/login
 
 | Parameters    |  Description  |
 | ------------- |:--------------|
-|status| `200` Jika Username & Password benar. `204` Jika Username dan atau Password tidak ditemukan|
+|status| `200` Jika `Username` & `Password` benar. `204` Jika Username dan atau Password tidak ditemukan|
 |message| Bernilai `Successfully login.` jika `Username` & `Password` benar / ditemukan, dan `Username not found.` jika sebaliknya |
 |nip| `NIP` dari user |
 |kode_jabatan| Kode Jabatan dari user |
