@@ -118,8 +118,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Profil_SKP/?nip=1
   --header "Content-Type: application/x-www-form-urlencoded" \
   --header "Auth-Key: geomedia" \
   --header "Authorization: 9ece4" \	
-  --data "{
-	\"nip\":\"198512052015032001\",
+  
 }"
 ```
 ```json
@@ -144,7 +143,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Profil_SKP/?nip=1
 }
 ```
 
-### 4.  Log Aktifitas
+### 4.  Log Aktifitas Default
 
 #### HTTP Request
 ```json
@@ -154,7 +153,7 @@ PATCH http://localhost/API-MAGANG/api/Log_Aktivitas/?nip=198512052015032001
 
 | Parameters    |               | Description  |
 | ------------- |:-------------:| -------------|
-| nip   | required	  	| `nip` dari pegawai yang ingin di ambil datanya|
+| nip   | required	  	| `nip` dari pegawai yang ingin di ambil datanya |
 
 #### Result
 
@@ -184,8 +183,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Log_Aktivitas/?ni
   --header "Content-Type: application/x-www-form-urlencoded" \
   --header "Auth-Key: geomedia" \
   --header "Authorization: 9ece4" \	
-  --data "{
-	\"nip\":\"198512052015032001\",
+  
 }"
 ```
 ```json
@@ -206,6 +204,198 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Log_Aktivitas/?ni
             "akt_waktu": "30",
             "akt_keterangan": null,
             "id_tkerja": "47687",
+            "akt_status": "1"
+        }
+```
+
+### 5.  Log Aktifitas Before
+
+#### HTTP Request
+```json
+PATCH http://localhost/API-MAGANG/api/Log_Aktivitas/before/?before=2019-02-01&nip=198512052015032001
+```
+#### Parameters
+
+| Parameters    |               | Description  |
+| ------------- |:-------------:| -------------|
+| nip   | required	  	| `nip` dari pegawai yang ingin di ambil datanya|
+| before   | required	  	| `tanggal` sebelum tanggal yang diinginkan |
+
+
+#### Result
+
+| Parameters    |  Description  |
+| ------------- |:--------------|
+|status| `true` Jika `nip` yang bersangkutan benar-benar ada. `false` Jika `nip` tidak ditemukan|
+|message| Bernilai `Success !` jika `nip` benar / ditemukan, dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+|data| Data yang dipanggil |
+|log_id| `id` dari aktivitas |
+|akt_tanggal| `tanggal` kegiatan mulai aktifitas |
+|bk_id| `bk_id` dari pegawai yang diambil datanya |
+|bk_nama_kegiatan| `bk_nama_kegiatan` dari pegawai yang diambil datanya |
+|akt_catatan| `Catatan` dari kegiatan |
+|akt_output| `Output` atau `Hasil` dari kegiatan tersebut |
+|akt_start| `Waktu Mulai` dari kegiatan tersebut |
+|akt_end| `Waktu Salesai` dari kegiatan tersebut |
+|akt_satuan| `Satuan` hasil keluaran akhir dari kegiatan tersebut |
+|akt_waktu| `Durasi` dari mulai kegiatan sampai selesai |
+|akt_keterangan| `Keterangan` tambahan dari kegiatan tersebut |
+|id_tkerja| `id tenaga kerja` dari pegawai yang diambil datanya |
+|akt_status| `Status Penyelesaian` aktivitas tersebut |
+
+
+#### Example
+```json
+curl --location --request GET "http://localhost/API-MAGANG/api/Log_Aktivitas/before/?before=2019-02-01&nip=198512052015032001" \
+  --header "Content-Type: application/x-www-form-urlencoded" \
+  --header "Auth-Key: geomedia" \
+  --header "Authorization: 9ece4" \	
+  
+}"
+```
+```json
+{
+    "status": true,
+    "message": "Success !",
+    "data": [
+        {
+            "log_id": "198512052015032001.190130132052.483",
+            "akt_tanggal": "2019-01-18",
+            "bk_id": "9208",
+            "bk_nama_kegiatan": "Mengolah data",
+            "akt_catatan": "Membuat profil KGB",
+            "akt_output": "2",
+            "akt_start": "09:00:00",
+            "akt_end": "09:30:00",
+            "akt_satuan": "Data",
+            "akt_waktu": "30",
+            "akt_keterangan": null,
+            "id_tkerja": "47687",
+            "akt_status": "1"
+        }
+```
+
+### 5.  Log Aktifitas After
+
+#### HTTP Request
+```json
+PATCH http://localhost/API-MAGANG/api/Log_Aktivitas/after/?after=2019-02-01&nip=198512052015032001
+```
+#### Parameters
+
+| Parameters    |               | Description  |
+| ------------- |:-------------:| -------------|
+| nip   | required	  	| `nip` dari pegawai yang ingin di ambil datanya|
+| after   | required	  	| `tanggal` setelah tanggal yang diinginkan |
+
+
+#### Result
+
+| Parameters    |  Description  |
+| ------------- |:--------------|
+|status| `true` Jika `nip` yang bersangkutan benar-benar ada. `false` Jika `nip` tidak ditemukan|
+|message| Bernilai `Success !` jika `nip` benar / ditemukan, dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+|data| Data yang dipanggil |
+|log_id| `id` dari aktivitas |
+|akt_tanggal| `tanggal` kegiatan mulai aktifitas |
+|bk_id| `bk_id` dari pegawai yang diambil datanya |
+|bk_nama_kegiatan| `bk_nama_kegiatan` dari pegawai yang diambil datanya |
+|akt_catatan| `Catatan` dari kegiatan |
+|akt_output| `Output` atau `Hasil` dari kegiatan tersebut |
+|akt_start| `Waktu Mulai` dari kegiatan tersebut |
+|akt_end| `Waktu Salesai` dari kegiatan tersebut |
+|akt_satuan| `Satuan` hasil keluaran akhir dari kegiatan tersebut |
+|akt_waktu| `Durasi` dari mulai kegiatan sampai selesai |
+|akt_keterangan| `Keterangan` tambahan dari kegiatan tersebut |
+|id_tkerja| `id tenaga kerja` dari pegawai yang diambil datanya |
+|akt_status| `Status Penyelesaian` aktivitas tersebut |
+
+
+#### Example
+```json
+curl --location --request GET "http://localhost/API-MAGANG/api/Log_Aktivitas/after/?after=2019-02-01&nip=198512052015032001" \
+  --header "Content-Type: application/x-www-form-urlencoded" \
+  --header "Auth-Key: geomedia" \
+  --header "Authorization: 9ece4" \	
+  
+}"
+```
+```json
+{
+    "status": true,
+    "message": "Success !",
+    "data": [
+        {
+            "log_id": "198512052015032001.190201131824.617",
+            "akt_tanggal": "2019-02-01",
+            "bk_nama_kegiatan": "Scanning dokumen kepegawaian kedalam media komputer",
+            "akt_output": "22",
+            "akt_start": "09:00:00",
+            "akt_end": "15:15:00",
+            "akt_waktu": "375",
+            "akt_status": "1"
+        }
+```
+
+### 6.  Log Aktifitas Between
+
+#### HTTP Request
+```json
+PATCH http://localhost/API-MAGANG/api/Log_Aktivitas/between/?after=2019-02-01&nip=198512052015032001&before=2019-03-01
+```
+#### Parameters
+
+| Parameters    |               | Description  |
+| ------------- |:-------------:| -------------|
+| nip   | required	  	| `nip` dari pegawai yang ingin di ambil datanya|
+| after   | required	  	| `tanggal` setelah tanggal yang diinginkan |
+| before   | required	  	| `tanggal` sebelum tanggal yang diinginkan |
+
+
+#### Result
+
+| Parameters    |  Description  |
+| ------------- |:--------------|
+|status| `true` Jika `nip` yang bersangkutan benar-benar ada. `false` Jika `nip` tidak ditemukan|
+|message| Bernilai `Success !` jika `nip` benar / ditemukan, dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+|data| Data yang dipanggil |
+|log_id| `id` dari aktivitas |
+|akt_tanggal| `tanggal` kegiatan mulai aktifitas |
+|bk_id| `bk_id` dari pegawai yang diambil datanya |
+|bk_nama_kegiatan| `bk_nama_kegiatan` dari pegawai yang diambil datanya |
+|akt_catatan| `Catatan` dari kegiatan |
+|akt_output| `Output` atau `Hasil` dari kegiatan tersebut |
+|akt_start| `Waktu Mulai` dari kegiatan tersebut |
+|akt_end| `Waktu Salesai` dari kegiatan tersebut |
+|akt_satuan| `Satuan` hasil keluaran akhir dari kegiatan tersebut |
+|akt_waktu| `Durasi` dari mulai kegiatan sampai selesai |
+|akt_keterangan| `Keterangan` tambahan dari kegiatan tersebut |
+|id_tkerja| `id tenaga kerja` dari pegawai yang diambil datanya |
+|akt_status| `Status Penyelesaian` aktivitas tersebut |
+
+
+#### Example
+```json
+curl --location --request GET "http://localhost/API-MAGANG/api/Log_Aktivitas/between/?after=2019-02-01&nip=198512052015032001&before=2019-03-01" \
+  --header "Content-Type: application/x-www-form-urlencoded" \
+  --header "Auth-Key: geomedia" \
+  --header "Authorization: 9ece4" \	
+  
+}"
+```
+```json
+{
+    "status": true,
+    "message": "Success !",
+    "data": [
+        {
+            "log_id": "198512052015032001.190207132839.9906",
+            "akt_tanggal": "2019-02-07",
+            "bk_nama_kegiatan": "Scanning dokumen kepegawaian kedalam media komputer",
+            "akt_output": "9",
+            "akt_start": "13:45:00",
+            "akt_end": "15:15:00",
+            "akt_waktu": "90",
             "akt_status": "1"
         }
 ```
