@@ -275,7 +275,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Log_Aktivitas/bef
         }
 ```
 
-### 5.  Log Aktifitas After
+### 6.  Log Aktifitas After
 
 #### HTTP Request
 ```json
@@ -337,7 +337,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Log_Aktivitas/aft
         }
 ```
 
-### 6.  Log Aktifitas Between
+### 7.  Log Aktifitas Between
 
 #### HTTP Request
 ```json
@@ -398,4 +398,72 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Log_Aktivitas/bet
             "akt_waktu": "90",
             "akt_status": "1"
         }
+```
+
+### 8.  Dashboard Default
+
+#### HTTP Request
+```json
+PATCH http://localhost/API-MAGANG/api/Dashboard/target?nip=198512052015032001
+```
+#### Parameters
+
+| Parameters    |               | Description  |
+| ------------- |:-------------:| -------------|
+| nip   | required	  	| `nip` dari pegawai yang ingin di ambil datanya|
+
+
+#### Result
+
+| Parameters    |  Description  |
+| ------------- |:--------------|
+|status| `true` Jika `nip` yang bersangkutan benar-benar ada. `false` Jika `nip` tidak ditemukan|
+|message| Bernilai `success` jika `nip` benar / ditemukan, dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+|data| Data yang dipanggil |
+|image_profil| `Foto Profil` dari pegawai yang diambil datanya |
+|nama| `Nama` dari pegawai yang diambil datanya |
+|nama_jabatan| `Jabatan Pegawai` dari pegawai yang diambil datanya |
+|nip| `NIP` dari pegawai yang diambil datanya |
+|ttl| `Tempat Tanggal Lahir` dari pegawai yang diambil datanya |
+|notelp| `No telp` dari pegawai yang diambil datanya |
+|email| `Email` dari pegawai yang diambil datanya |
+|alamat| `Alamat` dari pegawai yang diambil datanya |
+|nama_golongan| `Golongan Pegawai` dari pegawai yang diambil datanya |
+|jabatan_penilai| `Jabatan Penilai / Atasan` dari pegawai yang diambil datanya |
+|nama_penilai| `Nama Penilai / Atasan` dari pegawai yang diambil datanya |
+|target| `jumlah target` dari pegawai yang diambil datanya |
+|realisasi| `jumlah realisasi` dari pegawai yang diambil datanya  |
+
+
+#### Example
+```json
+curl --location --request GET "http://localhost/API-MAGANG/api/Dashboard/target?nip=198512052015032001" \
+  --header "Content-Type: application/x-www-form-urlencoded" \
+  --header "Auth-Key: geomedia" \
+  --header "Authorization: 9ece4" \	
+  
+}"
+```
+```json
+{
+    "status": true,
+    "message": "success",
+    "data": [
+        {
+            "image_profil": "pf_198512052015032001_.JPG",
+            "nama": "GREACE CYNTHIA MOBILALA",
+            "nama_jabatan": "PENGOLAH DATA",
+            "nip": "198512052015032001",
+            "ttl": "SORONG, 1985-12-05",
+            "notelp": "",
+            "email": null,
+            "alamat": "RUFEI",
+            "nama_golongan": "II/a",
+            "jabatan_penilai": "KEPALA SUB BIDANG DATA DAN INFORMASI",
+            "nama_penilai": "RONALD YUNUS NOYA, S.SI.",
+            "target": "7",
+            "realisasi": "0"
+        }
+    ]
+}
 ```
