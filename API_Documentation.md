@@ -467,3 +467,222 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Dashboard/target?
     ]
 }
 ```
+
+### 9.  Dashboard Lihat Bawahan
+
+#### HTTP Request
+```json
+PATCH http://localhost/API-MAGANG/api/Dashboard/bawahan/?parent=92.01.305.1.2.3
+```
+#### Parameters
+
+| Parameters    |               | Description  |
+| ------------- |:-------------:| -------------|
+| parent   | required	  	| `parent` adalah kode jabatan atasan masing-masing pegawai |
+
+
+#### Result
+
+| Parameters    |  Description  |
+| ------------- |:--------------|
+|status| `true` Jika `parent` yang bersangkutan benar-benar ada. `false` Jika `parent` tidak ditemukan|
+|message| Bernilai `success` jika `parent` benar / ditemukan, dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+|data| Data yang dipanggil |
+|image_profil| `Foto Profil` dari pegawai yang diambil datanya |
+|nama| `Nama` dari pegawai yang diambil datanya |
+|nip| `NIP` dari pegawai yang diambil datanya |
+|nama_jabatan| `Jabatan Pegawai` dari pegawai yang diambil datanya |
+|parent| `Kode Penilai` dari pegawai yang diambil datanya |
+|nama_penilai| `Nama Penilai / Atasan` dari pegawai yang diambil datanya |
+|target| `jumlah target` dari pegawai yang diambil datanya |
+
+
+
+#### Example
+```json
+curl --location --request GET "http://localhost/API-MAGANG/api/Dashboard/bawahan/?parent=92.01.305.1.2.3" \
+  --header "Content-Type: application/x-www-form-urlencoded" \
+  --header "Auth-Key: geomedia" \
+  --header "Authorization: 9ece4" \	
+  
+}"
+```
+```json
+{
+    "status": true,
+    "message": "success",
+    "data": [
+        {
+            "image_profil": "pf_198512052015032001_.JPG",
+            "nama": "GREACE CYNTHIA MOBILALA",
+            "nip": "198512052015032001",
+            "nama_jabatan": "PENGOLAH DATA",
+            "parent": "92.01.305.1.2.3",
+            "nama_penilai": "RONALD YUNUS NOYA, S.SI.",
+            "target": "7"
+        }
+```
+
+### 10.  Target SKP 
+
+#### HTTP Request
+```json
+PATCH http://localhost/API-MAGANG/api/Target_SKP/?nip=198512052015032001
+```
+#### Parameters
+
+| Parameters    |               | Description  |
+| ------------- |:-------------:| -------------|
+| nip   | required	  	| `nip` dari pegawai yang ingin di ambil datanya|
+
+
+#### Result
+
+| Parameters    |  Description  |
+| ------------- |:--------------|
+|status| `true` Jika `nip` yang bersangkutan benar-benar ada. `false` Jika `nip` tidak ditemukan|
+|message| Bernilai `Success !` jika `nip` benar / ditemukan, dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+|data| Data yang dipanggil |
+|id_tkerja| `Id Tenaga Kerja` dari pegawai yang diambil datanya |
+|nip| `NIP` dari pegawai yang diambil datanya |
+|uraian| `Detail informasi target` dari pegawai yang diambil datanya |
+|output| `Output / hasil` dari target SKP |
+|satuan_output| `Satuan hasil` dari target SKP |
+|mutu| `kualitas` dari pengerjaan target |
+|waktu| `lama` penyelesaian target |
+|satuan_waktu| `satuan waktu` dari penyelesaian target |
+|biaya| `biaya` yang digunakan penyelesaian target|
+|is_aktif| `cek status` konfirmasi dari atasan mengenai target tersebut |
+
+
+#### Example
+```json
+curl --location --request GET "http://localhost/API-MAGANG/api/Target_SKP/?nip=198512052015032001" \
+  --header "Content-Type: application/x-www-form-urlencoded" \
+  --header "Auth-Key: geomedia" \
+  --header "Authorization: 9ece4" \	
+  
+}"
+```
+```json
+{
+    "status": true,
+    "message": "Success !",
+    "data": [
+        {
+            "id_tkerja": "47686",
+            "nip": "198512052015032001",
+            "kode_jabatan": "92.01.305.1.2.3.14.48",
+            "uraian": "Mengelola Data SAPK",
+            "output": "350",
+            "satuan_output": "Data",
+            "mutu": "100",
+            "waktu": "12",
+            "satuan_waktu": "Bulan",
+            "biaya": null,
+            "is_aktif": "1"
+        }
+```
+
+### 11.  Realisasi SKP Tugas Pokok
+
+#### HTTP Request
+```json
+PATCH http://localhost/API-MAGANG/api/Realisasi_SKP/?nip=198602232015032003
+```
+#### Parameters
+
+| Parameters    |               | Description  |
+| ------------- |:-------------:| -------------|
+| nip   | required	  	| `nip` dari pegawai yang ingin di ambil datanya|
+
+
+#### Result
+
+| Parameters    |  Description  |
+| ------------- |:--------------|
+|status| `true` Jika `nip` yang bersangkutan benar-benar ada. `false` Jika `nip` tidak ditemukan|
+|message| Bernilai `Success !` jika `nip` benar / ditemukan, dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+|data| Data yang dipanggil |
+|id_realisasi| `Id Tenaga Kerja` dari pegawai yang diambil datanya |
+|uraian| `Detail informasi Realisasi SKP` dari pegawai yang diambil datanya |
+|r_output| `Output / hasil` dari Realisasi SKP |
+|r_mutu| `kualitas` dari pengerjaan Realisasi |
+|r_waktu| `lama` penyelesaian Realisasi |
+|r_biaya| `biaya` yang digunakan penyelesaian Realisasi|
+|r_perhitungan| `perhitungan` dari atasan mengenai Realisasi tersebut |
+|r_capaian| `nilai capaian` dari atasan mengenai Realisasi tersebut |
+
+
+#### Example
+```json
+curl --location --request GET "http://localhost/API-MAGANG/api/Realisasi_SKP/?nip=198602232015032003" \
+  --header "Content-Type: application/x-www-form-urlencoded" \
+  --header "Auth-Key: geomedia" \
+  --header "Authorization: 9ece4" \	
+  
+}"
+```
+```json
+{
+    "status": true,
+    "message": "Success !",
+    "data": [
+        {
+            "id_realisasi": "200",
+            "uraian": "Mengelola Data Arsip",
+            "r_output": "150",
+            "r_mutu": "100",
+            "r_waktu": "12",
+            "r_biaya": "0",
+            "r_perhitungan": "251",
+            "r_capaian": "83.67"
+        }
+```
+
+### 12.  Realisasi SKP Tugas Pokok Update
+
+#### HTTP Request
+```json
+PATCH http://localhost/API-MAGANG/api/Realisasi_SKP/?id_realisasi=200
+```
+#### Parameters
+
+| Parameters    |               | Description  |
+| ------------- |:-------------:| -------------|
+| nip   | required	  	| `nip` dari pegawai yang ingin di ambil datanya|
+
+
+#### Result
+
+| Parameters    |  Description  |
+| ------------- |:--------------|
+|status| `true` Jika `id_realisasi` yang bersangkutan benar-benar ada. `false` Jika `id_realisasi` tidak ditemukan|
+|message| Bernilai `Success !` jika `id_realisasi` benar & data berhasil diubah dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+
+#### Example
+```json
+curl --location --request PUT "http://localhost/API-MAGANG/api/Realisasi_SKP/?id_realisasi=200" \
+  --header "Content-Type: application/x-www-form-urlencoded" \
+  --header "Auth-Key: geomedia" \
+  --header "Authorization: 9ece4" \
+  --data "{
+	\"id_realisasi\":\"200\",
+	\"r_output\":\"150\"
+	\"r_mutu\":\"100\"
+	\"r_waktu\":\"12\"
+	\"r_perhitungan\":\"251\"
+	\"r_capaian\":\"83.67\"
+}"
+  
+}"
+```
+```json
+{
+    "status": true,
+    "message": "Success !"
+}
+```
+
+
+
