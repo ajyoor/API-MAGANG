@@ -657,7 +657,7 @@ PATCH http://localhost/API-MAGANG/api/Realisasi_SKP/
 
 | Parameters    |               | Description  |
 | ------------- |:-------------:| -------------|
-| nip   | required	  	| `nip` dari pegawai yang ingin di ambil datanya|
+| id_realisasi   | required	  	| `id_realisasi` dari pegawai yang ingin di ambil datanya|
 
 
 #### Result
@@ -709,7 +709,7 @@ PATCH http://localhost/API-MAGANG/api/Kreatifitas_SKP/?id_skp=1197
 | Parameters    |  Description  |
 | ------------- |:--------------|
 |status| `true` Jika `id_skp` yang bersangkutan benar-benar ada. `false` Jika `id_skp` tidak ditemukan|
-|message| Bernilai `Success !` jika `nip` benar / ditemukan, dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+|message| Bernilai `Success !` jika `id_skp` benar / ditemukan, dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
 |data| Data yang dipanggil |
 |id_skp| `id_skp` dari pegawai yang diambil datanya |
 |idkreatifitas| `idkreatifitas` dari pegawai yang diambil datanya |
@@ -759,7 +759,7 @@ PATCH http://localhost/API-MAGANG/api/Kreatifitas_SKP/
 | Parameters    |  Description  |
 | ------------- |:--------------|
 |status| `true` Jika `idkreatifitas` yang bersangkutan benar-benar ada. `false` Jika `idkreatifitas` tidak ditemukan|
-|message| Bernilai `Success !` jika `id_realisasi` benar & data berhasil diubah dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+|message| Bernilai `Success !` jika `idkreatifitas` benar & data berhasil diubah dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
 
 #### Example
 ```json
@@ -775,6 +775,124 @@ curl --location --request PUT "http://localhost/API-MAGANG/api/Kreatifitas_SKP/"
 	\"dok_kreatifitas\":\"bersih.jpeg\"
 }"
   
+```
+```json
+{
+    "status": true,
+    "message": "Success !"
+}
+```
+
+### 15.  Tambah Realisasi SKP Kreatifitas
+
+#### HTTP Request
+```json
+PATCH http://localhost/API-MAGANG/api/Kreatifitas_SKP/
+```
+
+#### Result
+
+| Parameters    |  Description  |
+| ------------- |:--------------|
+|status| `true` Jika `idkreatifitas` yang bersangkutan belum ada. `false` Jika `idkreatifitas` sudah terdaftar|
+|message| Bernilai `Success !` jika `idkreatifitas` benar & data berhasil diubah dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+
+#### Example
+```json
+curl --location --request POST "http://localhost/API-MAGANG/api/Kreatifitas_SKP/" \
+  --header "Content-Type: application/x-www-form-urlencoded" \
+  --header "Auth-Key: geomedia" \
+  --header "Authorization: 9ece4" \
+  --data "{
+	\"idkreatifitas\":\"6\",
+	\"id_skp\":\"1197\"
+	\"uraiankreatifitas\":\"Mencuci Mobil Kepala\"
+	\"tgl_kreatifitas\":\"\"
+	\"dok_kreatifitas\":\"cucimobil.jpg\"
+}"
+
+```
+```json
+{
+    "status": true,
+    "message": "Success !"
+}
+```
+
+### 16.  GET Realisasi Tugas Tambahan SKP
+
+#### HTTP Request
+```json
+PATCH http://localhost/API-MAGANG/api/Tugas_Tambahan_SKP/?id_skp=2999
+```
+#### Parameters
+
+| Parameters    |               | Description  |
+| ------------- |:-------------:| -------------|
+| id_skp   | required	  	| `id_skp` dari pegawai yang ingin di ambil datanya|
+
+
+#### Result
+
+| Parameters    |  Description  |
+| ------------- |:--------------|
+|status| `true` Jika `id_skp` yang bersangkutan benar-benar ada. `false` Jika `id_skp` tidak ditemukan|
+|message| Bernilai `Success !` jika `id_skp` benar / ditemukan, dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+|data| Data yang dipanggil |
+|id_skp| `id_skp` dari pegawai yang diambil datanya |
+|id_uraian_tambahan| `idkreatifitas` dari pegawai yang diambil datanya |
+|uraian_tambahan| detail tentang kegiatan |
+|tgl_uraiantambahan|  tanggal dimulainya kegiatan |
+
+#### Example
+```json
+curl --location --request GET "http://localhost/API-MAGANG/api/Tugas_Tambahan_SKP/?id_skp=2999" \
+  --header "Content-Type: application/x-www-form-urlencoded" \
+  --header "Auth-Key: geomedia" \
+  --header "Authorization: 9ece4" \	
+  
+}"
+```
+```json
+{
+    "status": true,
+    "message": "Success !",
+    "data": [
+        {
+            "id_skp": "2999",
+            "id_uraian_tambahan": "2000",
+            "uraian_tambahan": "Penyuluhan kepada Warga",
+            "tgl_uraiantambahan": "2019-08-13"
+        }
+    ]
+}
+```
+
+### 17.  Realisasi Tugas Tambahan SKP Update
+
+#### HTTP Request
+```json
+PATCH http://localhost/API-MAGANG/api/Tugas_Tambahan_SKP/
+```
+
+#### Result
+
+| Parameters    |  Description  |
+| ------------- |:--------------|
+|status| `true` Jika `id_uraian_tambahan` yang bersangkutan benar-benar ada. `false` Jika `id_uraian_tambahan` tidak ditemukan|
+|message| Bernilai `Success !` jika `id_uraian_tambahan` benar & data berhasil diubah dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+
+#### Example
+```json
+curl --location --request PUT "http://localhost/API-MAGANG/api/Tugas_Tambahan_SKP/" \
+  --header "Content-Type: application/x-www-form-urlencoded" \
+  --header "Auth-Key: geomedia" \
+  --header "Authorization: 9ece4" \
+  --data "{
+	\"id_uraian_tambahan\":\"2000\",
+	\"id_skp\":\"2999\"
+	\"uraian_tambahan\":\"Membersihkan kantor\"
+	\"tgl_uraiantambahan\":\"\"
 }"
 ```
 ```json
@@ -783,3 +901,40 @@ curl --location --request PUT "http://localhost/API-MAGANG/api/Kreatifitas_SKP/"
     "message": "Success !"
 }
 ```
+
+### 18.  Tambah Realisasi Tugas Tambahan SKP
+
+#### HTTP Request
+```json
+PATCH http://localhost/API-MAGANG/api/Tugas_Tambahan_SKP/
+```
+
+#### Result
+
+| Parameters    |  Description  |
+| ------------- |:--------------|
+|status| `true` Jika `idkreatifitas` yang bersangkutan belum ada. `false` Jika `idkreatifitas` sudah terdaftar|
+|message| Bernilai `Success !` jika `idkreatifitas` benar & data berhasil diubah dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+
+#### Example
+```json
+curl --location --request POST "http://localhost/API-MAGANG/api/Tugas_Tambahan_SKP/" \
+  --header "Content-Type: application/x-www-form-urlencoded" \
+  --header "Auth-Key: geomedia" \
+  --header "Authorization: 9ece4" \
+  --data "{
+	\"id_uraian_tambahan\":\"32\",
+	\"id_skp\":\"2999\"
+	\"uraian_tambahan\":\"Menyapu Halaman\"
+	\"tgl_uraiantambahan\":\"\"
+}"
+  
+```
+```json
+{
+    "status": true,
+    "message": "Success !"
+}
+```
+
+
