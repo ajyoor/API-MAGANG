@@ -35,7 +35,7 @@ class Pen_Aktivitas extends CI_Controller{
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
-        if($response['status'] == 200 && $id_skp != null){
+        if($response['status'] == 200 && $nip != null&& $month != null && $year != null){
             $pskp = $this->pskp->getAktivitas($nip,$year,$month);
             json_encode($response['status'],$pskp);
         } else {

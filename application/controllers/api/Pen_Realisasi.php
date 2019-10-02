@@ -32,7 +32,7 @@ class Pen_Realisasi extends CI_Controller{
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
-        if($response['status'] == 200 && $nip != null){
+        if($response['status'] == 200 && $nip != null && $year != null){
             $pskp = $this->pskp->getPokok($nip,$year);
             json_encode($response['status'],$pskp);
         } else {
@@ -81,7 +81,7 @@ class Pen_Realisasi extends CI_Controller{
             $this->response([
                 'status'  => true,
                 'message' => 'Success !'
-            ], 400);
+            ], 200);
         } else {
             $this->response([
                 'status'    => false,
@@ -179,7 +179,8 @@ class Pen_Realisasi extends CI_Controller{
                     $data = [
                         'id_uraian_tambahan' => $this->put('id_uraian_tambahan'),
                         'id_skp'             => $this->put('id_skp'),
-                        'uraian_tambahan'    => $this->put('uraian_tambahan')
+                        'uraian_tambahan'    => $this->put('uraian_tambahan'),
+                        'tgl_uraiantambahan' => date('Y-m-d')
                     ];
 
         if ($this->pskp->updateTambahan($data, $id_uraian_tambahan) > 0) {

@@ -39,7 +39,7 @@ class Penilaian_SKP_model extends CI_Model
     //-----------------------------------------------------------------------------------------//
     public function getAktivitas($nip,$year,$month)
     {
-        if( $nip != null)   {
+        if( $nip != null && $month != null && $year != null)   {
             $this->db->select('log_id,akt_tanggal,bk_nama_kegiatan,akt_output,akt_start,akt_end,akt_waktu,akt_status');
             $this->db->from('log_aktivitas');
             $this->db->join('skp_pns', 'skp_pns.nip = log_aktivitas.nip ');

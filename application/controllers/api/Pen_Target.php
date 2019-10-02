@@ -32,7 +32,7 @@ class Pen_Target extends CI_Controller{
             $check_auth_client = $this->mm->check_auth_client();
 			if($check_auth_client == true){
 		        $response = $this->mm->auth();
-        if($response['status'] == 200 && $nip != null){
+        if($response['status'] == 200 && $nip != null && $year != null){
             $pskp = $this->pskp->getTarget($nip,$year);
             json_encode($response['status'],$pskp);
         } else {
