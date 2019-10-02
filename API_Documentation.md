@@ -81,7 +81,8 @@ curl --location --request POST "http://localhost/API-MAGANG/api/auth/logout" \
 }
 ```
 
-### 3.  Profil SKP
+### 3.  GET Profil SKP
+	Untuk mengambil nilai Profil berdasarkan nip.
 
 #### HTTP Request
 ```json
@@ -143,7 +144,8 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Profil_SKP/?nip=1
 }
 ```
 
-### 4.  Log Aktifitas Default
+### 4.  GET Log Aktifitas Default
+	Log Aktifitas tanpa ada parameter sebelum, sesudah atau diantara.
 
 #### HTTP Request
 ```json
@@ -209,6 +211,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Log_Aktivitas/?ni
 ```
 
 ### 5.  Log Aktifitas Before
+	Log Aktifitas dengan parameter sebelum.
 
 #### HTTP Request
 ```json
@@ -276,6 +279,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Log_Aktivitas/bef
 ```
 
 ### 6.  Log Aktifitas After
+	Log Aktifitas dengan parameter setelah.
 
 #### HTTP Request
 ```json
@@ -338,6 +342,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Log_Aktivitas/aft
 ```
 
 ### 7.  Log Aktifitas Between
+	Log Aktifitas dengan parameter diantara.
 
 #### HTTP Request
 ```json
@@ -401,6 +406,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Log_Aktivitas/bet
 ```
 
 ### 8.  Dashboard Default
+	Dashboard untuk menampilkan Profil pribadi pelaku login.
 
 #### HTTP Request
 ```json
@@ -469,6 +475,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Dashboard/target?
 ```
 
 ### 9.  Dashboard Lihat Bawahan
+	Fungsi lihat bawahan yang ada di dashboard.
 
 #### HTTP Request
 ```json
@@ -523,8 +530,8 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Dashboard/bawahan
         }
 ```
 
-### 10.  Target SKP 
-
+### 10.  GET Target SKP
+	 
 #### HTTP Request
 ```json
 PATCH http://localhost/API-MAGANG/api/Target_SKP/?nip=198512052015032001
@@ -584,7 +591,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Target_SKP/?nip=1
         }
 ```
 
-### 11.  Realisasi SKP Tugas Pokok
+### 11.  GET Realisasi SKP Tugas Pokok
 
 #### HTTP Request
 ```json
@@ -644,7 +651,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Realisasi_SKP/?ni
 
 #### HTTP Request
 ```json
-PATCH http://localhost/API-MAGANG/api/Realisasi_SKP/?id_realisasi=200
+PATCH http://localhost/API-MAGANG/api/Realisasi_SKP/
 ```
 #### Parameters
 
@@ -662,7 +669,7 @@ PATCH http://localhost/API-MAGANG/api/Realisasi_SKP/?id_realisasi=200
 
 #### Example
 ```json
-curl --location --request PUT "http://localhost/API-MAGANG/api/Realisasi_SKP/?id_realisasi=200" \
+curl --location --request PUT "http://localhost/API-MAGANG/api/Realisasi_SKP/" \
   --header "Content-Type: application/x-www-form-urlencoded" \
   --header "Auth-Key: geomedia" \
   --header "Authorization: 9ece4" \
@@ -684,5 +691,95 @@ curl --location --request PUT "http://localhost/API-MAGANG/api/Realisasi_SKP/?id
 }
 ```
 
+### 13.  GET Realisasi SKP Kreatifitas
+
+#### HTTP Request
+```json
+PATCH http://localhost/API-MAGANG/api/Kreatifitas_SKP/?id_skp=1197
+```
+#### Parameters
+
+| Parameters    |               | Description  |
+| ------------- |:-------------:| -------------|
+| id_skp   | required	  	| `id_skp` dari pegawai yang ingin di ambil datanya|
 
 
+#### Result
+
+| Parameters    |  Description  |
+| ------------- |:--------------|
+|status| `true` Jika `id_skp` yang bersangkutan benar-benar ada. `false` Jika `id_skp` tidak ditemukan|
+|message| Bernilai `Success !` jika `nip` benar / ditemukan, dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+|data| Data yang dipanggil |
+|id_skp| `id_skp` dari pegawai yang diambil datanya |
+|idkreatifitas| `idkreatifitas` dari pegawai yang diambil datanya |
+|uraiankreatifitas| detail tentang kegiatan |
+|tgl_kreatifitas|  tanggal dimulainya kegiatan |
+|dok_kreatifitas| informasi tambahan berbentuk dokumen |
+
+
+#### Example
+```json
+curl --location --request GET "http://localhost/API-MAGANG/api/Kreatifitas_SKP/?id_skp=1197" \
+  --header "Content-Type: application/x-www-form-urlencoded" \
+  --header "Auth-Key: geomedia" \
+  --header "Authorization: 9ece4" \	
+  
+}"
+```
+```json
+{
+    "status": true,
+    "message": "Success !",
+    "data": [
+        {
+            "id_skp": "1197",
+            "idkreatifitas": "4",
+            "uraiankreatifitas": "Membuat SIMPEGDA",
+            "tgl_kreatifitas": "2018-11-25",
+            "dok_kreatifitas": null
+        }
+```
+
+### 14.  Realisasi SKP Kreatifitas Update
+
+#### HTTP Request
+```json
+PATCH http://localhost/API-MAGANG/api/Kreatifitas_SKP/
+```
+#### Parameters
+
+| Parameters    |               | Description  |
+| ------------- |:-------------:| -------------|
+| idkreatifitas   | required	  	| `idkreatifitas` dari pegawai yang ingin di ambil datanya|
+
+
+#### Result
+
+| Parameters    |  Description  |
+| ------------- |:--------------|
+|status| `true` Jika `idkreatifitas` yang bersangkutan benar-benar ada. `false` Jika `idkreatifitas` tidak ditemukan|
+|message| Bernilai `Success !` jika `id_realisasi` benar & data berhasil diubah dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+
+#### Example
+```json
+curl --location --request PUT "http://localhost/API-MAGANG/api/Kreatifitas_SKP/" \
+  --header "Content-Type: application/x-www-form-urlencoded" \
+  --header "Auth-Key: geomedia" \
+  --header "Authorization: 9ece4" \
+  --data "{
+	\"idkreatifitas\":\"5\",
+	\"id_skp\":\"1197\"
+	\"uraiankreatifitas\":\"Membersihkan kantor\"
+	\"tgl_kreatifitas\":\"\"
+	\"dok_kreatifitas\":\"bersih.jpeg\"
+}"
+  
+}"
+```
+```json
+{
+    "status": true,
+    "message": "Success !"
+}
+```
