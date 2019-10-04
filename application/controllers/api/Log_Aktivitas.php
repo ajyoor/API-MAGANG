@@ -257,11 +257,14 @@ class Log_Aktivitas extends CI_Controller{
                     $data = [
                         'log_id'        => $this->post('log_id'),
                         'akt_tanggal'   => $this->post('akt_tanggal'),
+                        'nip'           => $this->post('nip'),
+                        'id_tkerja'     => $this->post('id_tkerja'),
                         'akt_idkegiatan'=> $this->post('akt_idkegiatan'),
                         'akt_catatan'   => $this->post('akt_catatan'),
                         'akt_output'    => $this->post('akt_output'),
                         'akt_start'     => $this->post('akt_start'),
-                        'akt_end'       => $this->post('akt_end')
+                        'akt_end'       => $this->post('akt_end'),
+                        'akt_kodeja'    => $this->post('akt_kodeja'),
                     ];
         if ($this->akt->createAktivitas($data) > 0) {
             $this->response([

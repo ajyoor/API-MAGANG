@@ -33,7 +33,7 @@ class Log_Aktivitas_model extends CI_Model
             $this->db->join('skp_pns', 'skp_pns.nip = log_aktivitas.nip ');
             $this->db->join('log_masteraktivitas', ' log_masteraktivitas.bk_id= log_aktivitas.akt_idkegiatan');
             $this->db->where('log_aktivitas.nip',$nip);    
-            $this->db->where("bk_nama_kegiatan like '%$masukan%'");
+            $this->db->where("bk_nama_kegiatan ILIKE '%$masukan%' ");
             return $this->db->get()->result_array();
         }
     }

@@ -405,7 +405,48 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Log_Aktivitas/bet
         }
 ```
 
-### 8.  Dashboard Default
+### 8.  Tambah Log Aktifitas
+
+#### HTTP Request
+```json
+PATCH http://localhost/API-MAGANG/api/Log_Aktivitas/
+```
+
+#### Result
+
+| Parameters    |  Description  |
+| ------------- |:--------------|
+|status| `true` Jika `log_id` yang bersangkutan belum ada. `false` Jika `log_id` sudah terdaftar|
+|message| Bernilai `Success !` jika `log_id` benar & data berhasil ditambah dan `Maaf, Data baru gagal dibuat !` jika sebaliknya |
+
+#### Example
+```json
+curl --location --request POST "http://localhost/API-MAGANG/api/Log_Aktivitas/" \
+  --header "Content-Type: application/x-www-form-urlencoded" \
+  --header "Auth-Key: geomedia" \
+  --header "Authorization: 9ece4" \
+  --data "{
+	\"log_id\":\"1\",
+	\"akt_tanggal\":\"2019-10-05\"
+	\"akt_idkegiatan\":\"9208\"
+	\"akt_catatan\":\"Membuat profil Media Sosial\"
+	\"akt_output\":\"2\"
+  \"akt_start\":\"09:00:00\"
+  \"akt_end\":\"14:00:00\"
+	\"nip\":\"198512052015032001\"
+	\"id_tkerja\":\"47687\"
+  \"akt_kodeja\":\"92.01.305.1.2.3.14.48\"  
+}"
+
+```
+```json
+{
+    "status": true,
+    "message": "Success !"
+}
+```
+
+### 9.  Dashboard Default
 	Dashboard untuk menampilkan Profil pribadi pelaku login.
 
 #### HTTP Request
@@ -474,7 +515,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Dashboard/target?
 }
 ```
 
-### 9.  Dashboard Lihat Bawahan
+### 10.  Dashboard Lihat Bawahan
 	Fungsi lihat bawahan yang ada di dashboard.
 
 #### HTTP Request
@@ -530,7 +571,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Dashboard/bawahan
         }
 ```
 
-### 10.  GET Target SKP
+### 11.  GET Target SKP
 	 
 #### HTTP Request
 ```json
@@ -591,7 +632,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Target_SKP/?nip=1
         }
 ```
 
-### 11.  GET Realisasi SKP Tugas Pokok
+### 12.  GET Realisasi SKP Tugas Pokok
 
 #### HTTP Request
 ```json
@@ -647,7 +688,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Realisasi_SKP/?ni
         }
 ```
 
-### 12.  Realisasi SKP Tugas Pokok Update
+### 13.  Realisasi SKP Tugas Pokok Update
 
 #### HTTP Request
 ```json
@@ -691,7 +732,7 @@ curl --location --request PUT "http://localhost/API-MAGANG/api/Realisasi_SKP/" \
 }
 ```
 
-### 13.  GET Realisasi SKP Kreatifitas
+### 14.  GET Realisasi SKP Kreatifitas
 
 #### HTTP Request
 ```json
@@ -741,7 +782,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Kreatifitas_SKP/?
         }
 ```
 
-### 14.  Realisasi SKP Kreatifitas Update
+### 15.  Realisasi SKP Kreatifitas Update
 
 #### HTTP Request
 ```json
@@ -783,7 +824,7 @@ curl --location --request PUT "http://localhost/API-MAGANG/api/Kreatifitas_SKP/"
 }
 ```
 
-### 15.  Tambah Realisasi SKP Kreatifitas
+### 16.  Tambah Realisasi SKP Kreatifitas
 
 #### HTTP Request
 ```json
@@ -819,7 +860,7 @@ curl --location --request POST "http://localhost/API-MAGANG/api/Kreatifitas_SKP/
 }
 ```
 
-### 16.  GET Realisasi Tugas Tambahan SKP
+### 17.  GET Realisasi Tugas Tambahan SKP
 
 #### HTTP Request
 ```json
@@ -868,7 +909,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Tugas_Tambahan_SK
 }
 ```
 
-### 17.  Realisasi Tugas Tambahan SKP Update
+### 18.  Realisasi Tugas Tambahan SKP Update
 
 #### HTTP Request
 ```json
@@ -902,7 +943,7 @@ curl --location --request PUT "http://localhost/API-MAGANG/api/Tugas_Tambahan_SK
 }
 ```
 
-### 18.  Tambah Realisasi Tugas Tambahan SKP
+### 19.  Tambah Realisasi Tugas Tambahan SKP
 
 #### HTTP Request
 ```json
