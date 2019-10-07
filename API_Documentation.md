@@ -2,20 +2,20 @@
 
 ### Daftar Isi
 
-   [Login SKP](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#1--login-skp/ "Dokumentasi Login")
-   ### 2.  Logout SKP
-   ### 3.  GET Profil SKP
-   ### 4.  GET Log Aktifitas Default
-   ### 5.  Log Aktifitas Before
-   ### 6.  Log Aktifitas After
-   ### 7.  Log Aktifitas Between
-   ### 8.  Tambah Log Aktifitas
-   ### 9.  Log Aktifitas Search
-   ### 10.  Log Aktivitas Update
-   ### 11.  Log Aktivitas Delete
-   ### 12.  Dashboard Default
-   ### 13.  Dashboard Lihat Bawahan
-   ### 14.  GET Target SKP
+   POST [Login SKP](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#1--login-skp "Dokumentasi Login")
+   POST [Logout SKP](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#2--logout-skp "Dokumentasi Logout")
+   GET [Profil SKP](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#3--get-profil-skp "Dokumentasi Profil SKP")
+   GET [Log Aktifitas Default](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#4--get-log-aktifitas-default "Dokumentasi Log Aktivitas")
+   GET [Log Aktifitas Before](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#5--log-aktifitas-before "Dokumentasi Log Aktivitas")
+   GET [Log Aktifitas After](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#6--log-aktifitas-after "Dokumentasi Log Aktivitas")
+   GET [Log Aktifitas Between](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#7--log-aktifitas-between "Dokumentasi Log Aktivitas")
+   POST [Tambah Log Aktifitas](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#8--tambah-log-aktifitas "Dokumentasi Log Aktivitas")
+   GET [Log Aktifitas Search](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#9--log-aktifitas-search "Dokumentasi Log Aktivitas")
+   PUT [Log Aktivitas Update](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#10--log-aktivitas-update "Dokumentasi Log Aktivitas")
+   DELETE [Log Aktivitas Delete](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#11--log-aktivitas-delete "Dokumentasi Log Aktivitas")
+   GET [Dashboard Default](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#12--dashboard-default "Dokumentasi Dashboard")
+   GET [Dashboard Lihat Bawahan](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#13--dashboard-lihat-bawahan "Dokumentasi Dokumentasi Dashboard")
+   GET [Target SKP](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#14--get-target-skp "Dokumentasi Target SKP")
    ### 15.  Tambah Target SKP
    ### 16.  Target SKP Update
    ### 17.  Target SKP Delete
