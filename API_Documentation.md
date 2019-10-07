@@ -2,7 +2,7 @@
 
 ### Daftar Isi
 
-   ### 1.  Login SKP
+   (https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#1--login-skp-1)[### 1.  Login SKP]
    ### 2.  Logout SKP
    ### 3.  GET Profil SKP
    ### 4.  GET Log Aktifitas Default
