@@ -59,7 +59,8 @@ class Kreatifitas_SKP extends CI_Controller{
                                       //DELETE by idkreatifitas//
     //-----------------------------------------------------------------------------------------//
     public function index_delete() {
-
+        $idkreatifitas = $this->delete('idkreatifitas');
+        
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'DELETE'){
 			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
@@ -71,7 +72,7 @@ class Kreatifitas_SKP extends CI_Controller{
             $rskp = $this->rskp->deleteKreatifitasSKP($idkreatifitas);
             json_encode($response['status'],$rskp);
         }
-        if( $this->rskp->deleteKreatifitasSKP($idkreatifitas) > 0){
+        if($rskp){
                 //ok
                 $this->response([
                     'status'             => true,
