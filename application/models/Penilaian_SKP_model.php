@@ -101,7 +101,7 @@ class Penilaian_SKP_model extends CI_Model
             $this->db->join('skp_t_kerja', 'skp_t_kerja.id_skp = skp_dataskp.id_skp');
             $this->db->where("EXTRACT(YEAR FROM skp_dataskp.tgl_create) = ". $year);
             $this->db->where('skp_dataskp.nip',$nip);
-            $this->db->where("uraian like '%$masukan%'");
+            $this->db->where("uraian ilike '%$masukan%'");
             return $this->db->get()->result_array();
         }
     }

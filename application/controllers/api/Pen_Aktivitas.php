@@ -106,7 +106,7 @@ class Pen_Aktivitas extends CI_Controller{
             $pskp = $this->pskp->deleteAktivitas($log_id);
             json_encode($response['status'],$pskp);
         }
-        if( $this->pskp->deleteAktivitas($log_id) > 0){
+        if($pskp){
                 //ok
                 $this->response([
                     'status'  => true,

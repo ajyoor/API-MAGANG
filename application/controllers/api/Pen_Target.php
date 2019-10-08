@@ -267,7 +267,7 @@ class Pen_Target extends CI_Controller{
         json_encode($response['status'],$pskp);
         }
        
-        if( $this->pskp->deleteTarget($id_tkerja) > 0){
+        if( $pskp){
                 //ok
                 $this->response([
                     'status'    => true,

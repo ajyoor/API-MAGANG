@@ -131,6 +131,7 @@ class Pen_Realisasi extends CI_Controller{
                                         //Method DELETE//
     //-----------------------------------------------------------------------------------------//
     public function tambahan_delete() {
+    $id_uraian_tambahan = $this->delete('id_uraian_tambahan');
 
     $method = $_SERVER['REQUEST_METHOD'];
     if($method != 'DELETE'){
@@ -144,7 +145,7 @@ class Pen_Realisasi extends CI_Controller{
         json_encode($response['status'],$pskp);
     }
 
-    if( $this->pskp->deleteTambahan($id_uraian_tambahan) > 0){
+    if( $pskp){
             //ok
             $this->response([
                 'status'             => true,
@@ -238,7 +239,8 @@ class Pen_Realisasi extends CI_Controller{
                                         //Method DELETE//
     //-----------------------------------------------------------------------------------------//
     public function kreatifitas_delete() {
-        
+        $idkreatifitas = $this->delete('idkreatifitas');
+
         $method = $_SERVER['REQUEST_METHOD'];
         if($method != 'DELETE'){
 			json_encode(400,array('status' => 400,'message' => 'Bad request.'));
@@ -251,7 +253,7 @@ class Pen_Realisasi extends CI_Controller{
             json_encode($response['status'],$pskp);
         }
          
-        if( $this->pskp->deleteKreatifitas($idkreatifitas) > 0){
+        if( $pskp){
                 //ok
                 $this->response([
                     'status'             => true,
