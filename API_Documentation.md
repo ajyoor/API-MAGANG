@@ -1971,7 +1971,7 @@ curl --location --request DELETE "http://localhost/API-MAGANG/api/Pen_Realisasi/
 
 #### HTTP Request
 ```json
-PATCH http://localhost/API-MAGANG/api/Pen_Aktivitas/?nip=198512052015032001&year=2019&month=7
+PATCH http://localhost/API-MAGANG/api/Pen_Aktivitas/search?nip=198512052015032001&year=2019&month=7&masukan=membuat
 ```
 #### Parameters
 
@@ -1980,6 +1980,8 @@ PATCH http://localhost/API-MAGANG/api/Pen_Aktivitas/?nip=198512052015032001&year
 | nip   | required	  	| `nip` dari pegawai yang ingin di ambil datanya|
 | year   | required	  	| tahun yang ingin di ambil datanya|
 | month   | required	  	| bulan yang ingin di ambil datanya|
+| masukan   | required	  	| masukan yang ingin di ambil datanya|
+
 
 #### Result
 
@@ -1999,7 +2001,7 @@ PATCH http://localhost/API-MAGANG/api/Pen_Aktivitas/?nip=198512052015032001&year
 
 #### Example
 ```json
-curl --location --request GET "http://localhost/API-MAGANG/api/Pen_Aktivitas/?nip=198512052015032001&year=2019&month=7" \
+curl --location --request GET "http://localhost/API-MAGANG/api/Pen_Aktivitas/search?nip=198512052015032001&year=2019&month=7&masukan=membuat" \
   --header "Content-Type: application/x-www-form-urlencoded" \
   --header "Auth-Key: geomedia" \
   --header "Authorization: 9ece4" \	
@@ -2086,7 +2088,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Pen_Target/search
 }
 ```
 
-<!-- ### 43.  Penilaian Realisasi SKP (Kreatifitas) Update
+<!-- ### 43.  Penilaian Aktivitas SKP Update
 
 #### HTTP Request
 ```json

@@ -57,6 +57,8 @@ class Pen_Aktivitas extends CI_Controller{
             }
         }
     }
+
+    
     public function search_get() {
         $nip     = $this->get('nip');
         $masukan = $this->get('masukan');

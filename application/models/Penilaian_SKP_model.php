@@ -63,7 +63,7 @@ class Penilaian_SKP_model extends CI_Model
             $this->db->where("EXTRACT(YEAR FROM log_aktivitas.akt_tanggal) = ". $year);
             $this->db->where("EXTRACT(MONTH FROM log_aktivitas.akt_tanggal) = ". $month);
             $this->db->where('log_aktivitas.nip',$nip); 
-            $this->db->where("bk_nama_kegiatan like '%$masukan%'");
+            $this->db->where("bk_nama_kegiatan ILIKE '%$masukan%'");
             return $this->db->get()->result_array();
         }
     }
