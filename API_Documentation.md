@@ -2004,9 +2004,7 @@ PATCH http://localhost/API-MAGANG/api/Pen_Aktivitas/search?nip=19851205201503200
 curl --location --request GET "http://localhost/API-MAGANG/api/Pen_Aktivitas/search?nip=198512052015032001&year=2019&month=7&masukan=membuat" \
   --header "Content-Type: application/x-www-form-urlencoded" \
   --header "Auth-Key: geomedia" \
-  --header "Authorization: 9ece4" \	
-  
-}"
+  --header "Authorization: 9ece4" \
 ```
 ```json
 {
@@ -2064,8 +2062,7 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Pen_Target/search
   --header "Content-Type: application/x-www-form-urlencoded" \
   --header "Auth-Key: geomedia" \
   --header "Authorization: 9ece4" \	
-  
-}"
+
 ```
 ```json
 {
@@ -2088,39 +2085,36 @@ curl --location --request GET "http://localhost/API-MAGANG/api/Pen_Target/search
 }
 ```
 
-<!-- ### 43.  Penilaian Aktivitas SKP Update
+### 43.  Penilaian Aktivitas SKP Update
 
 #### HTTP Request
 ```json
-PATCH http://localhost/API-MAGANG/api/Pen_Realisasi/kreatifitas/?id_skp=294
+PATCH http://localhost/API-MAGANG/api/Pen_Aktivitas/
 ```
 #### Parameters
 
 | Parameters    |               | Description  |
 | ------------- |:-------------:| -------------|
-| idkreatifitas   | required	  	| `idkreatifitas` dari pegawai yang ingin di ambil datanya|
+| log_id   | required	  	| `log_id` dari pegawai yang ingin di ambil datanya|
 
 
 #### Result
 
 | Parameters    |  Description  |
 | ------------- |:--------------|
-|status| `true` Jika `idkreatifitas` yang bersangkutan benar-benar ada. `false` Jika `idkreatifitas` tidak ditemukan|
-|message| Bernilai `Success !` jika `idkreatifitas` benar & data berhasil diubah dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+|status| `true` Jika `log_id` yang bersangkutan benar-benar ada. `false` Jika `log_id` tidak ditemukan|
+|message| Bernilai `Success !` jika `log_id` benar & data berhasil diubah dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
 
 #### Example
 ```json
-curl --location --request PUT "http://localhost/API-MAGANG/api/Pen_Realisasi/kreatifitas/?id_skp=294" \
+curl --location --request PUT "http://localhost/API-MAGANG/api/Pen_Aktivitas/" \
   --header "Content-Type: application/x-www-form-urlencoded" \
   --header "Auth-Key: geomedia" \
   --header "Authorization: 9ece4" \
   --data "{
-	\"id_skp\":\"294\",
-	\"idkreatifitas\":\"1\",
-	\"uraiankreatifitas\":\"Membuat Aplikasi G-Kinerja\",
-	\"nilai\":\"\",
-	\"tgl_kreatifitas\":\"\",
-	\"dok_kreatifitas\":\"\"
+	\"log_id\":\"198512052015032001.190701122925.0327\",
+	\"akt_status\":\"0\",
+	\"akt_tgl_confirm\":\"\"
 }"
   
 ```
@@ -2131,26 +2125,26 @@ curl --location --request PUT "http://localhost/API-MAGANG/api/Pen_Realisasi/kre
 }
 ```
 
-### 44.  Penilaian Realisasi SKP (Kreatifitas) Delete
+### 44.  Penilaian Aktivitas SKP Delete
 
 #### HTTP Request
 ```json
-PATCH http://localhost/API-MAGANG/api/Pen_Realisasi/kreatifitas/
+PATCH http://localhost/API-MAGANG/api/Pen_Aktivitas/
 ```
 #### Parameters
 
 | Parameters    |               | Description  |
 | ------------- |:-------------:| -------------|
-| idkreatifitas   | required	  	| `idkreatifitas` dari pegawai yang ingin dihapus datanya|
+| log_id   | required	  	| `log_id` dari pegawai yang ingin dihapus datanya|
 
 
 #### Result
 
 | Parameters    |  Description  |
 | ------------- |:--------------|
-|status| `true` Jika `idkreatifitas` yang bersangkutan benar-benar ada. `false` Jika `idkreatifitas` tidak ditemukan|
-|message| Bernilai `Success !` jika `idkreatifitas` benar & data berhasil dihapus dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
-|idkreatifitas|  | `idkreatifitas` yang dihapus |
+|status| `true` Jika `log_id` yang bersangkutan benar-benar ada. `false` Jika `log_id` tidak ditemukan|
+|message| Bernilai `Success !` jika `log_id` benar & data berhasil dihapus dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+|log_id|  | `log_id` yang dihapus |
 
 #### Example
 ```json
@@ -2159,14 +2153,116 @@ curl --location --request DELETE "http://localhost/API-MAGANG/api/Pen_Realisasi/
   --header "Auth-Key: geomedia" \
   --header "Authorization: 9ece4" \
   --data "{
-	\"idkreatifitas\":\"1\",
+	\"log_id\":\"198512052015032001.190701122925.0327\"
 }"
 ```
 ```json
 {
     "status": true,
     "message": "Success !",
-    "idkreatifitas": "6"
+    "log_id": "198512052015032001.190701122925.0327"
 }
 ```
- -->
+
+### 45.  GET Penilaian Perilaku SKP
+
+#### HTTP Request
+```json
+PATCH http://localhost/API-MAGANG/api/Pen_Perilaku/?id_skp=344&year=2018
+```
+#### Parameters
+
+| Parameters    |               | Description  |
+| ------------- |:-------------:| -------------|
+| id_skp   | required	  	| `id_skp` dari pegawai yang ingin di ambil datanya|
+| year   | required	  	| tahun yang ingin di ambil datanya|
+
+
+#### Result
+
+| Parameters    |  Description  |
+| ------------- |:--------------|
+|status| `true` Jika `nip` yang bersangkutan benar-benar ada. `false` Jika `nip` tidak ditemukan|
+|message| Bernilai `Success !` jika `nip` benar / ditemukan, dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+|data| Data yang dipanggil |
+|id_skp| `id_skp` dari pegawai yang diambil datanya |
+|id_perilaku| perilaku yang harus dilakukan pegawai |
+|orientasi_pelayanan| nilai pegawai |
+|integritas| nilai pegawai |
+|komitmen| nilai pegawai |
+|disiplin| nilai pegawai |
+|kerjasama| nilai pegawai |
+|kepemimpinan| nilai pegawai |
+
+#### Example
+```json
+curl --location --request GET "http://localhost/API-MAGANG/api/Pen_Perilaku/?id_skp=344&year=2018" \
+  --header "Content-Type: application/x-www-form-urlencoded" \
+  --header "Auth-Key: geomedia" \
+  --header "Authorization: 9ece4" \
+```
+```json
+{
+    "status": true,
+    "message": "Success !",
+    "data": [
+        {
+            "id_skp": "344",
+            "id_perilaku": "2",
+            "orientasi_pelayanan": "80",
+            "integritas": "80",
+            "komitmen": "80",
+            "disiplin": "80",
+            "kerjasama": "80",
+            "kepemimpinan": null
+        }
+    ]
+}
+```
+
+### 46.  Penilaian Perilaku SKP Update
+
+#### HTTP Request
+```json
+PATCH http://localhost/API-MAGANG/api/Pen_Perilaku/
+```
+#### Parameters
+
+| Parameters    |               | Description  |
+| ------------- |:-------------:| -------------|
+| id_perilaku   | required	  	| `id_perilaku` dari pegawai yang ingin di ambil datanya|
+
+
+#### Result
+
+| Parameters    |  Description  |
+| ------------- |:--------------|
+|status| `true` Jika `id_perilaku` yang bersangkutan benar-benar ada. `false` Jika `id_perilaku` tidak ditemukan|
+|message| Bernilai `Success !` jika `id_perilaku` benar & data berhasil diubah dan `Maaf, ID tidak ditemukan !` jika sebaliknya |
+
+#### Example
+```json
+curl --location --request PUT "http://localhost/API-MAGANG/api/Pen_Perilaku/" \
+  --header "Content-Type: application/x-www-form-urlencoded" \
+  --header "Auth-Key: geomedia" \
+  --header "Authorization: 9ece4" \
+  --data "{
+	\"id_perilaku\":\"2\",
+	\"id_skp\":\"344\",
+	\"integritas\":\"50\",
+  \"komitmen\":\"50\",
+  \"disiplin\":\"50\",
+  \"kerjasama\":\"50\",
+  \"kepemimpinan\":\"50\",
+  \"orientasi_pelayanan\":\"50\",
+  \"tanggal_perilaku\":\"\",
+  \"last_nip_penilai\":\"196610101990032012\"
+}"
+  
+```
+```json
+{
+    "status": true,
+    "message": "Success !"
+}
+```
