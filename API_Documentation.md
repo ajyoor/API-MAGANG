@@ -31,6 +31,23 @@
    27.  POST [Tambah Realisasi SKP Kreatifitas](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#27--tambah-realisasi-skp-kreatifitas "Dokumentasi Realisasi SKP")
    28.  PUT [Realisasi SKP Kreatifitas Update](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#28--realisasi-skp-kreatifitas-update "Dokumentasi Realisasi SKP")
    29.  DELETE [Realisasi SKP Kreatifitas Delete](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#29--realisasi-skp-kreatifitas-delete "Dokumentasi Realisasi SKP")
+   30.  GET [Penilaian Target SKP](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#30--get-penilaian-target-skp "Dokumentasi Penilaian Target SKP")
+   31.  GET [Penilaian Target SKP Search](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#31--penilaian-target-skp-search "Dokumentasi Penilaian Target SKP")
+   32.  PUT [Penilaian Target SKP Update](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#32--penilaian-target-skp-update "Dokumentasi Penilaian Target SKP")
+   33.  GET [Penilaian Realisasi SKP (Tugas Pokok)](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#33--get-penilaian-realisasi-skp-tugas-pokok "Dokumentasi Penilaian Realisasi SKP")
+   34.  PUT [Penilaian Realisasi SKP (Tugas Pokok) Update](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#34--penilaian-realisasi-skp-tugas-pokok-update "Dokumentasi Penilaian Realisasi SKP")
+   35.  GET [Penilaian Realisasi SKP (Tugas Tambahan)](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#35--get-penilaian-realisasi-skp-tugas-tambahan "Dokumentasi Penilaian Realisasi SKP")
+   36.  PUT [Penilaian Realisasi SKP (Tugas Tambahan) Update](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#36--penilaian-realisasi-skp-tugas-tambahan-update "Dokumentasi Penilaian Realisasi SKP")
+   37.  DELETE [Penilaian Realisasi SKP (Tugas Tambahan) Delete](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#37--penilaian-realisasi-skp-tugas-tambahan-delete "Dokumentasi Penilaian Realisasi SKP")
+   38.  GET [Penilaian Realisasi SKP (Kreatifitas)](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#38--get-penilaian-realisasi-skp-kreatifitas "Dokumentasi Penilaian Realisasi SKP")
+   39.  PUT [Penilaian Realisasi SKP (Kreatifitas) Update](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#39--penilaian-realisasi-skp-kreatifitas-update "Dokumentasi Penilaian Realisasi SKP")
+   40.  DELETE [Penilaian Realisasi SKP (Kreatifitas) Delete](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#40--penilaian-realisasi-skp-kreatifitas-delete "Dokumentasi Penilaian Realisasi SKP")
+   41.  GET [Penilaian Aktivitas SKP](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#41--get-penilaian-aktivitas-skp "Dokumentasi Penilaian Aktivitas SKP")
+   42.  GET [Penilaian Aktivitas SKP Search](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#42--penilaian-aktivitas-skp-search "Dokumentasi Penilaian Aktivitas SKP")
+   43.  PUT [Penilaian Aktivitas SKP Update](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#43--penilaian-aktivitas-skp-update "Dokumentasi Penilaian Aktivitas SKP")
+   44.  DELETE [Penilaian Aktivitas SKP Delete](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#44--penilaian-aktivitas-skp-delete "Dokumentasi Penilaian Aktivitas SKP")
+   45.  GET [Penilaian Perilaku SKP](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#45--get-penilaian-perilaku-skp "Dokumentasi Penilaian Perilaku SKP")
+   46.  PUT [Penilaian Perilaku SKP Update](https://github.com/airln99a/API-MAGANG/blob/master/API_Documentation.md#46--penilaian-perilaku-skp-update "Dokumentasi Penilaian Perilaku SKP")
 
 
 ### 1.  Login SKP
